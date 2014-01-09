@@ -1,0 +1,1 @@
+[15-May-2013 20:13:53] PHP Warning:  pg_query() expects parameter 1 to be resource, boolean given in C:\ms4w\apps\atlas3\com\mobiliti\consulta\bd.class.php on line 78

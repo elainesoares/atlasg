@@ -1,0 +1,112 @@
+
+RewriteEngine On
+RewriteBase /i3geo/atlas34/
+RewriteCond %{SCRIPT_FILENAME} !\.(gif|jpg|png|css|html|js|jpeg|php|eot|htc|xls)$
+RewriteRule ^(.*)$ url.php?cod=$1
+
+RewriteCond %{THE_REQUEST} ^[A-Z]+\ /[^?\ ]*\.php[/?\ ]
+#RewriteCond %{THE_REQUEST} \.php[\ /?].*HTTP/ [NC]
+
+# Compressão gzip
+<IfModule mod_deflate.c>
+  # html, txt, css, js, json, xml, htc:
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
+  # webfonts e svg:
+  <FilesMatch ".(ttf|otf|eot|svg)$" >
+  #<filesmatch .(.jpg|.gif|.png|.tiff|.ico|js|css)$="">
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
+
+# Segurança
+# Impede de navegar em pastas sem um documento padrão (index)
+Options -Indexes
+# Remove assinatura do servidor
+#ServerSignature Off
+#ServerTokens Prod
+
+# Previnindo acesso
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|txt)$">
+ Order Allow,Deny
+ Deny from none
+</FilesMatch>
+
+<IfModule mod_headers.c>  
+  #Header add MyHeader "Hello Joe. It took"
+  Header unset Server
+  Header unset X-Powered-By
+  #Header set X-Powered-By "ASP.net"
+</IfModule>
+
+# Proteção de Injeção de arquivos
+RewriteCond %{REQUEST_METHOD} GET
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC]
+RewriteRule .* - [F]
+
+
+# Forçando a codificação
+AddDefaultCharset utf-8
+AddCharset utf-8 .html .css .js .xml .json .rss
+
+#tabela
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/tabela/ControllerTabela\.php$ [NC]
+
+#mapa
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/map/map.controller\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/map/map.spatialquery.service\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/map/map.spatialquery\.php$ [NC]
+
+#Árvore HDI
+RewriteCond %{REQUEST_URI} !^(.*/)?hdi/municipio\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?hdi/ano\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?hdi/estado\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?hdi/estadoSearch\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?hdi/consulta2\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?hdi/consulta\.php$ [NC]
+
+#histgrama
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/histogram/histogram.controller\.php$ [NC]
+
+#Gráficos
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/grafico/grafico-dispersao.controller\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/grafico/linhas/grafico-linhas.controller\.php$ [NC]
+
+#autocompletar
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/util/AjaxSearchString\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/util/AjaxLogErro\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/util/AjaxConsultaPronta\.php$ [NC]
+
+#busca de variaveis
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/componentes/indicador/filtros\.php$ [NC]
+
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/componentes/local/cidades_estados\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/componentes/local/local\.html$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/componentes/local/local\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/componentes/local/cidades_por_estado\.php$ [NC]
+
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/tabela/tabela.controller\.php$ [NC]
+
+#bolha
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/grafico/grafico-dispersao.controller\.php$ [NC]
+
+#rank
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/ranking/load_more\.php$ [NC]
+
+#perfil
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/display/controller/AjaxPaginaPerfil\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/display/controller/AjaxPaginaPerfilPrint\.php$ [NC]
+
+#gerador do quintil pelo admin
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/administrativo/quintil/gerador\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/administrativo/quintil/class_loader\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/administrativo/quintil/class_update\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/administrativo/quintil/class_delete\.php$ [NC]
+
+
+
+#RewriteRule ^.*$ - [R=404,L]
+RewriteRule .*\.php$ url.php [L]

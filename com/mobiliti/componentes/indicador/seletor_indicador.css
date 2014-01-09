@@ -1,0 +1,323 @@
+div.divCallOut .popover 
+{
+	border-radius: 0px;
+}
+
+div.divCallOut .popover-title 
+{ 
+	display: none; 
+}
+
+div.divCallOut .popover-inner,div.divCallOut .popover-content,div.divCallOut .popover
+{
+/*	width: 503px;*/
+	height: 310px;
+	padding: 0px;
+	margin: 0px;
+}
+
+div.divCallOut .popover .arrow
+{
+	display: none;
+}
+
+div.divCallOut .popover-content
+{
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+div.divCallOut .box
+{
+	float: left;
+	width: 150px;
+	height: 310px;
+	padding-left: -1px;
+	border-right: 1px solid #999999;
+        cursor: default;
+}
+
+ul.nav.nav-list.list_menu_indicador.dim>li>a
+{
+	font-size: 14px !important;
+	font-family: Arial, Verdana, 'Times New Roman' !important;
+        line-height:135%
+}
+
+ul.nav.nav-list.list_menu_indicador.dim>li>a
+{
+	width: 115px;
+}
+
+div.dimensao.box.dim
+{
+	width: 140px;
+}
+
+
+div.divCallOut .box .title_box 
+{
+	float: left;
+	padding: 5px !important;
+	margin-top: 5px !important;
+	/*margin-left: 5px !important;*/
+	margin-bottom: 5px !important;
+	width: 150px;
+	font-size: 14px !important;
+	font-family: Arial, Verdana, 'Times New Roman' !important;
+	font-weight: bold;
+	color: black;
+	height: 20px;
+}
+
+div.divCallOut .list_menu_indicador
+{
+    float: left;
+    width: 140px;
+}
+
+
+div.tema.box
+{
+  width: 170px;
+}
+
+
+div.itens_selecionados.box
+{
+	border-right: none;
+	/*width: 140px;*/
+}
+
+div.divCallOut .box:last-child .nav-list
+{
+	/*width: 144px !important;*/
+}
+
+#popOverBox
+{
+	width: 600px;
+	height: 263px;
+	border-right: 1px solid #999999;
+	display: block;
+	margin-top: -10px;
+	padding-top: 10px;
+}
+
+div.divCallOut ul li
+{
+	height: auto;
+}
+
+div.divCallOut ul li a
+{
+	padding-left: 10px;
+	color: black !important;
+}
+
+div.divCallOut ul li a:hover
+{
+	background: #74d0f7;
+}
+
+.divCallOut .nav>.nav-list
+{
+	padding-left: 20px;
+}
+
+div.divCallOut .nav-list>li
+{
+	/*word-wrap: break-word;*/
+}
+
+div.divCallOut .nav-list>li>a
+{
+	font-size: 12px !important;
+	font-family: Arial, Verdana, 'Times New Roman' !important;
+        line-height:120%
+	
+}
+
+
+div.divCallOut .nav-list>.active>a
+{
+	background: #d0edf9!important;
+	color: black;	
+}
+
+div.indicador
+{
+	width: 200px !important;
+}
+
+div.itens_selecionados
+{
+	width: 199px !important;
+        border-right: none;
+}
+
+div.indicador .list_menu_indicador
+{
+	width: 170px !important;
+}
+
+div.itens_selecionados .list_menu_indicador
+{
+	width: 170px !important;
+}
+
+.indicador ul .popover-content,.itens_selecionados ul .popover-content
+{
+	background: #FFF993;
+	/*border: solid 1px #FED218;*/
+	border: none;
+}
+
+div.divCallOut .indicador ul .popover .arrow,div.divCallOut .itens_selecionados ul .popover .arrow
+{
+	border-bottom-color: #FFF993 !important;
+	border-width: 0px 10px 10px !important;
+	margin-bottom: -2px !important;
+	display: inline !important;
+	margin-top: 0px !important;
+	border-right-color: transparent !important;
+	
+}
+div.divCallOut .indicador ul .popover.bottom .arrow,div.divCallOut .itens_selecionados ul .popover.bottom .arrow
+{
+        border-bottom-color: pink;
+	border-bottom-color: #FFF993;
+	border-width: 0px 10px 10px;
+	margin-bottom: -2px;
+	display: inline;
+}
+
+
+.indicador ul li input[type=checkbox]
+{
+	margin-right: 8px;
+    margin-top: 0px;
+    background: red;	
+}
+
+.indicador ul li a
+{
+	padding-left: 20px !important;
+}
+.indicador ul li.selected a
+{
+	background: url('indicadorSelecionado.jpg')no-repeat #d0edf9;
+	background-position: 7px 4px; 
+}
+.indicador ul li.selected a:hover
+{
+	background: url('deleteSelecionado.jpg')no-repeat #d0edf9;
+	background-position: 7px 4px; 
+}
+
+div.indicador .popover-inner,div.indicador .popover-content,div.indicador .popover ,
+div.itens_selecionados .popover-inner,div.itens_selecionados .popover-content,div.itens_selecionados .popover 
+{
+	font-size: 10px;
+	width: 180px !important;
+	height: auto !important;
+}
+
+div.indicador .popover-content p,div.itens_selecionados .popover-content p
+{
+	display: block;
+	white-space: normal; 
+	padding: 5px;
+}
+
+div.indicador .list_menu_indicador,div.tema .list_menu_indicador
+{
+	height: 270px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+div.itens_selecionados .list_menu_indicador
+{
+	height: 270px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	width: 170px !important;
+}
+
+
+
+div.divCallOut .messages
+{
+	float: left;
+	width: 450px;
+	height: 40px;
+	font-size: 12px;
+}
+div.divCallOut .messages .alert
+{
+	padding: 2px 2px 2px 2px;
+}
+
+
+div.divCallOut .buttons
+{
+	float: right;
+	width: 230px;
+	font-size: 140% !important;
+}
+
+#bolhaEditIndicador{
+    float: left;
+}
+
+
+.btn_select .btn
+{
+	float: right;
+	margin-left: 5px;
+}
+
+div.divCallOut .box .list_menu_indicador li
+{
+	background: none;
+}
+
+div.divCallOut .box .list_menu_indicador li .indicador_ano 
+{
+	height: 20px;
+	width: 100%;
+	/*background: url('seletor_ano.png')no-repeat;
+
+	background-position: 1px 20px;*/
+}
+
+div.divCallOut .box .list_menu_indicador li .indicador_ano span
+{
+	font-size: 11px;
+	color: #BCBDC0;
+	width: 46px;
+	height: 24px;
+	background: none;
+	cursor: pointer;
+	float: left;
+}
+
+div.divCallOut .box .list_menu_indicador li .indicador_ano span.selected
+{
+	color: black;
+	font-weight: bold;
+/* 	background: url('selected_ano.png')no-repeat; */
+}
+
+
+a.close.indicador
+{
+   margin-right: 5px;
+   margin-top: 3px;
+   margin-bottom: 0;
+   margin-left: 0;
+   
+   border: 0;
+   padding: 0;
+}

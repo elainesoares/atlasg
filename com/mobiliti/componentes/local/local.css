@@ -1,0 +1,157 @@
+.box_local
+{
+	padding-left: 31px;
+	height: 265px; 
+	/*width: 215px;*/
+	width: 245px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 14px !important;
+	font-family: Arial, Verdana, 'Times New Roman' !important;
+}
+.box_local .btn_all,
+.box_local .btn_clean_local
+{
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+
+.list_local_grafico
+{
+	/*display: none;*/
+	list-style: none;
+        cursor: default;
+}
+
+.list_local_grafico li:hover
+{
+	background: #74d0f7;
+}
+
+.list_local_grafico li.selection
+{
+	background-color: #d0edf9;
+}
+
+.list_local_grafico li
+{
+	padding: 1px 20px;
+	background: white;
+}
+.list_local_grafico li .icon_select
+{
+	height: 10px;
+	width: 10px;
+	float: left;
+	background-position: 7px 8px; 
+	background: url('uncheck_selected.png')no-repeat;
+	margin-top: 5px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.list_local_grafico li.selected .icon_select
+{	
+	background: url('check_selected.png')no-repeat;
+
+}
+
+.list_local_grafico li .icon_remove
+{	
+	height: 10px;
+	width: 10px;
+	float: right;
+	background: url('delete_selected.png')no-repeat;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+
+.list_local
+{
+	/*display: none;*/
+	list-style: none;
+        cursor: default;
+}
+
+.local
+{
+	height: 200px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	overflow-y: scroll;
+}
+
+.list_local li:hover
+{
+	background: #74d0f7;
+}
+
+.list_local li.selection
+{
+	background-color: #d0edf9;
+}
+
+.list_local_indicadores li
+{
+	padding: 1px 20px;
+}
+
+
+.box_local li.title_toggle
+{
+	background: url('item.png') no-repeat;
+	list-style: none;
+	padding-left: 18px;
+	background-position: 2px 9px;
+	padding: 3px 15px;
+        cursor: default;
+}
+
+.box_local li.selected_item
+{
+	background: url('item_selected.png') no-repeat;
+	background-position: 2px 9px;
+}
+
+.list_local_indicadores
+{
+	display: inline;
+}
+
+.inputSearchLocal
+{
+	margin-top: 10px;
+}
+.list_local li
+{
+	padding: 1px 20px;
+	background: white;
+}
+.list_local li .icon_select
+{
+	height: 10px;
+	width: 10px;
+	float: left;
+	background-position: 7px 8px; 
+	background: url('uncheck_selected.png')no-repeat;
+	margin-top: 5px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.list_local li.selected .icon_select
+{	
+	background: url('check_selected.png')no-repeat;
+
+}
+
+.list_local li .icon_remove
+{	
+	height: 10px;
+	width: 10px;
+	float: right;
+	background: url('delete_selected.png')no-repeat;
+	margin-top: 5px;
+	cursor: pointer;
+}

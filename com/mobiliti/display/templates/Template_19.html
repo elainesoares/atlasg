@@ -1,0 +1,41 @@
+<script type="text/javascript">
+$(document).ready(function()
+{
+    $('#v1_tooltip').tooltip({html:true});
+    $('#v2x_tooltip').tooltip({html:true});
+    $('#v3x_tooltip').tooltip({html:true});
+    $('#v4x_tooltip').tooltip({html:true});
+    $('#v5_tooltip').tooltip({html:true}); 
+});
+</script>
+<div>    
+<table border="0" width="100%" class="tablePerfil">
+<caption style="text-align: left;"><b>[caption] - [municipio]</b></caption>
+<tr class="borderDark">
+<td id="dateTitle"><b>[titulo]</b></td>
+<td class="columnAno"><b>[ano1]</b></td><td class="columnAno"><b>[ano2]</b></td><td class="columnAno"><b>[ano3]</b></td>
+</tr>
+<tr class="borderLight">
+    <td id="dateTitle"><div id="v1_tooltip" data-original-title='[v1_tt]'>[v1]</div>
+    </td><td>[v1_a1]</td><td>[v1_a2]</td><td>[v1_a3]</td>
+</tr>
+<tr class="borderLight">
+    <td id="dateTitle"><div id="v2x_tooltip" data-original-title='[v2_tt]'>[v2]</div>
+    </td><td>[v2_a1]</td><td>[v2_a2]</td><td>[v2_a3]</td>
+</tr>
+<tr class="borderLight">
+    <td id="dateTitle"><div id="v3x_tooltip" data-original-title='[v3_tt]'>[v3]</div>
+    </td><td>[v3_a1]</td><td>[v3_a2]</td><td>[v3_a3]</td>
+</tr>
+<tr class="borderLight">
+    <td id="dateTitle"><div id="v4x_tooltip" data-original-title='[v4_tt]'>[v4]</div>
+    </td><td>[v4_a1]</td><td>[v4_a2]</td><td>[v4_a3]</td>
+</tr>
+<tr>
+    <td id="dateTitle"><div id="v5_tooltip" data-original-title='[v5_tt]'>[v5]</div>
+    </td><td>[v5_a1]</td><td>[v5_a2]</td><td>[v5_a3]</td>
+</tr>
+</table> 
+<sub style="color:gray;">
+    [fonte]</sub>
+</div>

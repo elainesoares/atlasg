@@ -1,0 +1,63 @@
+/* 
+    Document   : override-css-ie-9-lower
+    Created on : 08/05/2013, 10:14:48
+    Author     : Lorran
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.th_1{
+    width: 21% !important;
+    max-width: 21% !important;
+}
+
+.tableConsulta{
+    min-width: 21% !important;
+}
+.columnTitle{
+    min-width: 109px !important;
+    max-width: 109px !important;
+    width: 100% !important;
+    margin-right: 5px;
+}
+
+.tableConsulta tbody{
+    display: block;
+    overflow-y: scroll;
+/*    width: 960px !important;*/
+    max-height: 505px !important;
+}
+#second-td-scroll{
+    overflow-y: scroll;
+    height: 505px !important;
+    max-height: 505px;
+}
+
+.tdValues{
+    min-width: 112px !important;
+    max-width: 112px !important;
+    width: 112px !important;
+}
+.th_hover{
+    min-width: 112px !important;
+    max-width: 112px !important;
+    width: 112px !important;
+}
+.tabelaStyle{
+    min-height: 0px !important;
+}
+#second-td-scroll{
+    margin-left: -1px;
+    overflow-x: visible;
+}
+.td-master-tabela{
+    width: 100% !important;
+}
+.table-master-consulta{
+    width: 100% !important;
+}
+.table-master-consulta-1{
+    padding-right: 17px;
+}
+.blue_button{
+    background-color: rgb(8, 122, 204) !important;
+}

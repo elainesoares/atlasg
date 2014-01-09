@@ -1,0 +1,313 @@
+div.divCallOutLugares .popover 
+{
+	border-radius: 0px;
+}
+
+div.divCallOutLugares .popover .arrow
+{
+	display: none;
+}
+
+div.divCallOutLugares ul li
+{
+	height: auto;
+}
+
+div.divCallOutLugares ul li a
+{
+	padding-left: 10px;
+	color: black !important;
+}
+
+div.divCallOutLugares .popover 
+{
+	border-radius: 0px;
+}
+
+div.divCallOutLugares .popover-title 
+{ 
+	display: none; 
+}
+
+div.divCallOutLugares .popover-inner,div.divCallOutLugares .popover-content,div.divCallOutLugares .popover
+{
+	width: 503px;
+	height: 375px;
+	padding: 0px;
+	margin: 0px;
+}
+
+div.divCallOutLugares .box
+{
+	float: left;
+	width: 150px;
+	height: 375px;
+	padding-left: -1px;
+	border-right: 1px solid #999999;
+        cursor: default;
+}
+
+div.divCallOutLugares .box .title_box 
+{
+	float: left;
+	padding: 5px !important;
+	margin-top: 5px !important;
+	/*margin-left: 5px !important;*/
+	margin-bottom: 5px !important;
+	width: 150px;
+	font-size: 14px !important;
+	font-family: Arial, Verdana, 'Times New Roman' !important;
+	font-weight: bold;
+	color: black;
+	height: 20px;
+}
+
+
+div.divCallOutLugares .box .list_menu_indicador
+{
+	float: left;
+	width: 120px;
+}
+
+div.divCallOutLugares .itens_selecionados
+{
+	border-right: none;
+}
+
+#popOverBox
+{
+	width: 600px;
+	height: 263px;
+	border-right: 1px solid #999999;
+	display: block;
+	margin-top: -10px;
+	padding-top: 10px;
+}
+
+div.divCallOutLugares ul li
+{
+	height: auto;
+}
+
+div.divCallOutLugares ul li a
+{
+	padding-left: 10px;
+	color: black !important;
+}
+
+div.divCallOutLugares ul li a:hover
+{
+	background: #74d0f7;
+}
+
+.divCallOutLugares .nav>.nav-list
+{
+	padding-left: 20px;
+}
+
+div.divCallOutLugares .nav-list>li
+{
+	word-wrap: break-word;
+}
+
+
+div.divCallOutLugares .nav-list>.active>a
+{
+	background: #d0edf9!important;
+	color: black;	
+}
+
+
+div.divCallOutLugares div.box3
+{
+	width: 200px !important;
+}
+
+div.divCallOutLugares div.itens_selecionados
+{
+	width: 200px !important;
+}
+
+div.divCallOutLugares div.box3 .list_menu_indicador
+{
+	width: 170px !important;
+}
+
+div.divCallOutLugares div.itens_selecionados .list_menu_indicador
+{
+	width: 170px !important;
+}
+
+div.divCallOutLugares .box3 ul .popover-content,div.divCallOutLugares .itens_selecionados ul .popover-content
+{
+	background: #FFF993;
+	border: none;
+}
+
+div.divCallOutLugares .box3 ul .popover .arrow,div.divCallOutLugares .itens_selecionados ul .popover .arrow
+{
+	border-bottom-color: #FFF993;
+	border-width: 0px 10px 10px;
+	margin-bottom: -2px;
+	display: inline;
+	margin-top: 0px !important;
+	border-right-color: transparent;
+}
+
+div.divCallOutLugares .box3 ul .popover .arrow:after,div.divCallOutLugares .itens_selecionados ul .popover .arrow:after
+{
+	border-width: 1px 1px 1px !important;
+}
+
+
+
+
+
+div.divCallOutLugares .box3 ul li input[type=checkbox]
+{
+	margin-right: 8px;
+    margin-top: 0px;
+    background: red;	
+}
+
+div.divCallOutLugares .box2 ul li a,div.divCallOutLugares  .box3 ul li a
+{
+	padding-left: 20px !important;
+}
+div.divCallOutLugares ul li.selected a
+{
+	background: url('indicadorSelecionado.jpg')no-repeat #d0edf9;
+	background-position: 7px 8px; 
+}
+div.divCallOutLugares ul li.selected a:hover
+{
+	background: url('deleteSelecionado.jpg')no-repeat #d0edf9;
+	background-position: 7px 8px; 
+}
+
+div.divCallOutLugares div.box3 .popover-inner,div.divCallOutLugares div.box3 .popover-content,div.divCallOutLugares div.box3 .popover ,
+div.divCallOutLugares div.itens_selecionados .popover-inner,div.divCallOutLugares div.itens_selecionados .popover-content,div.divCallOutLugares div.itens_selecionados .popover 
+{
+	font-size: 10px;
+	width: 180px !important;
+	height: auto !important;
+}
+
+div.divCallOutLugares div.box3 .popover-content p,div.itens_selecionados .popover-content p
+{
+	display: block;
+	white-space: normal; 
+	padding: 5px;
+}
+
+div.divCallOutLugares div.box3 .list_menu_indicador,div.box2 .list_menu_indicador
+{
+	height: 336px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+div.divCallOutLugares div.itens_selecionados .list_menu_indicador
+{
+	height: 336px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	width: 170px !important;
+}
+
+div.divCallOutLugares .popover-inner,div.divCallOutLugares .popover-content,div.divCallOutLugares .popover
+{
+	width: 503px;
+	height: 375px;
+	padding: 0px;
+	margin: 0px;
+}
+
+div.divCallOutLugares  div.box3 ul li.selected a,div.divCallOutLugares  div.box2 ul li.selected a
+{
+	background: url('indicadorSelecionado.jpg')no-repeat #d0edf9;
+	background-position: 7px 8px; 
+}
+div.divCallOutLugares  div.box3 ul li.selected a:hover,div.divCallOutLugares  div.box2 ul li.selected a:hover
+{
+	background: url('deleteSelecionado.jpg')no-repeat #d0edf9;
+	background-position: 7px 8px; 
+}
+
+
+div.divCallOutLugares .messages
+{
+	float: left;
+	width: 450px;
+	height: 40px;
+	font-size: 12px;
+}
+div.divCallOutLugares .messages .alert
+{
+	padding: 1px 1px 1px 1px;
+}
+
+
+div.divCallOutLugares .buttons
+{
+	float: right;
+	width: 230px;
+	font-size: 140% !important;
+}
+
+
+.btn_select
+{
+	float: left;
+	width: 640px;
+	height: 30px;
+	border-top: 1px solid #999999;
+	padding: 7px;
+}
+
+.btn_select .btn
+{
+	float: right;
+	margin-left: 5px;
+}
+
+ul.nav.nav-list.list_menu_indicador.lista1
+{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+ul.nav.nav-list.list_menu_indicador.lista1 li
+{
+    padding-right: 0px;
+    padding-left: 15px;
+    width: 100%;
+}
+
+ul.nav.nav-list.list_menu_indicador.lista2 li a
+{
+    font-size: 12px !important;
+    font-family: Arial, Verdana, 'Times New Roman' !important;
+}
+
+ul.nav.nav-list.list_menu_indicador.lista3 li a
+{
+    font-size: 12px !important;
+    font-family: Arial, Verdana, 'Times New Roman' !important;
+}
+
+ul.nav.nav-list.list_menu_indicador.lista4 li a
+{
+    font-size: 12px !important;
+    font-family: Arial, Verdana, 'Times New Roman' !important;
+}
+
+a.close.lugar
+{
+   margin-right: 5px;
+   margin-top: 3px;
+   margin-bottom: 0;
+   margin-left: 0;
+   border: 0;
+   padding: 0;
+}
