@@ -16,7 +16,7 @@
         
         
         public function __construct($lugares, $indicadores, $espacialidade, $ano) {
-//            echo $ano;
+//            echo 'construct  ';
             $this->eixo_x = $indicadores[0];
             $this->eixo_y = $indicadores[1];
             $this->eixo_color = $indicadores[2];
@@ -37,7 +37,9 @@
             foreach($this->dados as $d){
                 $counter++;
                 $draw[$counter] = $d->draw();
+                //echo $draw[$counter][$counter];
             }
+            
             echo json_encode($draw);
         }
         
@@ -63,12 +65,53 @@
                      $filtro = "fk_estado";
                     break;
                 case Consulta::$ESP_REGIAODEINTERESSE:
-                    $ParteInicialSQL = "SELECT valor, fk_regiao_interesse,fk_ano_referencia,fk_variavel, ri.nome 
-                                        FROM valor_variavel_ri as vv
+                    $lugs2 = array();
+                    $tam_lug2 = count($lugares);
+//                    echo $tam_lug2;
+                    for($i = 0; $i < $tam_lug2; $i++){
+                        $lugs2[] = "(fk_regiao_interesse = $lugares[$i])";                        
+                    }
+                    $whereLugs2 = '('.implode(' OR ',$lugs2).')';
+//                    echo $whereLugs2;
+                    $RI = "SELECT Distinct m.id as id
+                            FROM valor_variavel_mun as vv
+                            INNER JOIN regiao_interesse_has_municipio as b ON (b.fk_municipio = vv.fk_municipio)
+                            INNER JOIN municipio as m ON (vv.fk_municipio = m.id)
+                            INNER JOIN estado as e ON (e.id = m.fk_estado)
+                            INNER JOIN regiao_interesse as ri ON (b.fk_regiao_interesse = ri.id)
+                            WHERE ".$whereLugs2;
+                   $RI .=  "ORDER BY m.id";
+                   
+//                   echo 'RI: '.$RI.'  ';
+                    
+                    $Resp = pg_query($this->bd->getConexaoLink(), $RI) or die ("Nao foi possivel executar a consulta! ");
+                    $Linha = pg_fetch_assoc($Resp);
+                    $cmdtuples = pg_affected_rows($Resp);
+//                    echo $cmdtuples . " tuples are affected.\n";
+                    $lugares = array();
+                    $i = 0;
+//                    foreach ($Linha as $value) {
+//                        echo 'Entrei  ';
+//                        $lugares[] = $value;
+//                        echo $lugares[$i];
+//                        $i++;
+//                    }
+                    while ($Linha = pg_fetch_assoc($Resp))
+                    {
+//                        echo 'While  ';
+//                        echo 'Linha: '.$linha.'  ';
+                        $lugares[$i] = $Linha['id'];
+//                        echo $lugares[$i];
+                        $i++;
+                    }
+                    
+                    $ParteInicialSQL = "SELECT valor, fk_municipio,fk_ano_referencia as id_a,fk_variavel as id_v, m.nome as nome,e.uf as uf FROM valor_variavel_mun as vv
                                         INNER JOIN variavel as v ON (vv.fk_variavel = v.id)
-                                        INNER JOIN regiao_interesse as ri ON (vv.fk_regiao_interesse = ri.id)
+                                        INNER JOIN municipio as m ON (m.id = vv.fk_municipio)
+                                        INNER JOIN estado as e ON (e.id = m.fk_estado)
+                                        INNER JOIN regiao as r ON (r.id = e.fk_regiao)
                                         WHERE ";
-                     $filtro = "fk_regiao_interesse";
+                     $filtro = "fk_municipio";
                     break;
                 case Consulta::$ESP_UDH:
                     $ParteInicialSQL = "SELECT valor, fk_udh,fk_ano_referencia,fk_variavel, udh.nome FROM valor_variavel_udh as vv
@@ -87,10 +130,12 @@
             }
             
             
+//            echo 'ParteInicial 1: '.$ParteInicialSQL.'  ';
             $vars = array();
             $identify = array();
             $variaveis = array();
             $tam_ind = count($indicadores);
+//            echo 'tam_ind: '.$tam_ind.'  ';
             $indicadores2 = $indicadores;
             $indicadores[0] = $indicadores2[1];
             $indicadores[1] = $indicadores2[0];
@@ -107,21 +152,28 @@
             }
             
             $whereVars = '('.implode(' OR ',$vars).')';
+//            echo 'whereVars: '.$whereVars.
 
             $lugs = array();
             $tam_lug = count($lugares);
+//            echo 'tam_lug: '.$tam_lug.'  ';
             for($i = 0; $i < $tam_lug; $i++){
+//                echo $lugares[$i];
                 $lugs[] = "($filtro = $lugares[$i])";
+//                echo '  '.$lugs[$i];
             }
             $whereLugs = '('.implode(' OR ',$lugs).')';
+//            echo 'whereLugs: '.$whereLugs.'  ';
             
             $ParteInicialSQL .= $whereVars . " AND " . $whereLugs . " AND fk_ano_referencia = {$ano} ";
-//            echo $ParteInicialSQL;
+            
+//            echo 'ParteInicial 2: '.$ParteInicialSQL.'  ';
             
             $Resposta = pg_query($this->bd->getConexaoLink(), $ParteInicialSQL) or die ("Nao foi possivel executar a consulta! ");
             
             while ($Linha = pg_fetch_assoc($Resposta))
             {
+//                echo $Linha;
                 if(isset($this->dados[$Linha[$filtro]])){
                     $this->dados[$Linha[$filtro]]->addEixo($Linha['valor'], $identify["{$Linha['id_v']}"]);  
                 }

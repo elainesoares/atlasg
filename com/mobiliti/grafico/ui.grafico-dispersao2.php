@@ -193,6 +193,7 @@
 
 
             obj = $.parseJSON(data);
+//            console.log('OBJ: '+obj);
             drawChartBolha();
 
         }
@@ -397,7 +398,7 @@
         </tr>
         <tstyle="background: wheat">
             <td style="margin:0px; padding: 0px; border: 0px; border-right: 1px solid #ccc;">
-                <span style="font-weight: bold; display:block; margin-left:24px; width:44px; margin-top: 311px;">ANO</span>
+                <span style="font-weight: bold; display:block; margin-left:24px; width:44px; margin-top: 381px;">ANO</span>
                 <div>
                     <div class='labels'>
                         <span class="one">1991</span>

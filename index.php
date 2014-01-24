@@ -1,30 +1,6 @@
 <?php
 require_once "com/mobiliti/services/URL.class.php";
-//    require_once "com/mobiliti/consulta/bd.class.php";
 ob_start();
-//$widthStyle = "page100Percent";
-//    $bd = new bd();
-//    $sql = "select * from valor_variavel_mun where fk_ano_referencia = 3 and fk_municipio = 995 order by fk_municipio, fk_variavel limit 500";
-//    $result = $bd->ExecutarSQL($sql);
-//    $i3 = array();
-//    $i2 = array();
-//    $i = array();
-//    foreach($result as $key=>$val){
-//        $v = $val["valor"];
-//        if(strpos($v, ".")){
-//            $arr = explode(".",$v);
-//            if($arr[0] == "0"){
-//                $i3[] = $val["fk_variavel"];
-//            }else{
-//                $i2[] = $val["fk_variavel"];
-//            }
-//        }else{
-//            $i[] = $val["fk_variavel"];
-//        }
-//    }
-//    echo "(".  implode(",", $i3).")";
-//    echo "(".  implode(",", $i2).")";
-//    echo "(".  implode(",", $i).")";
 
 $useragent = $_SERVER['HTTP_USER_AGENT'];
 
@@ -92,7 +68,7 @@ foreach ($NavegadoresBloqueados as $key => $v) {
 
     function readyGo()
     {
-//        console.log('readyGo');
+        console.log('readyGo');
         $(".iconAtlasModel").hover(
         function(){
             newStr = "img/icons/"+$(this).attr("icon") + ".png";
@@ -106,7 +82,7 @@ foreach ($NavegadoresBloqueados as $key => $v) {
     }
 
     function changeAba(switcher, t){
-//        console.log('changeAba');
+        console.log('changeAba');
         b = $("#imgTab"+lastClickedId);
         $(b).addClass('gray_button');
         $(b).removeClass('blue_button');
@@ -156,7 +132,7 @@ foreach ($NavegadoresBloqueados as $key => $v) {
     }
 
     function novaPagina(sw){
-//        console.log('novaPagina');
+        console.log('novaPagina');
         t_geral = false;
         g =  geral.getLugares();
 
@@ -191,12 +167,12 @@ foreach ($NavegadoresBloqueados as $key => $v) {
     
     function printMapEvt()
     {
-//        console.log('printMapEvt');
+        console.log('printMapEvt');
         $("#form_mapa_print").submit();
     }
     
     function consulta(){
-//        console.log('consulta');
+        console.log('consulta');
         if (!Array.prototype.indexOf)
         {
             Array.prototype.indexOf = function(elt /*, from*/)

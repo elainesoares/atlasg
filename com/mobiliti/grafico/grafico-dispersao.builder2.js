@@ -29,9 +29,13 @@ function drawChartBolha(){
     }
     
      var options = {
-          colorAxis: {colors: ['red', 'blue']},
-          width: 700,
-          height: 563
+          colorAxis: {colors: ['red', 'blue'], legend: {position: 'none'}},
+          axisTitlesPosition: 'none',
+          chartArea:{left:70,top:10,width:"85%",height:"90%"},
+          enableInteractivity: true,
+          hAxis: {gridlines: {count: -1}, textPosition: 'none'}
+          //explorer: {actions: ['dragToZoom', 'rightClickToReset']}
+          
 //          backgroundColor: 'pink',
 //          hAxis: {title: 'Life Expectancy'},
 //          vAxis: {title: 'Fertility Rate'}

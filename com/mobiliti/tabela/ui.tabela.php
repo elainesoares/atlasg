@@ -3,11 +3,10 @@
     var local2;
     var map_indc2;
     var tab_indc;
-    
+    console.log('ui.tabela');
     $(document).ready(function(){
         map_indc2 = new LocalSelector();
-        map_indc2.startSelector(true,"uimapindicator_selector_tabela",
-        map_indcator_selector_tabela,"right","uiindicator_selector_tabela_mult");
+        map_indc2.startSelector(true,"uimapindicator_selector_tabela",map_indcator_selector_tabela,"right","uiindicator_selector_tabela_mult");
         tab_indc = new IndicatorSelector();
         html = tab_indc.html("uiindicator_selector_tabela_mult");
         $("#calloutIndicadores").append(html);
@@ -21,14 +20,14 @@
     }
     
     function tab_indcator_selector_tabela(array){
-//        console.log('tab_indcator_selector_tabela');
+        console.log('ui.tabela - tab_indcator_selector_tabela');
         geral.setIndicadores(array);
         tabela_build();
     }
    
     function listnerTabelaLocal(e, obj)
     {
-//        console.log('tab_indcator_selector_tabela');
+        console.log('ui.tabela - listnerTabelaLocal');
         if(e == "changetab" || e == "reloadList"){
             // geral.removeIndicadoresExtras();
             map_indc2.refresh();

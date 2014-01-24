@@ -26,7 +26,7 @@ function IndicatorSelector()
 
     this.html = function(idElement, eixo_)
     {
-//       console.log('html - tabela');
+       console.log('Indicador Seletor - html - tabela');
        eixo2 = eixo_;
        if(eixo2 != false){
 //           console.log('tem coisa');
@@ -52,7 +52,7 @@ function IndicatorSelector()
     * @param multiselect - Especifica se a lista de indicadores serÃ¡ de mÃºltipla seleÃ§Ã£o ou de seleÃ§Ã£o simples
     */
     this.startSelector = function(multiselect, id_element_context, _listener, orientation, multiYear_,_to_hide,_skipLimit, eixo_){ 
-//        console.log('startSelector - tabela');
+        console.log('Indicador Seletor - startSelector - tabela');
         listener = _listener;
         multiYear = multiYear_;
         eixo['eixo'] = eixo_;
@@ -110,13 +110,13 @@ function IndicatorSelector()
     
     this.refresh = function()
     {
-//        console.log('this.refresh - tabela');
+        console.log('Indicador Seletor - this.refresh - tabela');
         refresh();
     };
 
     this.setIndicadores = function setIndicadores(array_values)
     {
-//        console.log('setIndicadores - tabela');
+        console.log('Indicador Seletor - setIndicadores - tabela');
         setIndicadoresValue(array_values);
     };
     
@@ -126,7 +126,7 @@ function IndicatorSelector()
         
     function startPopOver(multiselect)
     {
-//        console.log('startPopOver - tabela');
+        console.log('Indicador Seletor - startPopOver - tabela');
         if(eixo['eixo'] != false){
             geral.setEixo(eixo['eixo']);
             if(eixo['eixo'] == 'y'){
@@ -211,14 +211,14 @@ function IndicatorSelector()
     
     function dispatchListener()
     {
-//       console.log('dispatchListener - tabela');
+       console.log('Indicador Seletor - dispatchListener - tabela');
        listener(value_indicador);  
        //fillSelectedItens(); 
     }
 
     function fillSelectedItensOfCurrentListOfIndicador()
     {
-//         console.log('fillSelectedItensOfCurrentListOfIndicador - tabela');
+         console.log('Indicador Seletor - fillSelectedItensOfCurrentListOfIndicador - tabela');
         $(this_selector_element).find('.indicador ul li').removeClass('selected');
         $(this_selector_element).find('.indicador ul li .indicador_ano span').removeClass('selected');
         
@@ -254,7 +254,7 @@ function IndicatorSelector()
 
     function fillSelectedItens()
     {
-//         console.log('fillSelectedItens - tabela');
+         console.log('Indicador Seletor - fillSelectedItens - tabela');
         var indicadoresDistintos = getIndicadoresDistintos(value_indicador);
         //console.log('indicadoresDistintos: '+indicadoresDistintos);  //[object object]
         var html = "";
@@ -276,7 +276,7 @@ function IndicatorSelector()
 
     function enableClickYear()
     {
-//        console.log('enableClickYear - tabela');
+        console.log('Indicador Seletor - enableClickYear - tabela');
         $(this_selector_element).find(".itens_selecionados ul li .indicador_ano span").click(function()
         {
             var idIndicadorSelecionado = parseInt($(this).attr('data-indicador'));
@@ -311,7 +311,7 @@ function IndicatorSelector()
     */
     function loadData(multiselect)
     {
-//        console.log('loadData - tabela');
+        console.log('Indicador Seletor - loadData - tabela');
         load = true;
        
         if(dataSeletorIndicador == null)
@@ -330,7 +330,7 @@ function IndicatorSelector()
 
     function fillData(data,multiselect)
     {
-//        console.log('fillData - tabela');
+        console.log('Indicador Seletor - fillData - tabela');
         array_indicadores = data.indicadores;
         array_dimensoes = data.dimensoes;
         array_temas = data.temas;
@@ -367,7 +367,7 @@ function IndicatorSelector()
     */
     function filtro_tema(value,multiselect)
     {
-//        console.log('filtro_tema - tabela');
+        console.log('Indicador Seletor - filtro_tema - tabela');
         var temas = getTemasPorDimensao(value);
         
         if(temas.length == 0)
@@ -395,7 +395,7 @@ function IndicatorSelector()
 
     function getTemasPorDimensao(temaSuperior)
     {
-//        console.log('getTemasPorDimensao - tabela');
+        console.log('Indicador Seletor - getTemasPorDimensao - tabela');
         var lista = new Array();
         
         $.each(array_temas,function(i,item){
@@ -407,7 +407,7 @@ function IndicatorSelector()
 
     function getIndicadoresPorTema(value)
     {
-//        console.log('getIndicadoresPorTema - tabela');
+        console.log('Indicador Seletor - getIndicadoresPorTema - tabela');
         var listaIndicadorHasTema = new Array();
         var listaIndicadores = new Array();
 
@@ -434,7 +434,7 @@ function IndicatorSelector()
     */
     function containsInFilter(listaIndicadorHasTema,idIndicador)
     {
-//        console.log('containsInFilter - tabela');
+        console.log('Indicador Seletor - containsInFilter - tabela');
         for(var i = 0; i < listaIndicadorHasTema.length; i++)
         {   
             if(listaIndicadorHasTema[i].variavel == idIndicador)
@@ -448,14 +448,14 @@ function IndicatorSelector()
     */
     function filtro_indicador(value,multiselect)
     {
-//        console.log('filtro_indicador - tabela');
+        console.log('Indicador Seletor - filtro_indicador - tabela');
         var indicadores = getIndicadoresPorTema(value);
         fillIndicadores(indicadores,multiselect);
     }
     
     function adicionaOpcaoTodos(array)
     {
-//        console.log('adicionaOpcaoTodos - tabela');
+        console.log('Indicador Seletor - adicionaOpcaoTodos - tabela');
         var value = new IndicadorPorAno();
 
         value.desc = "Selecionar todos";
@@ -476,7 +476,7 @@ function IndicatorSelector()
     */
     function fillIndicadores(indicadores,multiselect)
     {
-//        console.log('fillIndicadores - tabela');
+        console.log('Indicador Seletor - fillIndicadores - tabela');
         var array;
         if(multiselect == true && (indicadores.length >0))
             array = adicionaOpcaoTodos(indicadores);
@@ -502,7 +502,7 @@ function IndicatorSelector()
     
     function getDivAno(arrayIndicadores, idIndicador)
     {
-//        console.log('getDivAno - tabela');
+        console.log('Indicador Seletor - getDivAno - tabela');
         if(multiYear == false || multiYear == undefined) return "";
         
         var classAno1 = "";
@@ -533,7 +533,7 @@ function IndicatorSelector()
     */
     function fillTemas(array)
     {
-//        console.log('fillTemas - tabela');
+        console.log('Indicador Seletor - fillTemas - tabela');
         var html = "";
         
 //        if(array.length > 1)
@@ -563,7 +563,7 @@ function IndicatorSelector()
     */
     function listenerClickIndicador(multiselect)
     {
-//        console.log('listenerClickIndicador - tabela');
+        console.log('Indicador Seletor - listenerClickIndicador - tabela');
 //        console.log('multiselect: '+multiselect);
         if(multiselect == false)
         {
@@ -634,7 +634,7 @@ function IndicatorSelector()
     
     function fillLabelButtonIndicador()
     {
-//        console.log('fillLabelButtonIndicador - tabela');
+        console.log('Indicador Seletor - fillLabelButtonIndicador - tabela');
         var objeto = value_indicador[0];
         textoIndicadorSelecionado = objeto.nc;
                 
@@ -651,7 +651,7 @@ function IndicatorSelector()
     */
     function contains(value)
     {
-//        console.log('contains - tabela');
+        console.log('Indicador Seletor - contains - tabela');
         var retorno = false;
         
         for(var i = 0; i < value_indicador.length; i++)
@@ -668,7 +668,7 @@ function IndicatorSelector()
 
     function getPosition(value)
     {
-//        console.log('getPosition - tabela');
+        console.log('Indicador Seletor - getPosition - tabela');
         var retorno = -1;
         
         for(var i = 0; i < value_indicador.length; i++)
@@ -685,7 +685,7 @@ function IndicatorSelector()
 
     function getArrayOfIndicadores(idIndicador)
     {
-//        console.log('getArrayOfIndicadores - tabela');
+        console.log('Indicador Seletor - getArrayOfIndicadores - tabela');
         var array = new Array();
         for(var i = 0; i < value_indicador.length; i++)
         {
@@ -701,7 +701,7 @@ function IndicatorSelector()
      */
     function adicionaIndicador(value,ele)
     {
-//        console.log('adicionaIndicador - tabela');
+        console.log('Indicador Seletor - adicionaIndicador - tabela');
         $(this_selector_element).find('.messages').html("");   
         
         if(!skipLimit)
@@ -756,7 +756,7 @@ function IndicatorSelector()
     */
     function removeIndicador(value)
     {
-//        console.log('removeIndicador - tabela');
+        console.log('Indicador Seletor - removeIndicador - tabela');
         for(var i = 0; i < value_indicador.length; i++)
         {
             if(parseInt(value_indicador[i].id) == parseInt(value.id) && value_indicador[i].a == value.a)
@@ -802,7 +802,7 @@ function IndicatorSelector()
     */
     function removeIndicadores(value)
     {
-//        console.log('removeIndicadores - tabela');
+        console.log('Indicador Seletor - removeIndicadores - tabela');
         var tmp_array = new Array();
         for(var i = 0; i < value_indicador.length; i++)
         {
@@ -850,7 +850,7 @@ function IndicatorSelector()
     */
     function getIndicadorById(value)
     {
-//        console.log('getIndicadorById - tabela');
+        console.log('Indicador Seletor - getIndicadorById - tabela');
         var length = array_indicadores.length;
 //        console.log('length: '+length);
         for(var i = 0; i < length; i++)
@@ -872,7 +872,7 @@ function IndicatorSelector()
 
     function convertToArray(value)
     {
-//        console.log('convertToArray - tabela');
+        console.log('Indicador Seletor - convertToArray - tabela');
         if($.isArray(value))
             return value;
         else
@@ -881,7 +881,7 @@ function IndicatorSelector()
 
     function refresh()
     {
-//        console.log('refresh - tabela');
+        console.log('Indicador Seletor - refresh - tabela');
         value_indicador = geral.getIndicadores().slice();
         fillSelectedItens();
     }
@@ -894,7 +894,7 @@ function IndicatorSelector()
     
     function getIndicadoresDistintos(array)
     {
-//        console.log('getIndicadoresDistintos - tabela');
+        console.log('Indicador Seletor - getIndicadoresDistintos - tabela');
         var novosIndicadores = new Array();
         for(var i = 0; i < array.length; i++)
         {
@@ -910,7 +910,7 @@ function IndicatorSelector()
 
     function containsInArray(array,value)
     {
-//        console.log('containsInArray - tabela');
+        console.log('Indicador Seletor - containsInArray - tabela');
         for(var i = 0; i < array.length; i++)
         {
             if(array[i].id == value.id)
@@ -921,7 +921,7 @@ function IndicatorSelector()
     
     function closePopOver()
     {
-//        console.log('closePopOver - tabela');
+        console.log('Indicador Seletor - closePopOver - tabela');
         $('html').on('click.popover.divCallOut',function(e) 
         {
             if($(e.target).has('.divCallOut').length == 1)

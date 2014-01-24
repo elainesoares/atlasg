@@ -74,23 +74,27 @@ function drawChart(){
     }
     
     var options = {
+    	curveType: 'function',	//Deixa a curva mais 'lisa'
+    	legend: {position: 'none'}, 	//Retira a legenda
+    	hAxis: {direction: 1, textPosition: 'out', gridlines: {count: 3}, minorGridlines: {count: 2}, viewWindow: {max: 2010, min: 1991}},
+        chartArea:{left:70,top:10,width:"90%",height:"100%"}
 //        width: 400,
-        height: 900,
-        selectionMode: 'multiple',          // Allow multiple simultaneous selections.
-        tooltip: {trigger: 'selection'},    // Trigger tooltips on selections
-        aggregationTarget: 'category',      // Group selections by x-value.
-        curveType: 'function',
-        chartArea: {
-            left:100,
-            top: 10,
-            width:"60%"
-        },
-        focusTarget: 'datum',
-        hAxis: {direction: 1, textPosition: 'out', gridlines: {count: 3}, minorGridlines: {count: 2}, viewWindow: {max: 2010, min: 1991}},
-        legend: {alignment: 'start', position: 'right', maxLines: '10'},
-        lineWidth: 2,
-        vAxis: {format: '#.###'},
-        reverseCategories: true
+        //height: 900,
+        //selectionMode: 'multiple',          // Allow multiple simultaneous selections.
+        //tooltip: {trigger: 'selection'},    // Trigger tooltips on selections
+        //aggregationTarget: 'category',      // Group selections by x-value.
+//        
+//        chartArea: {
+//            left:100,
+//            top: 10,
+//            width:"60%"
+//        },
+//        legend: null,
+        //focusTarget: 'datum',
+        //hAxis: {direction: 1, textPosition: 'out', gridlines: {count: 3}, minorGridlines: {count: 2}, viewWindow: {max: 2010, min: 1991}},
+        //lineWidth: 2,
+        //vAxis: {format: '#.###'},
+        //reverseCategories: true
         //pointSize: 5
     };
 

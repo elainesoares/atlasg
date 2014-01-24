@@ -26,7 +26,7 @@ function LocalSelector()
 
     this.html = function(idElement)
     {
-//        console.log('html');
+        console.log('Seletor Lugares - html');
        var button = '<div id="' + idElement + '" style="float: right;">'
             + '<div class="divCallOutLugares">'
             + '<button class="blue_button big_bt selector_popover" data-toggle="dropdown" style="margin-right: 27px !important; height: 34px; font-size: 14px;" rel="popover" >Selecionar</button>'
@@ -44,7 +44,7 @@ function LocalSelector()
     */
     this.startSelector = function(multiselect,id_element_context,listener_param,orientation,_to_hide,skip)
     { 
-//        console.log('startSelector');
+        console.log('Seletor Lugares - startSelector');
         this_selector_element = '#' + id_element_context;
         value_multiselect = multiselect;
         listener = listener_param;
@@ -100,7 +100,7 @@ function LocalSelector()
 
     function startPopOver()
     {
-//        console.log('startPopOver');
+        console.log('Seletor Lugares - startPopOver');
         refresh();
         $(this_selector_element).find('.divCallOutLugares .popover').toggle(); //Exibir ou ocultar os elementos combinados.
         
@@ -173,13 +173,13 @@ function LocalSelector()
 
     this.getData = function()
     {
-//        console.log('getData');
+        console.log('Seletor Lugares - getData');
         return value_indicador;
     }
     
     function dispatchListener(listener)
     {
-//        console.log('dispatchListener');
+        console.log('Seletor Lugares - dispatchListener');
         fillSelectedItens();
 
         var locais_municipal = new Array();
@@ -217,13 +217,14 @@ function LocalSelector()
         lugar_area_tematica.e = 7;
         lugar_area_tematica.ac = false;
         lugar_area_tematica.l = locais_area_tematica;
-        
+        console.log('lugar_area_tematica: '+lugar_area_tematica.l);
+        console.log('listener: '+listener);
         listener([lugar_municipal,lugar_estadual,lugar_area_tematica]);
     }
 
     function fillSelectedItens()
     {
-//        console.log('fillSelectedItens');
+        console.log('Seletor Lugares - fillSelectedItens');
         var html = "";
         
         $.each(value_indicador,function(i,item){
@@ -235,7 +236,7 @@ function LocalSelector()
 
     function loadData(listener)
     {
-//        console.log('loadData');
+        console.log('Seletor Lugares - loadData');
         load = true;
        
         $.getJSON('com/mobiliti/componentes/local/local.php', function(data){ 
@@ -245,7 +246,7 @@ function LocalSelector()
 
     function injetaEspacialidade(array,espacialidade)
     {
-//        console.log('injetaEspacialidade');
+        console.log('Seletor Lugares - injetaEspacialidade');
         $.each(array,function(i,item)
         {
             item.e = espacialidade;
@@ -256,7 +257,7 @@ function LocalSelector()
 
     function fillData(data)
     {
-//        console.log('fillData');
+        console.log('Seletor Lugares - fillData');
         estados = injetaEspacialidade(data.estados,4);
         if(estados.length > 1)
         {
@@ -278,7 +279,7 @@ function LocalSelector()
 
     function getItensBox1()
     {
-//        console.log('getItensBox1');
+        console.log('Seletor Lugares - getItensBox1');
         var array = new Array();
         var objeto;
 
@@ -306,7 +307,7 @@ function LocalSelector()
 
     function fillFiltroBox1(array)
     {
-//        console.log('fillFiltroBox1');
+        console.log('Seletor Lugares - fillFiltroBox1');
         var html = "";
         $.each(array,function(i,item)
         {
@@ -356,7 +357,7 @@ function LocalSelector()
     
     function filtroBox2(value)
     {
-//        console.log('filtroBox2');
+        console.log('Seletor Lugares - filtroBox2');
         if(value == 7)
             filterByBox2(areas_tematicas,value);
         else
@@ -365,7 +366,7 @@ function LocalSelector()
 
     function filterByBox2(array,value)
     {
-//        console.log('filterByBox2');
+        console.log('Seletor Lugares - filterByBox2');
         $(this_selector_element).find('.box2 ul li').removeClass('active');
         $(this_selector_element).find('.box2 ul li').removeClass('selected');
 
@@ -468,7 +469,7 @@ function LocalSelector()
     
     function filterByBox3(array)
     {
-//        console.log('filterByBox3');
+        console.log('Seletor Lugares - filterByBox3');
         $("#ui_city_loader").hide();
         
         array = injetaEspacialidade(array,2);
@@ -497,7 +498,7 @@ function LocalSelector()
 
     function filtroBox3(value)
     {
-//        console.log('filtroBox3');
+        console.log('Seletor Lugares - filtroBox3');
         $.getJSON('com/mobiliti/componentes/local/cidades_por_estado.php', {estado:value},function(data){ 
             cidades = data.cidades;
             filterByBox3(data.cidades)
@@ -506,7 +507,7 @@ function LocalSelector()
 
     function adicionaItemTodos(array)
     {
-//        console.log('adicionaItemTodos');
+        console.log('Seletor Lugares - adicionaItemTodos');
         var html = "";
         
         if(array.length > 1)
@@ -528,7 +529,7 @@ function LocalSelector()
     */
     function listenerClickItens()
     {
-//        console.log('listenerClickItens');
+        console.log('Seletor Lugares - listenerClickItens');
         if(value_multiselect == false)
         {
             $(this_selector_element).find('.box3 ul li').click(function(e)
@@ -600,7 +601,7 @@ function LocalSelector()
     
     function fillLabelButtonIndicador()
     {
-//        console.log('fillLabelButtonIndicador');
+        console.log('Seletor Lugares - fillLabelButtonIndicador');
         var objeto = value_indicador[0];
         textoIndicadorSelecionado = objeto.nome;
                 
@@ -617,7 +618,7 @@ function LocalSelector()
     */
     function contains(value)
     {
-//        console.log('contains');
+        console.log('Seletor Lugares - contains');
         var length = value_indicador.length
         for(var i = 0; i < length; i++)
         {
@@ -633,7 +634,7 @@ function LocalSelector()
     */
     function adicionaElemento(value,elemento,size)
     {
-//        console.log('adicionaElemento');
+        console.log('Seletor Lugares - adicionaElemento');
         $(this_selector_element).find('.messages').html("");
         
         if(size == undefined || size == null)size = 0;
@@ -679,7 +680,7 @@ function LocalSelector()
 
     function adicionaVariosElementos(value)
     {
-//        console.log('adicionaVariosElementos');
+        console.log('Seletor Lugares - adicionaVariosElementos');
         $(this_selector_element).find('.messages').html("");
 
         if(!skipLimit)
@@ -720,7 +721,7 @@ function LocalSelector()
     */
     function removeElemento(value, size)
     {
-//        console.log('removeElemento');
+        console.log('Seletor Lugares - removeElemento');
         var length = value_indicador.length;
         if(size == undefined || size == null)size = 0;
         
@@ -775,7 +776,7 @@ function LocalSelector()
     */
     function getIndicadorById(value)
     {
-//        console.log('getCIndicadorById');
+        console.log('Seletor Lugares - getCIndicadorById');
         var length = array_indicadores.length;
         
         for(var i = 0; i < length; i++)
@@ -791,7 +792,7 @@ function LocalSelector()
     */
     function getIndicadorBySigla(value)
     {
-//        console.log('getIndicadorBySigla');
+        console.log('Seletor Lugares - getIndicadorBySigla');
         var length = array_indicadores.length;
         for(var i = 0; i < length; i++)
         {
@@ -803,7 +804,7 @@ function LocalSelector()
 
     function convertToArray(value)
     {
-//        console.log('convertToArray');
+        console.log('Seletor Lugares - convertToArray');
         if($.isArray(value))
             return value;
         else
@@ -812,13 +813,13 @@ function LocalSelector()
 
     this.setLugares = function(lugares)
     {
-//        console.log('setLugares');
+        console.log('Seletor Lugares - setLugares');
         setLugaresValue(lugares);
     }
 
     function setLugaresValue(lugares)
     {
-//        console.log('setLugaresValue');
+        console.log('Seletor Lugares - setLugaresValue');
 //        console.log('lugares: '+lugares);
         var array = new Array();
 
@@ -841,13 +842,13 @@ function LocalSelector()
 
     this.refresh = function()
     {
-//       console.log('this.refresh');
+       console.log('this.refresh');
        refresh();
     }
 
     function refresh()
     {
-//       console.log('refresh');
+       console.log('Seletor Lugares - refresh');
        setLugaresValue(geral.getLugares().slice());
     }
 }
