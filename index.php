@@ -50,6 +50,7 @@ foreach ($NavegadoresBloqueados as $key => $v) {
     var lastClickedId = "1";
     $(document).ready(function()
     {
+        console.log('ready');
         $('#imgTab1').tooltip({html:true});
         $('#imgTab2').tooltip({html:true});
         $('#imgTab3').tooltip({html:true, delay: 500});

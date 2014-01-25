@@ -105,7 +105,7 @@
     }
 //    
     function bolha_year_slider_listener(event, data){
-//        console.log('2 - bolha_year_slider_listener');
+        console.log('2 - bolha_year_slider_listener');
         if (___first_time_year_)
         {
             ___first_time_year_ = false;
@@ -136,7 +136,7 @@
     
     function bolha_loading(status)
     {
-//        console.log('bolha_loading');
+        console.log('bolha_loading');
         if (status)
             $("#uibolhaloader").show();
         else
@@ -176,7 +176,7 @@
     
     function bolha_response(data, textStatus, jqXHR)
     {
-//        console.log('bolha_response');
+        console.log('bolha_response');
         if (textStatus === "success"){
             var ano_result_to_fill = '';
             if (bolha_a === 1)
@@ -193,23 +193,23 @@
 
 
             obj = $.parseJSON(data);
-//            console.log('OBJ: '+obj);
+            console.log('OBJ: '+obj);
             drawChartBolha();
 
         }
     }
     
     function listenerLocalGrafBolha(lugares){
-//        console.log('listenerLocalGrafBolha');
+        console.log('listenerLocalGrafBolha');
         geral.setLugares(lugares);
     }    
     function bolha_indcator_selector_bolha(array){
-//        console.log('bolha_indcator_selector_bolha');
+        console.log('bolha_indcator_selector_bolha');
         local_.setItensSelecionados(array);
     }
     
     function listenerLocalIndicadoresBolha(indicadores){
-//        console.log('listenerLocalIndicadoresBolha');
+        console.log('listenerLocalIndicadoresBolha');
         geral.setIndicadores(indicadores);
         eixo = geral.getEixo();
         if(eixo == undefined || eixo == ''){
@@ -221,7 +221,7 @@
     
     function bolha_listener_lugar(event, obj)
     {
-//        console.log('bolha_listener_lugar');
+        console.log('bolha_listener_lugar');
 //        quantil_id = "";
         local_.refresh();
         bolha_indc.refresh();
@@ -229,7 +229,7 @@
     }
     
     function seletor_indicador_(obj){
-//        console.log('seletor_indicador_');
+        console.log('seletor_indicador_');
         geral.setIndicadores(obj);
         eixo = geral.getEixo();
         if(eixo == undefined || eixo == ''){
@@ -242,7 +242,7 @@
     
     function bolha_listener_indicador(event, obj)
     {
-//        console.log('bolha_listener_indicador');
+        console.log('bolha_listener_indicador');
         quantil_id = "";
 
         if (event === "changetab")
@@ -276,7 +276,7 @@
 
     function dispacth_bolha_evt()
     {
-//        console.log('dispacth_bolha_evt');
+        console.log('dispacth_bolha_evt');
         // limpa todos os argumentos
         bolha_i_name = new Array();
         bolha_e = 0;

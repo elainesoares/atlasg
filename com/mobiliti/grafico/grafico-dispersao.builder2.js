@@ -33,7 +33,9 @@ function drawChartBolha(){
           axisTitlesPosition: 'none',
           chartArea:{left:70,top:10,width:"85%",height:"90%"},
           enableInteractivity: true,
-          hAxis: {gridlines: {count: -1}, textPosition: 'none'}
+          hAxis: {gridlines: {count: 5}},
+          sortBubblesBySize: true,
+          tooltip: {trigger: 'focus'}
           //explorer: {actions: ['dragToZoom', 'rightClickToReset']}
           
 //          backgroundColor: 'pink',

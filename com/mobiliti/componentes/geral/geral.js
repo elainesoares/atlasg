@@ -207,13 +207,13 @@ function Geral(listenerReady){
     }
 
     this.setListenerLugares = function(listener){
-        console.log('setListenerLugares');
+        console.log('Geral - setListenerLugares');
 //        console.log('++++++++++++++++++');
         listenerLugares = listener;
     }
 
     this.setListenerIndicadores = function(listener){
-        console.log('setListenerIndicadores');
+        console.log('Geral - setListenerIndicadores');
         listenerIndicadores = listener;
     }
 
@@ -233,7 +233,7 @@ function Geral(listenerReady){
     }
 
     this.removeIndicadoresExtras = function(){
-        console.log('removeIndicadoresExtras');
+        console.log('Geral - removeIndicadoresExtras');
         var novosIndicadores = indicadores.slice();
         var hasCheck = false;
 
@@ -321,18 +321,25 @@ function Geral(listenerReady){
 function IndicadorPorAno(){
     console.log('Geral - IndicadorPorAno');
     this.id; //indicadoor
+    console.log('this.id: '+this.id);
     this.a; //ano
     this.c; //checked
+    console.log('this.c: '+this.c);
     this.desc; //nome_longo
     this.nc; //nome_curto
 
     this.setIndicador = function(id,a,c,desc,nc){
         console.log('Geral - setIndicador');
         this.id = id;
+        console.log('this.id: '+this.id);
         this.a = a; 
+        console.log('this.a: '+this.a);
         this.c = c; 
+        console.log('this.c: '+this.c);
         this.desc = desc;
+        console.log('this.desc: '+this.desc);
         this.nc  = nc;
+        console.log('this.nc: '+this.nc);
     }
 }
 
