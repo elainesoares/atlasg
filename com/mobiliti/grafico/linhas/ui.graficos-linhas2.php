@@ -104,11 +104,11 @@
     
     function linha_load(e, l, i, a)
     {
-//        console.log('linha_load');
-//        console.log('Espacialidade: '+e);
-//        console.log('Locais: '+l);
-//        console.log('indicador'+i);
-//        console.log('ano: '+a);
+        console.log('linha_load');
+        console.log('Espacialidade: '+e);
+        console.log('Locais: '+l);
+        console.log('indicador'+i);
+        console.log('ano: '+a);
 
         linha_loading(true);
 
@@ -138,8 +138,9 @@
     
     function linha_response(data, textStatus, jqXHR)
     {
-//        console.log('linha_response');
+        console.log('linha_response');
         if (textStatus === "success"){
+            console.log('success');
             var ano_result_to_fill = '';
             if (linha_a === 1)
                 ano_result_to_fill = "1991";
@@ -155,9 +156,9 @@
 
 
             obj = $.parseJSON(data);
-//            console.log(obj['ano'][0]);
-//            console.log(obj['valor'][1]);
-//            console.log(obj['nome'][0]);
+            console.log(obj['ano'][0]);
+            console.log(obj['valor'][1]);
+            console.log(obj['nome'][0]);
             drawChart();
         }
     }
@@ -240,6 +241,7 @@
                 if (_lugar)
                 {
                     if (_lugar.c)
+                        console.log('ID Lugar: '+_lugar.id);
                         linha_l.push(_lugar.id);
                 }
             }
@@ -256,10 +258,13 @@
                 //if (_indicador.c)
                 //{
                     linha_i = _indicador.id;
+                    console.log('linha_i: '+linha_i);
                     linha_a = _indicador.a;
+                    console.log('linha_a: '+linha_a);
 
                     //nome completo
                     linha_i_name = _indicador.desc;
+                    console.log('linha_i_name: '+linha_i_name);
                     break;
                 //}
             }

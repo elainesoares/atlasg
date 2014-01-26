@@ -48,13 +48,58 @@
                      $SQLNome = "SELECT nome, id FROM estado WHERE id IN (".implode(',',$lugares).")";
                     break;
                 case Consulta::$ESP_REGIAODEINTERESSE:
-                    $ParteInicialSQL = "SELECT valor as v, fk_regiao_interesse,fk_ano_referencia,fk_variavel, ri.nome FROM valor_variavel_ri as vv
+                    $arr = array();
+                    foreach($lugares as $key=>$val){
+    //                    echo '$val[id]: '.$val.'<br />';
+                        $arr[] = $val;
+                    }
+                    
+                    $arr2 = array();
+                    $tam_lug2 = count($lugares);
+                    for($i = 0; $i < $tam_lug2; $i++){
+//                        echo 'Lugares: '.$lugares[$i].'  ';
+                        $arr2[] = $lugares[$i];
+                    }
+                    
+                    $whereLugs2 = '('.implode(',',$arr2).')';
+
+                    $RI = "SELECT Distinct m.id as id
+                            FROM valor_variavel_mun as vv
+                            INNER JOIN regiao_interesse_has_municipio as b ON (b.fk_municipio = vv.fk_municipio)
+                            INNER JOIN municipio as m ON (vv.fk_municipio = m.id)
+                            INNER JOIN estado as e ON (e.id = m.fk_estado)
+                            INNER JOIN regiao_interesse as ri ON (b.fk_regiao_interesse = ri.id)
+                            WHERE fk_regiao_interesse IN ".$whereLugs2;
+                    $RI .=  " ORDER BY m.id";    
+                    
+                    //echo $RI;
+                    $Resp = pg_query($this->bd->getConexaoLink(), $RI) or die ("Nao foi possivel executar a consulta! ");
+                    $Linha = pg_fetch_assoc($Resp);
+                    $cmdtuples = pg_affected_rows($Resp);
+//                    echo $cmdtuples . " tuples are affected.\n";
+                    $lugares = array();
+                    $i = 0;
+                    
+                    while ($Linha = pg_fetch_assoc($Resp))
+                    {
+//                        echo 'While  ';
+//                        echo 'Linha: '.$linha.'  ';
+                        $lugares[$i] = $Linha['id'];
+//                        echo $lugares[$i];
+                        $i++;
+                    }
+                    
+                    $ParteInicialSQL = "SELECT valor as v, fk_municipio, fk_ano_referencia as ka,fk_variavel as iv, m.nome as nome, e.uf as uf, ar.label_ano_referencia as a 
+                                        FROM ano_referencia as ar, valor_variavel_mun as vv
                                         INNER JOIN variavel as v ON (vv.fk_variavel = v.id)
-                                        INNER JOIN regiao_interesse as ri ON (vv.fk_regiao_interesse = ri.id)
-                                        WHERE ";
-                     $filtro = "fk_regiao_interesse";
+                                        INNER JOIN municipio as m ON (m.id = vv.fk_municipio)
+                                        INNER JOIN estado as e ON (e.id = m.fk_estado)
+                                        INNER JOIN regiao as r ON (r.id = e.fk_regiao)
+                                        WHERE fk_municipio IN ";
+                     $filtro = "fk_municipio";
                      
-                     $SQLNome = "SELECT nome, id FROM regiao_interesse WHERE id IN (".implode(',',$lugares).")";
+                     $SQLNome = "SELECT nome, id FROM municipio WHERE id IN (".implode(',',$lugares).")";
+//                     echo $SQLNome;
                     break;
                 case Consulta::$ESP_UDH:
                     $ParteInicialSQL = "SELECT valor as v, fk_udh,fk_ano_referencia,fk_variavel, udh.nome FROM valor_variavel_udh as vv
@@ -74,13 +119,24 @@
             
             if(isset($lugares)){
                 $arr = array();
-                foreach($lugares as $key=>$val){
-//                    echo '$val[id]: '.$val.'<br />';
-                    $arr[] = $val;
+//                echo 'indicador: '.$indicador;
+                $lugs = array();
+                $tam_lug = count($lugares);
+//                echo 'tam_lug: '.$tam_lug.'  ';
+                for($i = 0; $i < $tam_lug; $i++){
+//                    echo $lugares[$i];
+                    $lugs[] = $lugares[$i];
+    //                echo '  '.$lugs[$i];
                 }
+                $whereLugs = '('.implode(',',$lugs).')';
+//                foreach($lugares as $key=>$val){
+//                    echo '$val[id]: '.$val.'<br />';
+//                    $arr[] = $val;
+//                }
                 
                 $SQL = "";
-                $SQL = $ParteInicialSQL . " (".implode(",", $arr).") AND (fk_variavel = $indicador) AND(ar.id = fk_ano_referencia)  ORDER BY fk_ano_referencia";
+//                $SQL = $ParteInicialSQL . " (".implode(",", $arr).") AND (fk_variavel = $indicador) AND(ar.id = fk_ano_referencia)  ORDER BY fk_ano_referencia";
+                $SQL = $ParteInicialSQL.$whereLugs." AND (fk_variavel = $indicador) AND(ar.id = fk_ano_referencia)  ORDER BY fk_ano_referencia";
 //                echo 'SQL: '.$SQL.'<br />';
                 $result = pg_query($this->bd->getConexaoLink(), $SQL) or die ("Nao foi possivel executar a consulta! ");
 //                echo 'result: '.$result.'<br />';
