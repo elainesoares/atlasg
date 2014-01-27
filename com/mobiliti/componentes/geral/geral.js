@@ -14,19 +14,19 @@ function Geral(listenerReady){
     var ready = listenerReady;
 
     this.listenerReady = function(value){
-        console.log('Geral - listenerReady');
+//        console.log('Geral - listenerReady');
         ready = value;
     }
 
     this.dispatchListeners = function(event){
-        console.log('Geral - dispatchListeners');
+//        console.log('Geral - dispatchListeners');
         //console.log('listenerLugares: '+listenerLugares);
         listenerIndicadores(event, indicadores);
         listenerLugares(event, lugares);
     }
     
     this.setEixo = function(eixo_){
-        console.log('Geral - setEixo');
+//        console.log('Geral - setEixo');
 //        console.log('eixo_: '+eixo_);
         if(eixo_ == 'y'){
             eixo = 0;
@@ -43,7 +43,7 @@ function Geral(listenerReady){
     }
     
     this.getEixo = function(){ 
-        console.log('Geral - getEixo');
+//        console.log('Geral - getEixo');
         return eixo;
     }
 
@@ -51,7 +51,7 @@ function Geral(listenerReady){
     * Retorna a posição do elemento adicionado
     * */
     this.addLugar = function(value){
-        console.log('Geral - addLugar');
+//        console.log('Geral - addLugar');
         var obj = lugares.push(value);
         if(listenerLugares)
             listenerLugares('check',obj);
@@ -62,7 +62,7 @@ function Geral(listenerReady){
     }
 
     this.getLugaresPorEspacialidadeAtiva = function(){
-        console.log('Geral - getLugaresPorEspacialidadeAtiva');
+//        console.log('Geral - getLugaresPorEspacialidadeAtiva');
         for(var i = 0; i < lugares.length; i++){
             var item = lugares[i];
 	if(item.ac == true)
@@ -71,7 +71,7 @@ function Geral(listenerReady){
     }
 
     this.removeLugar = function(espacialidade, id){
-        console.log('Geral - removeLugar');
+//        console.log('Geral - removeLugar');
         for(var i = 0; i < lugares.length; i++){
             var item = lugares[i];
             if(item.e == espacialidade){
@@ -88,27 +88,27 @@ function Geral(listenerReady){
     }
         
     this.removerIndicadoresTodos = function(){
-        console.log('Geral - removerIndicadoresTodos');
+//        console.log('Geral - removerIndicadoresTodos');
         indicadores = new Array();
     }
     this.removeLugarTodos = function(){
-        console.log('Geral - removeLugarTodos');
+//        console.log('Geral - removeLugarTodos');
         lugares = new Array();
     }
       
     this.removeTodosIndicadores = function(){
-        console.log('Geral - removeTodosIndicadores');
+//        console.log('Geral - removeTodosIndicadores');
         indicadores = new Array();
     }
         
     this.getLugares = function(){
-        console.log('Geral - getLugares');
-        console.log('lugares: '+lugares);
+//        console.log('Geral - getLugares');
+//        console.log('lugares: '+lugares);
         return lugares;
     }
         
     this.getTotalLugares = function(){
-        console.log('Geral - getTotalLugares');
+//        console.log('Geral - getTotalLugares');
         var total = 0;
         var instance = this;
         $.each(lugares, function(index, value) {
@@ -127,7 +127,7 @@ function Geral(listenerReady){
     }
 
     this.getLugaresString = function(){
-        console.log('Geral - getLugaresString');
+//        console.log('Geral - getLugaresString');
         ob = new Array();
         c = 0;
         for(var i in lugares){
@@ -145,8 +145,8 @@ function Geral(listenerReady){
     }
         
     this.setLugares = function(value){
-        console.log('Geral - setLugares');
-        console.log('value: '+value);
+//        console.log('Geral - setLugares');
+//        console.log('value: '+value);
         lugares = value;
         if(listenerLugares)
             listenerLugares('reloadList',value);
@@ -156,7 +156,7 @@ function Geral(listenerReady){
     * Retorna a posição do elemento adicionado
     * */
     this.addIndicador = function(value){
-        console.log('Geral - addIndicador');
+//        console.log('Geral - addIndicador');
         var obj = indicadores.push(value);
         if(listenerIndicadores)
             listenerIndicadores('check',obj);
@@ -164,12 +164,12 @@ function Geral(listenerReady){
     }
 
     this.getIndicadores = function(){
-        console.log('Geral - getIndicadores');
+//        console.log('Geral - getIndicadores');
         return indicadores;
     }
         
     this.getIndicadoresString = function(){
-        console.log('Geral - getIndicadoresString');
+//        console.log('Geral - getIndicadoresString');
         temp = new Array();
         for(var i in indicadores){
             temp.push(indicadores[i].a+";"+indicadores[i].id);
@@ -178,7 +178,7 @@ function Geral(listenerReady){
     }
 
     this.setIndicadores = function(value){
-        console.log('Geral - setIndicadores');
+//        console.log('Geral - setIndicadores');
         //console.log(value);
         indicadores = value;
         if(listenerIndicadores)
@@ -186,7 +186,7 @@ function Geral(listenerReady){
     }
 
     this.removeIndicador = function(index){
-        console.log('Geral - removeIndicador');
+//        console.log('Geral - removeIndicador');
         for(var i = 0;i<indicadores.length;i++){
             var item = indicadores[i];
 	if(i == index){
@@ -198,7 +198,7 @@ function Geral(listenerReady){
     }
 
     this.updateIndicador = function (index, ano){
-        console.log('Geral - updateIndicador');
+//        console.log('Geral - updateIndicador');
         for(var i = 0; i < indicadores.length; i++){
             var item = indicadores[i];
             if(i == index)
@@ -207,13 +207,13 @@ function Geral(listenerReady){
     }
 
     this.setListenerLugares = function(listener){
-        console.log('Geral - setListenerLugares');
+//        console.log('Geral - setListenerLugares');
 //        console.log('++++++++++++++++++');
         listenerLugares = listener;
     }
 
     this.setListenerIndicadores = function(listener){
-        console.log('Geral - setListenerIndicadores');
+//        console.log('Geral - setListenerIndicadores');
         listenerIndicadores = listener;
     }
 
@@ -221,7 +221,7 @@ function Geral(listenerReady){
     * Retorna os indicadores da consulta, desprezando o ano e retirando os indicadores duplicados
     */
     this.getIndicadoresDistintos = function(){
-        console.log('Geral - getIndicadoresDistintos');
+//        console.log('Geral - getIndicadoresDistintos');
         var indicadoresDistintos = new Array();
         for(var i = 0; i < indicadores.length; i++){
             var item = indicadores[i];
@@ -233,7 +233,7 @@ function Geral(listenerReady){
     }
 
     this.removeIndicadoresExtras = function(){
-        console.log('Geral - removeIndicadoresExtras');
+//        console.log('Geral - removeIndicadoresExtras');
         var novosIndicadores = indicadores.slice();
         var hasCheck = false;
 
@@ -256,7 +256,7 @@ function Geral(listenerReady){
     };
 
     this.removeIndicadoresDuplicados = function(){
-        console.log('Geral - removeIndicadoresDuplicados');
+//        console.log('Geral - removeIndicadoresDuplicados');
         var novosIndicadores = new Array();
         for(var i = 0; i < indicadores.length; i++){
             var item = indicadores[i];
@@ -276,7 +276,7 @@ function Geral(listenerReady){
     }
 
     function containsInArray(array,value){
-        console.log('Geral - containsInArray');
+//        console.log('Geral - containsInArray');
         for(var i = 0; i < array.length; i++){
             if(array[i].id == value.id)
                 return true;
@@ -285,7 +285,7 @@ function Geral(listenerReady){
     }
     
     this.getAreaTematica = function (id){
-        console.log('Geral - getAreaTematica');
+//        console.log('Geral - getAreaTematica');
         var area = null;
         for(var i = 0; i < areas_tematicas.length; i++){
             if(areas_tematicas[i].getId() == id){
@@ -297,7 +297,7 @@ function Geral(listenerReady){
     };
     
     this.AddOrUpdateAreaTematica = function (id,nome,size){
-        console.log('Geral - AddOrUpdateAreaTematica');
+//        console.log('Geral - AddOrUpdateAreaTematica');
         var area = null;
 //        console.log('id: '+id);
 //        console.log('nome: '+nome);
@@ -319,39 +319,39 @@ function Geral(listenerReady){
 }
 
 function IndicadorPorAno(){
-    console.log('Geral - IndicadorPorAno');
+//    console.log('Geral - IndicadorPorAno');
     this.id; //indicadoor
-    console.log('this.id: '+this.id);
+//    console.log('this.id: '+this.id);
     this.a; //ano
     this.c; //checked
-    console.log('this.c: '+this.c);
+//    console.log('this.c: '+this.c);
     this.desc; //nome_longo
     this.nc; //nome_curto
 
     this.setIndicador = function(id,a,c,desc,nc){
-        console.log('Geral - setIndicador');
+//        console.log('Geral - setIndicador');
         this.id = id;
-        console.log('this.id: '+this.id);
+//        console.log('this.id: '+this.id);
         this.a = a; 
-        console.log('this.a: '+this.a);
+//        console.log('this.a: '+this.a);
         this.c = c; 
-        console.log('this.c: '+this.c);
+//        console.log('this.c: '+this.c);
         this.desc = desc;
-        console.log('this.desc: '+this.desc);
+//        console.log('this.desc: '+this.desc);
         this.nc  = nc;
-        console.log('this.nc: '+this.nc);
+//        console.log('this.nc: '+this.nc);
     }
 }
 
 function Lugar(){
-    console.log('Geral - Lugar');
+//    console.log('Geral - Lugar');
     this.e; //espacialidade;
     this.ac; //ativo
     this.l = new Array(); //array de locais
 }
 
 function Local(){
-    console.log('Geral - Local');
+//    console.log('Geral - Local');
     this.id;
     this.n; //nome
     this.c; //checado
@@ -359,7 +359,7 @@ function Local(){
 }
 
 function AreaTematica(){
-    console.log('Geral - AreaTematica');
+//    console.log('Geral - AreaTematica');
     //atributos
     var _id = 0;
     var _nome = "";
@@ -367,35 +367,35 @@ function AreaTematica(){
     
     //metodos
     this.setId = function(id){
-        console.log('Geral - setId');
+//        console.log('Geral - setId');
         _id = id;
         return this;
     };
     
     this.getId = function(){
-        console.log('Geral - getId');
+//        console.log('Geral - getId');
        return _id;
     };
     
     this.setNome = function(nome){
-        console.log('Geral - setNome');
+//        console.log('Geral - setNome');
         _nome = nome;
         return this;
     };
     
     this.getNome = function(){
-        console.log('Geral - getNome');
+//        console.log('Geral - getNome');
         return _nome;
     };
     
     this.setSize = function(size){
-        console.log('Geral - setSize');
+//        console.log('Geral - setSize');
         _size = size;
         return this;
     };
     
     this.getSize = function(){
-        console.log('Geral - getSize');
+//        console.log('Geral - getSize');
         return _size;
     };
 }

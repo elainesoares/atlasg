@@ -18,12 +18,12 @@ function SeletorIndicador()
     eixo['cor'] = false;
 
     this.setButton = function(html){
-        console.log('setButton');
+//        console.log('setButton');
         $(element_context).find('.button').html(html);
     }
 
     function dispatcher(array){
-        console.log('dispatcher');
+//        console.log('dispatcher');
         listener(itens);
     }
     
@@ -32,7 +32,7 @@ function SeletorIndicador()
     }
 
     this.startLocal = function(listener_value,context,_multiSelecao, eixo_){
-        console.log('startLocal');
+//        console.log('startLocal');
         eixo['eixo'] = eixo_;
         multiSelecao = _multiSelecao;
         
@@ -44,7 +44,7 @@ function SeletorIndicador()
     }
 	
     function enableBtnCleanAll(){
-        console.log('enableBtnCleanAll');
+//        console.log('enableBtnCleanAll');
         $(element_context).find('.btn_clean_local').removeAttr("disabled");
         $(element_context).find('.btn_clean_local').click(function(){
             $.each(itens,function(i,item){
@@ -59,7 +59,7 @@ function SeletorIndicador()
 
     function enabledBtnAll()
     {
-        console.log('enabledBtnAll');
+//        console.log('enabledBtnAll');
         $(element_context).find('.btn_all').removeAttr("disabled");
         $(element_context).find('.btn_all').click(function()
         {
@@ -77,7 +77,7 @@ function SeletorIndicador()
     }
 
     function enabledSelected(){
-        console.log('enabledSelected');
+//        console.log('enabledSelected');
         $(element_context).find('.list_local li').click(function(){
             var objeto = {};
             objeto.id = parseInt($(this).attr('data-id'));
@@ -93,7 +93,7 @@ function SeletorIndicador()
 
     function preenche(array)
     {
-        console.log('PREENCHE');
+//        console.log('PREENCHE');
         enabledSelected();
         var html = "";
         $.each(array,function(i,item)
@@ -161,7 +161,7 @@ function SeletorIndicador()
 	
     function rechecked()
     {
-        console.log('rechecked');
+//        console.log('rechecked');
         var hasChecked = false;
 
         for(var i=0;i<itens.length;i++)
@@ -181,7 +181,7 @@ function SeletorIndicador()
 
     function enabledSearch()
     {
-        console.log('enabledSearch');
+//        console.log('enabledSearch');
         $(element_context).find('#inputSearchLocal').removeAttr("disabled");
 
         $(element_context).find('#inputSearchLocal').keyup(function() 
@@ -202,26 +202,26 @@ function SeletorIndicador()
 
     this.refresh = function()
     {
-        console.log('refresh2');
+//        console.log('refresh2');
         itens = geral.getIndicadores();
         preenche(itens);
     }
 
     this.getItens = function()
     {
-        console.log('getItens');
+//        console.log('getItens');
         return itens;
     }
 
     this.setItens = function(value)
     {
-        console.log('setItens');
+//        console.log('setItens');
         setItensValue(value);
     }
 
     function setItensValue(value)
     {
-        console.log('setItensValue');
+//        console.log('setItensValue');
         $.each(value,function(i,item)
         {
             item.a = 2;
@@ -238,7 +238,7 @@ function SeletorIndicador()
 
     function removeElement(value)
     {
-        console.log('removeElement');
+//        console.log('removeElement');
         var lista = itens;
 
         for(var i = 0; i < lista.length; i++)

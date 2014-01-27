@@ -15,22 +15,22 @@ function SeletorLocal()
     //adicionando por reinaldo
     var listenerSelectionItem = null;
     this.setListenerSelectionItem = function(_listener){
-        console.log('setListenerSelectionItem');
+//        console.log('setListenerSelectionItem');
         listenerSelectionItem = _listener;
     }
     
     this.setButton = function(html){
-        console.log('setButton');
+//        console.log('setButton');
         $(element_context).find('.button').html(html);
     }
 
     this.getEspacialidade_selecionada = function(){
-        console.log('getEspacialidade_selecionada');
+//        console.log('getEspacialidade_selecionada');
         return espacialidade_selecionada;
     }
 
     this.selectedElement = function(value){
-        console.log('selectedElement');
+//        console.log('selectedElement');
         try
         {
             var string_id = '[data-id=' + value + ']';
@@ -51,7 +51,7 @@ function SeletorLocal()
     }
 
     function dispatcher(array){
-        console.log('dispatcher');
+//        console.log('dispatcher');
         $.each(itens_selecionados,function(i,item)
         {
             if(item.e == espacialidade_selecionada)
@@ -65,7 +65,7 @@ function SeletorLocal()
     }
 
     this.startLocal = function(listener_value,context,multipla_espacializacao){
-        console.log('startLocal');
+//        console.log('startLocal');
 //        console.log('listener_value: '+listener_value);
         listener = listener_value;
         
@@ -90,7 +90,7 @@ function SeletorLocal()
     }
 
     function addEspacialidade(array,espacialidade){
-        console.log('addEspacialidade');
+//        console.log('addEspacialidade');
         $.each(array,function(i,item)
         {
             item.e = espacialidade;
@@ -116,7 +116,7 @@ function SeletorLocal()
     }
 
     function enabledBtnAll(){
-        console.log('enabledBtnAll');
+//        console.log('enabledBtnAll');
         $(element_context).find('.btn_all').removeAttr("disabled");
         $(element_context).find('.btn_all').click(function()
         {
@@ -135,7 +135,7 @@ function SeletorLocal()
     }
 
     function setEspacialidadePorDadosPreenchidos(){
-        console.log('setEspacialidadePorDadosPreenchidos');
+//        console.log('setEspacialidadePorDadosPreenchidos');
         var countMunicipal;
         var countEstadual;
         var countAreaTematica;
@@ -184,14 +184,14 @@ function SeletorLocal()
     }
 
     this.refresh = function(){
-        console.log('this.refresh - local');
+//        console.log('this.refresh - local');
         itens_selecionados = geral.getLugares();
         setEspacialidadePorDadosPreenchidos();
         preencheLista();
     }
 
     function preencheLista(){
-        console.log('preencheLista');
+//        console.log('preencheLista');
         $("#head_list_c").hide();
         var display_cidade = false;
             
@@ -232,7 +232,7 @@ function SeletorLocal()
     }
 
     function enabledSelected(){
-        console.log('enabledSelected');
+//        console.log('enabledSelected');
         $(element_context).find('.list_local li').click(function()
         {
                      
@@ -294,7 +294,7 @@ function SeletorLocal()
     }
     
     function classLi(item){
-        console.log('classLi');
+//        console.log('classLi');
         if(item.c == true && item.s == true)
             return "class='selected selection'";
         else if(item.c == true)
@@ -305,7 +305,7 @@ function SeletorLocal()
     }
 
     function preencheCidades(cidades){
-        console.log('preencheCidades');
+//        console.log('preencheCidades');
         var html = "";
                                 
         for (var i=0, il=cidades.length; i<il; i++) 
@@ -322,7 +322,7 @@ function SeletorLocal()
         
         
     function preencheAreasTematicas(areasTematicas){
-        console.log('preencheAreasTematicas');
+//        console.log('preencheAreasTematicas');
         var html = "";
 
         $.each(areasTematicas,function(i,item)
@@ -336,7 +336,7 @@ function SeletorLocal()
     }
 
     function preencheEstados(estados){
-        console.log('preencheEstados');
+//        console.log('preencheEstados');
         var html = "";
 
         $.each(estados,function(i,item)
@@ -353,7 +353,7 @@ function SeletorLocal()
 	* @description
 	*/
     function getElement(value){
-        console.log('getElement');
+//        console.log('getElement');
         lista = itens_selecionados;
 
         for(var i = 0; i < lista.length; i++)
@@ -375,7 +375,7 @@ function SeletorLocal()
 	* @description 
 	*/
     function removeElement(value){
-        console.log('removeElement');
+//        console.log('removeElement');
         lista = itens_selecionados;
 
         for(var i = 0; i < lista.length; i++)
@@ -399,7 +399,7 @@ function SeletorLocal()
 	* @description Pega o objeto da lista pelo name
 	*/
     function getItemByName(value){
-        console.log('getItemByName');
+//        console.log('getItemByName');
         var cidades = dataLocal.cidades;
         var estados = dataLocal.estados;
 	    
@@ -419,7 +419,7 @@ function SeletorLocal()
     }
 
     function convertToArray(value){
-        console.log('convertToArray');
+//        console.log('convertToArray');
         if($.isArray(value))
             return value;
         else
@@ -427,17 +427,17 @@ function SeletorLocal()
     }
 
     this.setItensSelecionados = function(array_values){
-        console.log('setItensSelecionados');
+//        console.log('setItensSelecionados');
         setItens(array_values);
     }
 
     this.getItensSelecionados = function(){
-        console.log('getItensSelecionados');
+//        console.log('getItensSelecionados');
         return itens_selecionados;
     }
 
     function setItens(array_values){
-        console.log('setItens');
+//        console.log('setItens');
         itens_selecionados = array_values;
         setEspacialidadePorDadosPreenchidos();
         preencheLista();

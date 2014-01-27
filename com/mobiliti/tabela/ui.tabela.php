@@ -3,7 +3,7 @@
     var local2;
     var map_indc2;
     var tab_indc;
-    console.log('ui.tabela');
+//    console.log('ui.tabela');
     $(document).ready(function(){
         map_indc2 = new LocalSelector();
         map_indc2.startSelector(true,"uimapindicator_selector_tabela",map_indcator_selector_tabela,"right","uiindicator_selector_tabela_mult");
@@ -20,14 +20,14 @@
     }
     
     function tab_indcator_selector_tabela(array){
-        console.log('ui.tabela - tab_indcator_selector_tabela');
+//        console.log('ui.tabela - tab_indcator_selector_tabela');
         geral.setIndicadores(array);
         tabela_build();
     }
    
     function listnerTabelaLocal(e, obj)
     {
-        console.log('ui.tabela - listnerTabelaLocal');
+//        console.log('ui.tabela - listnerTabelaLocal');
         if(e == "changetab" || e == "reloadList"){
             // geral.removeIndicadoresExtras();
             map_indc2.refresh();

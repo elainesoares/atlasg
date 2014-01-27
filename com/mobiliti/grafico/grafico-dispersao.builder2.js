@@ -29,7 +29,7 @@ function drawChartBolha(){
     }
     
      var options = {
-          colorAxis: {colors: ['red', 'blue'], legend: {position: 'none'}},
+          colorAxis: {/*colors: ['red', 'blue'],*/ legend: {position: 'none'}},
           axisTitlesPosition: 'none',
           chartArea:{left:70,top:10,width:"85%",height:"90%"},
           enableInteractivity: true,

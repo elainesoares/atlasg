@@ -50,7 +50,7 @@ foreach ($NavegadoresBloqueados as $key => $v) {
     var lastClickedId = "1";
     $(document).ready(function()
     {
-        console.log('ready');
+//        console.log('ready');
         $('#imgTab1').tooltip({html:true});
         $('#imgTab2').tooltip({html:true});
         $('#imgTab3').tooltip({html:true, delay: 500});
@@ -69,7 +69,7 @@ foreach ($NavegadoresBloqueados as $key => $v) {
 
     function readyGo()
     {
-        console.log('readyGo');
+//        console.log('readyGo');
         $(".iconAtlasModel").hover(
         function(){
             newStr = "img/icons/"+$(this).attr("icon") + ".png";
@@ -83,7 +83,7 @@ foreach ($NavegadoresBloqueados as $key => $v) {
     }
 
     function changeAba(switcher, t){
-        console.log('changeAba');
+//        console.log('changeAba');
         b = $("#imgTab"+lastClickedId);
         $(b).addClass('gray_button');
         $(b).removeClass('blue_button');
@@ -133,7 +133,7 @@ foreach ($NavegadoresBloqueados as $key => $v) {
     }
 
     function novaPagina(sw){
-        console.log('novaPagina');
+//        console.log('novaPagina');
         t_geral = false;
         g =  geral.getLugares();
 
@@ -168,12 +168,12 @@ foreach ($NavegadoresBloqueados as $key => $v) {
     
     function printMapEvt()
     {
-        console.log('printMapEvt');
+//        console.log('printMapEvt');
         $("#form_mapa_print").submit();
     }
     
     function consulta(){
-        console.log('consulta');
+//        console.log('consulta');
         if (!Array.prototype.indexOf)
         {
             Array.prototype.indexOf = function(elt /*, from*/)
