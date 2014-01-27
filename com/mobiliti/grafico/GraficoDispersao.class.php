@@ -2,7 +2,7 @@
     /**
      * Description of GraficoDispersao
      *
-     * @author Valter Lorran
+     * @author Elaine Soares Moreira
      */
     class GraficoDispersao {
         
@@ -27,23 +27,32 @@
         }
         
         public function draw(){
+//            echo 'draw   ';
             $draw = array();
             $counter = 0;
             $draw[$counter][] = 'Lugar';
             $draw[$counter][] = $this->eixo["X"];
+//            echo $this->eixo["X"];
             $draw[$counter][] = $this->eixo["Y"];
+//            echo $this->eixo["Y"];
             $draw[$counter][] = $this->eixo["Color"];
+//            echo $this->eixo["Color"];
             $draw[$counter][] = $this->eixo["Size"];
+//            echo $this->eixo["Size"];
+//            print_r($this->dados);
             foreach($this->dados as $d){
+//                echo 'Entrei';
                 $counter++;
+//                echo $d->draw();
                 $draw[$counter] = $d->draw();
-                //echo $draw[$counter][$counter];
+//                echo $draw[$counter][$counter].'    ';
             }
             
             echo json_encode($draw);
         }
         
         private function consultar($lugares,$indicadores, $espacialidade, $ano){
+//            echo 'consultar   ';
             $ParteInicialSQL = "";
             $filtro = "";
             switch ($espacialidade) {
@@ -129,60 +138,77 @@
                     break;
             }
             
+            $lugs = array();
+            $tam_lug = count($lugares);
+            for($i = 0; $i < $tam_lug; $i++){
+                $lugs[] = "($filtro = $lugares[$i])";
+            }
+            $whereLugs = '('.implode(' OR ',$lugs).')';
             
-//            echo 'ParteInicial 1: '.$ParteInicialSQL.'  ';
             $vars = array();
             $identify = array();
             $variaveis = array();
             $tam_ind = count($indicadores);
-//            echo 'tam_ind: '.$tam_ind.'  ';
             $indicadores2 = $indicadores;
             $indicadores[0] = $indicadores2[1];
             $indicadores[1] = $indicadores2[0];
             $indicadores[2] = $indicadores2[3];
             $indicadores[3] = $indicadores2[2];
-//            echo $indicadores[0].'<br />';
-//            echo $indicadores[1].'<br />';
-//            echo $indicadores[2].'<br />';
-//            echo $indicadores[3].'<br />';
-            for($i = 0; $i < $tam_ind; $i++){
-                $vars[] = "(fk_variavel = {$indicadores[$i]})"; //and fk_ano_referencia = {$ano})";
-                $identify["{$indicadores[$i]}"] = $this->eixo2[$i];
-//                echo $this->eixo2;
-            }
             
-            $whereVars = '('.implode(' OR ',$vars).')';
-//            echo 'whereVars: '.$whereVars.
-
-            $lugs = array();
-            $tam_lug = count($lugares);
-//            echo 'tam_lug: '.$tam_lug.'  ';
-            for($i = 0; $i < $tam_lug; $i++){
-//                echo $lugares[$i];
-                $lugs[] = "($filtro = $lugares[$i])";
-//                echo '  '.$lugs[$i];
-            }
-            $whereLugs = '('.implode(' OR ',$lugs).')';
-//            echo 'whereLugs: '.$whereLugs.'  ';
-            
-            $ParteInicialSQL .= $whereVars . " AND " . $whereLugs . " AND fk_ano_referencia = {$ano} ";
-            
+//            for($i = 0; $i < $tam_ind; $i++){
+//                $vars[] = "(fk_variavel = {$indicadores[$i]})"; //and fk_ano_referencia = {$ano})";
+//                $identify["{$indicadores[$i]}"] = $this->eixo2[$i];
+//            }
+//            
+//            $whereVars = '('.implode(' OR ',$vars).')';
+//            
+//            $ParteInicialSQL .= $whereVars . " AND " . $whereLugs . " AND fk_ano_referencia = {$ano} ";
+//            
 //            echo 'ParteInicial 2: '.$ParteInicialSQL.'  ';
             
-            $Resposta = pg_query($this->bd->getConexaoLink(), $ParteInicialSQL) or die ("Nao foi possivel executar a consulta! ");
-            
-            while ($Linha = pg_fetch_assoc($Resposta))
-            {
-//                echo $Linha;
-                if(isset($this->dados[$Linha[$filtro]])){
-                    $this->dados[$Linha[$filtro]]->addEixo($Linha['valor'], $identify["{$Linha['id_v']}"]);  
-                }
-                else{
-                    $lugar = new Lugar($Linha["nome"]);
-                    $this->dados[$Linha[$filtro]] = new Data($lugar);
-                    $this->dados[$Linha[$filtro]]->addEixo($Linha['valor'], $identify["{$Linha['id_v']}"]);
+            for($i = 0; $i < 4; $i ++){
+//                echo 'FOR   ';
+                $whereVars = "(fk_variavel = $indicadores[$i])";
+                $identify["{$indicadores[$i]}"] = $this->eixo2[$i];
+//                echo 'this->eixo2[i]: '.$this->eixo2[$i];
+                $ParteInicialSQL2 =$ParteInicialSQL.' '.$whereVars. " AND ".$whereLugs. "AND fk_ano_referencia = {$ano}";
+//                echo $ParteInicialSQL2.'   ';
+                        
+                $Resposta = pg_query($this->bd->getConexaoLink(), $ParteInicialSQL2) or die ("Nao foi possivel executar a consulta! ");
+//                $Linha = pg_fetch_assoc($Resposta);
+                while ($Linha = pg_fetch_assoc($Resposta))
+                {
+//                    echo 'Entrei While  ';
+//                    echo 'Filtro: '.$filtro.'  ';
+//                    echo 'Linha[filtro]: '.$Linha[$filtro];
+//                    echo 'Linha[valor]: '.$Linha['valor'].'  ';
+//                    echo 'Linha[id_v]: '.$Linha['id_v'].'  ';
+//                    echo 'this->dados[Linha[filtro]]: '.$this->dados[$Linha[$filtro]].'   ';
+                    if(isset($this->dados[$Linha[$filtro]])){
+                        $this->dados[$Linha[$filtro]]->addEixo($Linha['valor'], $identify["{$Linha['id_v']}"]);  
+                    }
+                    else{
+                        $lugar = new Lugar($Linha["nome"]);
+                        $this->dados[$Linha[$filtro]] = new Data($lugar);
+                        $this->dados[$Linha[$filtro]]->addEixo($Linha['valor'], $identify["{$Linha['id_v']}"]);
+                    }
                 }
             }
+//            print_r($Linha);
+            
+//            $Resposta = pg_query($this->bd->getConexaoLink(), $ParteInicialSQL) or die ("Nao foi possivel executar a consulta! ");
+//            
+//            while ($Linha = pg_fetch_assoc($Resposta))
+//            {
+//                if(isset($this->dados[$Linha[$filtro]])){
+//                    $this->dados[$Linha[$filtro]]->addEixo($Linha['valor'], $identify["{$Linha['id_v']}"]);  
+//                }
+//                else{
+//                    $lugar = new Lugar($Linha["nome"]);
+//                    $this->dados[$Linha[$filtro]] = new Data($lugar);
+//                    $this->dados[$Linha[$filtro]]->addEixo($Linha['valor'], $identify["{$Linha['id_v']}"]);
+//                }
+//            }
             
             $SQL = "select nomecurto, id from variavel where id IN (".implode(',',$indicadores).")";
             $Resposta = pg_query($this->bd->getConexaoLink(), $SQL) or die ("Nao foi possivel executar a consulta! ");
@@ -208,10 +234,12 @@
         private $nome;
         
         public function __construct($nome){
+//            echo 'construct Lugar   ';
             $this->nome = $nome;
         }
         
         public function getNome(){
+//            echo 'getNome   ';
             return $this->nome;
         }
     }
@@ -222,23 +250,35 @@
         private $eixo;
         
         public function __construct($lugar){
+//            echo 'construct Data   ';
             $this->lugar = $lugar;
+//            print_r($this->eixo);
         }
         
         public function draw(){
+//            echo 'draw  Data';
+//            print_r ($this->eixo);
             $draw = array();
             $draw[] = $this->lugar->getNome();
+//            echo 'draw[0]: '.$draw[0].'  ';
             $draw[] = (float)$this->eixo["X"];
+//            echo 'this->eixo[X]: '.$this->eixo['X   '];
+//            echo 'draw[1]: '.$draw[1].'  ';
             $draw[] = (float)$this->eixo["Y"];
+//            echo 'this->eixo[Y]: '.$this->eixo['Y'].'  ';
             $draw[] = (float)$this->eixo["Color"];
+//            echo 'this->eixo[Color]: '.$this->eixo['Color'].'  ';
             $draw[] = (float)$this->eixo["Size"];
+//            echo 'this->eixo[Size]: '.$this->eixo['Size'].'  ';
+//        print_r($draw).'    ';
             return $draw;
         }
         
         public function addEixo($valor,$eixo){
-//            echo 'Eixo: '.$eixo;
-//            echo 'Valor: '.$valor;
+//            echo 'addEixo   ';
             $this->eixo[$eixo] = $valor;
+//            print_r($this->eixo);
+//            echo "Eixo[".$this->eixo[$eixo]."] = ".$valor.'  ';
         }
     }
 

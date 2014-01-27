@@ -318,36 +318,27 @@
         
         var k = 1;
         
-        if((bolha_i[0] != undefined && bolha_i[1] != undefined && bolha_i[2] != undefined && bolha_i[3] != undefined) && (_locais != undefined)){
-//            alert('teste');
-           
-            for(var i = 0; i < 4; i++){
-//                console.log('bolha_i[i]: '+bolha_i[i]);
-                for(var j = i+1; j < 4; j++){
-//                    console.log('bolha_i[j]: '+bolha_i[j]);
-//                    alert(bolha_i[i]+ '=='+ bolha_i[j]);
-                    if(bolha_i[i] == bolha_i[j]){
-                        alert('Selecione Indicadores diferentes para cada Eixo.');
-//                        console.log('igual');
-//                        document.getElementById('myModal').style.display = 'block';
-                        bolha = false;
-                        break;
-                    }
-                    else{
-                        bolha = true;
-//                        document.getElementById('myModal').display = "none";
-                    }
-                }
-                
-                if(bolha == false){
-                    break;
-                }
-            }
-//            alert(bolha);
-            if(bolha == true){
+//        if((bolha_i[0] != undefined && bolha_i[1] != undefined && bolha_i[2] != undefined && bolha_i[3] != undefined) && (_locais != undefined)){
+//            for(var i = 0; i < 4; i++){
+//                for(var j = i+1; j < 4; j++){
+//                    if(bolha_i[i] == bolha_i[j]){
+//                        alert('Selecione Indicadores diferentes para cada Eixo.');
+//                        bolha = false;
+//                        break;
+//                    }
+//                    else{
+//                        bolha = true;
+//                    }
+//                }
+//                
+//                if(bolha == false){
+//                    break;
+//                }
+//            }
+//            if(bolha == true){
                 bolha_load(bolha_e, bolha_l, bolha_i, bolha_a);
-            }
-        }
+//            }
+//        }
         
     }
 
