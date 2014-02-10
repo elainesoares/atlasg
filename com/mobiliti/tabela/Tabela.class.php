@@ -102,7 +102,6 @@
                 $this->Count = 0;
                 $arrayAreas = "";
                 $sqlSecundaria = $this->getSQLSecundario($arrayAreas);
-                echo 'sqlSecundaria: '.$sqlSecundaria.'  ';
                 $this->getSQLResultsSecundario($this->results,$sqlSecundaria);
             }  catch (Exception $e){
                 die("erro :-)");
@@ -156,44 +155,34 @@
         }
         
         private function iGetSQLSecundario($ArrayId){
-            //echo "iGetSQLSecundario<br />";
             $SQLVariaveis = array();
             
             //$INClause = implode(',',$ArrayId);
             $ParteInicialSQL = $this->getSelect();
-            //echo "$ParteInicialSQL <br />";
             
             $Indicadores = $this->consulta->getIndicadores();
-            //echo $Indicadores;
             for($x = 0; $x < count($Indicadores);$x++){
                 $SQLVariaveis[] = "(fk_ano_referencia = {$Indicadores[$x]->getIndicadorAno()} AND fk_variavel = {$Indicadores[$x]->getIndicador()})";
             }
-            //echo implode(' OR ',$SQLVariaveis).'  ';
             $SQL2 = implode(' OR ',$SQLVariaveis);
-            //echo "$SQL2  ";
             $ORDER = "";
             $filtros = $this->getSelectFiltroMain();
             switch ($this->consulta->getEspacialidade()) {
                 case Consulta::$ESP_MUNICIPAL:
-                    //echo 'Municipal ';
                     //$where = " fk_municipio IN ($INClause)";
                     $ORDER = " ORDER BY m.nome,fk_variavel,fk_ano_referencia";
                     return "$ParteInicialSQL ($filtros) and ($SQL2) order by e.nome, m.nome";
                     break;
                 case Consulta::$ESP_ESTADUAL:
-                    //echo 'Estadual ';
                     //$where = " fk_estado IN ($INClause)";
                     $ORDER = " ORDER BY e.nome,fk_variavel,fk_ano_referencia";
                     break;
                 case Consulta::$ESP_REGIAODEINTERESSE:
-                    //echo 'Região de Interesse ';
                     //$where = " fk_estado IN ($INClause)";
                     $ORDER = " ORDER BY e.nome,fk_variavel,fk_ano_referencia";
-                    //echo "$ParteInicialSQL ($filtros) and ($SQL2) order by ri.nome,e.nome, m.nome";
                     return "$ParteInicialSQL ($filtros) and ($SQL2) order by ri.nome,e.nome, m.nome";
                     break;
                 case Consulta::$ESP_PAIS:
-                    //echo 'País ';
                     //$where = " fk_estado IN ($INClause)";
                     return "$ParteInicialSQL ($filtros) and ($SQL2) ";
                     break;
@@ -396,11 +385,8 @@
         }
         
         private function getSelect(){
-//            echo 'Espacialidade: '.$this->consulta->getEspacialidade().'<br />';
-//            echo 'ESP_REGIAODEINTERESSE: '.Consulta::$ESP_REGIAODEINTERESSE.'<br />';
             switch ($this->consulta->getEspacialidade()) {
                 case Consulta::$ESP_MUNICIPAL:
-//                    echo 'Municipal  ';
                     if(!$this->varOnly){
                         if(!$this->isSearchName)
                             $ParteInicialSQL = "SELECT valor as v, fk_municipio as im,fk_ano_referencia as ka,fk_variavel as iv FROM valor_variavel_mun as vv
@@ -420,7 +406,6 @@
                                             WHERE fk_municipio IN  ";
                     break;
                 case Consulta::$ESP_ESTADUAL:
-//                    echo 'Estadual  ';
                     if(!$this->varOnly)
                         if(!$this->isSearchName)
                             $ParteInicialSQL = "SELECT valor as v, fk_estado::text||'e' as im,fk_ano_referencia as ka,fk_variavel as iv, e.uf as u FROM valor_variavel_estado as vv
@@ -442,28 +427,22 @@
                                             WHERE fk_estado IN ";
                     break;
                 case Consulta::$ESP_REGIAODEINTERESSE:
-//                    echo 'Região Interesse  ';
-                    if(!$this->varOnly){
-//                        echo 'varOnly true';
+                    if(!$this->varOnly)
                         $ParteInicialSQL = "SELECT valor as v, vv.fk_municipio::text||'i' as im,fk_ano_referencia as ka,fk_variavel as iv,m.nome as nome,e.uf as uf, ri.id as is_ri FROM valor_variavel_mun as vv
                                             INNER JOIN regiao_interesse_has_municipio as b ON (b.fk_municipio = vv.fk_municipio)
                                             INNER JOIN municipio as m ON (vv.fk_municipio = m.id)
                                             INNER JOIN estado as e ON (e.id = m.fk_estado)
                                             INNER JOIN regiao_interesse as ri ON (b.fk_regiao_interesse = ri.id)
                                             WHERE fk_regiao_interesse IN ";
-                    }
-                    else{
-//                        echo 'varOnly false';
+                    else
                         $ParteInicialSQL = "SELECT valor as v, vv.fk_municipio::text||'i' as im, fk_variavel as iv, m.nome as nome,e.uf as uf, ri.id as is_ri FROM valor_variavel_mun as vv
                                             INNER JOIN regiao_interesse_has_municipio as b ON (b.fk_municipio = vv.fk_municipio)
                                             INNER JOIN municipio as m ON (vv.fk_municipio = m.id)
                                             INNER JOIN estado as e ON (e.id = m.fk_estado)
                                             INNER JOIN regiao_interesse as ri ON (b.fk_regiao_interesse = ri.id)
                                             WHERE fk_regiao_interesse IN ";
-                    }
                     break;
                 case Consulta::$ESP_PAIS:
-//                    echo 'País  ';
                     $this->varOnly = false;
                     $this->isSearchName = true;
                     if(!$this->varOnly){
@@ -498,7 +477,6 @@
             for($x = 0; $x < count($Filtros);$x++){
                 switch ($Filtros[$x]->getFiltro()){
                     case Filtro::$FILTRO_MUNICIPIO:
-//                        echo "FILTRO MUNICIPIO  ";
                         $filtros = $Filtros[$x]->getValores();
 //                        if(count($filtros)>3000){
 //                            $comp = array();
@@ -523,25 +501,21 @@
 //                        }
                         break;
                     case Filtro::$FILTRO_REGIAO:
-//                        echo 'FILTRO REGIAO  ';
                         foreach($Filtros[$x]->getValores() as $val){
                             $SQLRegiao[] = "{$val->getNome()}";
                         }
                         break;
                     case Filtro::$FILTRO_ESTADO:
-//                        echo 'FILTRO ESTADO  ';
                         foreach($Filtros[$x]->getValores() as $val){
                             $SQLRegiao[] = "{$val->getNome()}";
                         }
                         break;
                     case Filtro::$FILTRO_REGIAODEINTERESSE:
-//                        echo 'FILTRO REGIAODEINTERESSE  ';
                         foreach($Filtros[$x]->getValores() as $val){
                             $SQLRegiao[] = "{$val->getNome()}";
                         }
                         break;
                     case Filtro::$FILTRO_PAIS:
-//                        echo 'FILTRO PAIS  ';
                         foreach($Filtros[$x]->getValores() as $val){
                             $SQLRegiao[] = "{$val->getNome()}";
                         }
@@ -551,10 +525,9 @@
                  *=========================================================*/
                 }
             }
-            if(is_array($SQLRegiao)){
+            if(is_array($SQLRegiao))
                 $SQL1 = implode(',',$SQLRegiao);
-            }
-//            echo 'SQL1: '.$SQL1;
+            
             return $SQL1;
         }
         

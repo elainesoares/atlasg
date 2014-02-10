@@ -2,8 +2,6 @@
 /* =========================== VARIAVEIS GLOBAIS ================================*/
 function LocalSelector()
 {
-//    console.log('============');
-//    console.log('LOCALSELETOR');
     var value_indicador = new Array();
     var value_indicador_old = new Array();
     var load = false;
@@ -15,7 +13,7 @@ function LocalSelector()
 
     var estados;
     var regioes;
-    var areas_tematicas;
+//    var areas_tematicas;
     var espacialidade_selecionada = -1;
     var cidades = new Array();
     
@@ -26,7 +24,6 @@ function LocalSelector()
 
     this.html = function(idElement)
     {
-//        console.log('Seletor Lugares - html');
        var button = '<div id="' + idElement + '" style="float: right;">'
             + '<div class="divCallOutLugares">'
             + '<button class="blue_button big_bt selector_popover" data-toggle="dropdown" style="margin-right: 27px !important; height: 34px; font-size: 14px;" rel="popover" >Selecionar</button>'
@@ -44,7 +41,6 @@ function LocalSelector()
     */
     this.startSelector = function(multiselect,id_element_context,listener_param,orientation,_to_hide,skip)
     { 
-//        console.log('Seletor Lugares - startSelector');
         this_selector_element = '#' + id_element_context;
         value_multiselect = multiselect;
         listener = listener_param;
@@ -71,6 +67,8 @@ function LocalSelector()
         html += '</div>';
         
         divSeletor.html(html);
+        
+       
         
         $(this_selector_element).find('.selector_popover').popover({
                 html:true,
@@ -100,15 +98,12 @@ function LocalSelector()
 
     function startPopOver()
     {
-//        console.log('Seletor Lugares - startPopOver');
         refresh();
-        $(this_selector_element).find('.divCallOutLugares .popover').toggle(); //Exibir ou ocultar os elementos combinados.
+        $(this_selector_element).find('.divCallOutLugares .popover').toggle();
         
        
         value_indicador_old = value_indicador.slice();
-//        console.log('value_indicador_old: '+value_indicador_old);
-//        console.log('load: '+load);
-        
+       
         if(load == false)
         { 
             $(this_selector_element).find('.selector_popover').popover('show');
@@ -155,11 +150,11 @@ function LocalSelector()
         fillSelectedItens();
         
         
-        if(espacialidade_selecionada == 7)
-        {
-           filterByBox2(areas_tematicas,espacialidade_selecionada);     
-        }
-        else if(espacialidade_selecionada == 4)
+//        if(espacialidade_selecionada == 7)
+//        {
+//           filterByBox2(areas_tematicas,espacialidade_selecionada);     
+//        }
+        if(espacialidade_selecionada == 4)
         {
            filterByBox2(estados,espacialidade_selecionada);
         }
@@ -173,18 +168,16 @@ function LocalSelector()
 
     this.getData = function()
     {
-//        console.log('Seletor Lugares - getData');
         return value_indicador;
     }
     
     function dispatchListener(listener)
     {
-//        console.log('Seletor Lugares - dispatchListener');
         fillSelectedItens();
 
         var locais_municipal = new Array();
         var locais_estadual = new Array();
-        var locais_area_tematica = new Array();
+//        var locais_area_tematica = new Array();
         
         $.each(value_indicador,function(i,item){
             var local = new Local();
@@ -199,8 +192,8 @@ function LocalSelector()
             if(item.e == 4)
                 locais_estadual.push(local);
             
-            if(item.e == 7)
-                locais_area_tematica.push(local);
+//            if(item.e == 7)
+//                locais_area_tematica.push(local);
         });
         
         var lugar_municipal = new Lugar();
@@ -213,18 +206,17 @@ function LocalSelector()
         lugar_estadual.ac = false;
         lugar_estadual.l = locais_estadual;
         
-        var lugar_area_tematica = new Lugar();
-        lugar_area_tematica.e = 7;
-        lugar_area_tematica.ac = false;
-        lugar_area_tematica.l = locais_area_tematica;
-//        console.log('lugar_area_tematica: '+lugar_area_tematica.l);
-//        console.log('listener: '+listener);
-        listener([lugar_municipal,lugar_estadual,lugar_area_tematica]);
+//        var lugar_area_tematica = new Lugar();
+//        lugar_area_tematica.e = 7;
+//        lugar_area_tematica.ac = false;
+//        lugar_area_tematica.l = locais_area_tematica;
+        
+//        console.log(listener);
+        listener([lugar_municipal,lugar_estadual]);
     }
 
     function fillSelectedItens()
     {
-//        console.log('Seletor Lugares - fillSelectedItens');
         var html = "";
         
         $.each(value_indicador,function(i,item){
@@ -236,7 +228,6 @@ function LocalSelector()
 
     function loadData(listener)
     {
-//        console.log('Seletor Lugares - loadData');
         load = true;
        
         $.getJSON('com/mobiliti/componentes/local/local.php', function(data){ 
@@ -246,7 +237,6 @@ function LocalSelector()
 
     function injetaEspacialidade(array,espacialidade)
     {
-//        console.log('Seletor Lugares - injetaEspacialidade');
         $.each(array,function(i,item)
         {
             item.e = espacialidade;
@@ -257,7 +247,6 @@ function LocalSelector()
 
     function fillData(data)
     {
-//        console.log('Seletor Lugares - fillData');
         estados = injetaEspacialidade(data.estados,4);
         if(estados.length > 1)
         {
@@ -269,17 +258,16 @@ function LocalSelector()
             estados = newArray.concat(estados);
         }
         
-        areas_tematicas = injetaEspacialidade(data.areasTematicas,7);
-        $.each(areas_tematicas, function(index, value) {
-           geral.AddOrUpdateAreaTematica(value.id,value.n,value.tam);
-        });
+//        areas_tematicas = injetaEspacialidade(data.areasTematicas,7);
+//        $.each(areas_tematicas, function(index, value) {
+//           geral.AddOrUpdateAreaTematica(value.id,value.n,value.tam);
+//        });
         
         fillFiltroBox1(getItensBox1());
     }
 
     function getItensBox1()
     {
-//        console.log('Seletor Lugares - getItensBox1');
         var array = new Array();
         var objeto;
 
@@ -293,21 +281,20 @@ function LocalSelector()
         objeto.n = 'Municipal';
         array.push(objeto);
         
-        objeto = {};
-        objeto.n = '[BROKER]';
-        array.push(objeto);
-        
-        objeto = {};
-        objeto.id = 7;
-        objeto.n = 'Área temática';
-        array.push(objeto);
+//        objeto = {};
+//        objeto.n = '[BROKER]';
+//        array.push(objeto);
+//        
+//        objeto = {};
+//        objeto.id = 7;
+//        objeto.n = 'Área temática';
+//        array.push(objeto);
 
         return array;
     }
 
     function fillFiltroBox1(array)
     {
-//        console.log('Seletor Lugares - fillFiltroBox1');
         var html = "";
         $.each(array,function(i,item)
         {
@@ -357,16 +344,14 @@ function LocalSelector()
     
     function filtroBox2(value)
     {
-//        console.log('Seletor Lugares - filtroBox2');
-        if(value == 7)
-            filterByBox2(areas_tematicas,value);
-        else
+//        if(value == 7)
+//            filterByBox2(areas_tematicas,value);
+        
             filterByBox2(estados,value);
     }
 
     function filterByBox2(array,value)
     {
-//        console.log('Seletor Lugares - filterByBox2');
         $(this_selector_element).find('.box2 ul li').removeClass('active');
         $(this_selector_element).find('.box2 ul li').removeClass('selected');
 
@@ -400,6 +385,8 @@ function LocalSelector()
                         objeto.e = 4; //espacialidade estadual
 
                         adicionaElemento(objeto,$(this));
+
+                       
                     });
                 }
                 else
@@ -421,30 +408,30 @@ function LocalSelector()
                 }                
             });
         }
-        else if(value == 7)
-        {
-            $(this_selector_element).find('.box2 ul li').click(function(e)
-            {
-                    var valorSelecionado = parseInt($(this).attr('data-id'));
-                    var tamanho_tematica = parseInt($(this).attr('data-tematica'));
-                    
-                    var objeto = {};
-                    objeto.id = valorSelecionado;
-                    objeto.n = $(this).text();
-                    objeto.e = value; 
-
-                    if($(this).hasClass('selected') == false)
-                    {
-                        adicionaElemento(objeto,$(this),tamanho_tematica);
-                    }
-                    else
-                    {
-                        removeElemento(objeto,tamanho_tematica);
-                        $(this).removeClass('selected');
-                    }
-                                
-            });
-        }
+//        else if(value == 7)
+//        {
+//            $(this_selector_element).find('.box2 ul li').click(function(e)
+//            {
+//                    var valorSelecionado = parseInt($(this).attr('data-id'));
+//                    var tamanho_tematica = parseInt($(this).attr('data-tematica'));
+//                    
+//                    var objeto = {};
+//                    objeto.id = valorSelecionado;
+//                    objeto.n = $(this).text();
+//                    objeto.e = value; 
+//
+//                    if($(this).hasClass('selected') == false)
+//                    {
+//                        adicionaElemento(objeto,$(this),tamanho_tematica);
+//                    }
+//                    else
+//                    {
+//                        removeElemento(objeto,tamanho_tematica);
+//                        $(this).removeClass('selected');
+//                    }
+//                                
+//            });
+//        }
         else if(value == 2)
         {
             $(this_selector_element).find('.box2 ul li').click(function(e)
@@ -469,7 +456,7 @@ function LocalSelector()
     
     function filterByBox3(array)
     {
-//        console.log('Seletor Lugares - filterByBox3');
+        
         $("#ui_city_loader").hide();
         
         array = injetaEspacialidade(array,2);
@@ -498,7 +485,6 @@ function LocalSelector()
 
     function filtroBox3(value)
     {
-//        console.log('Seletor Lugares - filtroBox3');
         $.getJSON('com/mobiliti/componentes/local/cidades_por_estado.php', {estado:value},function(data){ 
             cidades = data.cidades;
             filterByBox3(data.cidades)
@@ -507,7 +493,6 @@ function LocalSelector()
 
     function adicionaItemTodos(array)
     {
-//        console.log('Seletor Lugares - adicionaItemTodos');
         var html = "";
         
         if(array.length > 1)
@@ -529,7 +514,6 @@ function LocalSelector()
     */
     function listenerClickItens()
     {
-//        console.log('Seletor Lugares - listenerClickItens');
         if(value_multiselect == false)
         {
             $(this_selector_element).find('.box3 ul li').click(function(e)
@@ -601,7 +585,6 @@ function LocalSelector()
     
     function fillLabelButtonIndicador()
     {
-//        console.log('Seletor Lugares - fillLabelButtonIndicador');
         var objeto = value_indicador[0];
         textoIndicadorSelecionado = objeto.nome;
                 
@@ -618,7 +601,6 @@ function LocalSelector()
     */
     function contains(value)
     {
-//        console.log('Seletor Lugares - contains');
         var length = value_indicador.length
         for(var i = 0; i < length; i++)
         {
@@ -634,7 +616,7 @@ function LocalSelector()
     */
     function adicionaElemento(value,elemento,size)
     {
-//        console.log('Seletor Lugares - adicionaElemento');
+        
         $(this_selector_element).find('.messages').html("");
         
         if(size == undefined || size == null)size = 0;
@@ -680,7 +662,6 @@ function LocalSelector()
 
     function adicionaVariosElementos(value)
     {
-//        console.log('Seletor Lugares - adicionaVariosElementos');
         $(this_selector_element).find('.messages').html("");
 
         if(!skipLimit)
@@ -721,7 +702,6 @@ function LocalSelector()
     */
     function removeElemento(value, size)
     {
-//        console.log('Seletor Lugares - removeElemento');
         var length = value_indicador.length;
         if(size == undefined || size == null)size = 0;
         
@@ -776,7 +756,6 @@ function LocalSelector()
     */
     function getIndicadorById(value)
     {
-//        console.log('Seletor Lugares - getCIndicadorById');
         var length = array_indicadores.length;
         
         for(var i = 0; i < length; i++)
@@ -792,7 +771,6 @@ function LocalSelector()
     */
     function getIndicadorBySigla(value)
     {
-//        console.log('Seletor Lugares - getIndicadorBySigla');
         var length = array_indicadores.length;
         for(var i = 0; i < length; i++)
         {
@@ -804,7 +782,6 @@ function LocalSelector()
 
     function convertToArray(value)
     {
-//        console.log('Seletor Lugares - convertToArray');
         if($.isArray(value))
             return value;
         else
@@ -813,14 +790,11 @@ function LocalSelector()
 
     this.setLugares = function(lugares)
     {
-//        console.log('Seletor Lugares - setLugares');
         setLugaresValue(lugares);
     }
 
     function setLugaresValue(lugares)
     {
-//        console.log('Seletor Lugares - setLugaresValue');
-//        console.log('lugares: '+lugares);
         var array = new Array();
 
         $.each(lugares,function(i,item)
@@ -842,13 +816,11 @@ function LocalSelector()
 
     this.refresh = function()
     {
-//       console.log('this.refresh');
        refresh();
     }
 
     function refresh()
     {
-//       console.log('Seletor Lugares - refresh');
        setLugaresValue(geral.getLugares().slice());
     }
 }

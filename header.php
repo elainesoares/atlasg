@@ -57,7 +57,7 @@
         <script src="<?php echo $path_dir ?>bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>js/bootstrapx-clickover.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/indicador/seletor_indicador.js" type="text/javascript"></script>
-        <!--<script src="<?php // echo $path_dir ?>com/mobiliti/componentes/indicador/seletor_indicador_grafico.js" type="text/javascript"></script>-->
+        <script src="<?php // echo $path_dir ?>com/mobiliti/componentes/indicador/seletor_indicador_graficos.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>js/history.min.js" type="text/javascript"></script>
         <script type='text/javascript' charset='utf-8' src="<?php echo $path_dir ?>js/simple-slider.js"></script>
         <script src="<?php echo $path_dir ?>js/search.js" type="text/javascript"></script>
@@ -70,10 +70,12 @@
         <script src="<?php echo $path_dir ?>js/loading.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/selector/SelectorIndicator.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/local.js" type="text/javascript"></script>
+        <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/local_graficos.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local_indicador/local.js" type="text/javascript"></script>
-        <!--<script src="<?php // echo $path_dir ?>com/mobiliti/componentes/local_indicador/local_grafico.js" type="text/javascript"></script>-->
+        <script src="<?php // echo $path_dir ?>com/mobiliti/componentes/local_indicador/local_graficos.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/geral/geral.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/seletor_lugares.js" type="text/javascript"></script>
+        <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/seletor_lugares_graficos.js" type="text/javascript"></script>
         <script type="text/javascript" src="<?php echo $path_dir ?>js/jquery.mousewheel.js"></script>
         <script type="text/javascript" src="<?php echo $path_dir ?>js/jquery.jscrollpane.min.js"></script>
         <script type="text/javascript" src="<?php echo $path_dir ?>js/scroll-startstop.events.jquery.js"></script>

@@ -11,7 +11,6 @@
 	require_once "../consulta/man_bd.class.php";
     require_once "../consulta/Consulta.class.php";
     require_once "Tabela.class.php";
-     
     $result = array();
     $json_lugares = array();
     $json_lugares[] = array("e"=>"10","ids"=>"103");

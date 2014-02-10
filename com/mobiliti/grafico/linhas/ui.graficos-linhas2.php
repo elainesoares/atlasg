@@ -7,10 +7,10 @@
      *****************************/
     var linha_indc_selector;
     var indicadorLocalL;
-    
+
     var local;
     var linha_indc;
-    
+
     var linha_a = 3;
     var ___first_time_year_ = true;
     var linha_e = null;
@@ -26,37 +26,37 @@
     var eixo;
     var _indicadores;
     var _locais;
-    
+
     $(document).ready(function()
     {
 //        console.log('ready');
         $('#local_box3').load('com/mobiliti/componentes/local/local_grafLinhas.html', function()
         {
 //            console.log('local_box3');
-            localL = new SeletorLocal();
+            localL = new SeletorLocalG();
             localL.startLocal(listenerLocalGrafBolha, "local_box3", false);
-            linha_indc = new LocalSelector();
+            linha_indc = new LocalSelectorG();
             localL.setButton(linha_indc.html('uilinhalocal_selector'))
             linha_indc.startSelector(true, "uilinhalocal_selector", linha_indcator_selector_linha, "right", "linhaEditIndicador", true);
         });
         $('#box_indicador').load('com/mobiliti/componentes/local_indicador/indicador6.html', function()
         {
 //            console.log('box_indicador');
-            indicadorLocalL = new SeletorIndicador();
+            indicadorLocalL = new SeletorIndicadorG();
             indicadorLocalL.startLocal(listenerLocalIndicadoresLinha, "box_indicador", false, false);
             try {
-                linha_indc_selector = new IndicatorSelector();
+                linha_indc_selector = new IndicatorSelectorG();
                 indicadorLocalL.setButton(linha_indc_selector.html('linhaEditIndicador', 'Y'));
                 linha_indc_selector.startSelector(false, "linhaEditIndicador", seletor_indicadorL, "right", false, "uilinhalocal_selector", true, false);
             } catch (e) {
 ////                //erro
             }
         });
-        
+
         linha_init();
     });
-    
-    function linha_init(){
+
+    function linha_init() {
 //        console.log('linha_init');
         $('.nav-tabs').button();
         $("#linha_year_slider").bind("slider:changed", linha_year_slider_listener);
@@ -64,14 +64,14 @@
         linha_loading(false);
     }
     //    
-    function linha_year_slider_listener(event, data){
+    function linha_year_slider_listener(event, data) {
 //        console.log('linha_year_slider_listener');
         if (___first_time_year_)
         {
             ___first_time_year_ = false;
             return;
         }
-        
+
         if (data.value === 1991)
             linha_a = 1;
         else if (data.value === 2000)
@@ -85,14 +85,14 @@
         // Muda todos os anos dos indicadores
         //-----------------------------------
         _indicadores = geral.getIndicadores();
-        for (var i = 0; i < _indicadores.length; i++){
+        for (var i = 0; i < _indicadores.length; i++) {
             geral.updateIndicador(i, linha_a);
         }
         //        if((linha_i[0] != undefined && linha_i[1] != undefined && linha_i[2] != undefined && linha_i[3] != undefined) &&(_locais != undefined)){
         linha_load(linha_e, linha_l, linha_i, linha_a);
         //        }
     }
-    
+
     function linha_loading(status)
     {
 //        console.log('linha_loading');
@@ -101,7 +101,7 @@
         else
             $("#uilinhaloader").hide();
     }
-    
+
     function linha_load(e, l, i, a)
     {
 //        console.log('linha_load');
@@ -127,7 +127,7 @@
 //        linha_l = l;
 //        linha_i = i;
 //        linha_a = a;
-        //        teste = <?//= $path_dir; ?>;
+        //        teste = <? //= $path_dir;  ?>;
         $.ajax({
             type: "POST",
             url: "<?php echo $path_dir ?>com/mobiliti/grafico/linhas/grafico-linhas.controller.php",
@@ -135,11 +135,11 @@
             success: linha_response
         });
     }
-    
+
     function linha_response(data, textStatus, jqXHR)
     {
 //        console.log('linha_response');
-        if (textStatus === "success"){
+        if (textStatus === "success") {
 //            console.log('success');
             var ano_result_to_fill = '';
             if (linha_a === 1)
@@ -163,22 +163,22 @@
             drawChart();
         }
     }
-    
-    function listenerLocalGrafLinha(lugares){
+
+    function listenerLocalGrafLinha(lugares) {
 //        console.log('listenerLocalGrafLInha');
         geral.setLugares(lugares);
-    }    
-    function linha_indcator_selector_linha(array){
+    }
+    function linha_indcator_selector_linha(array) {
 //        console.log('linha_indcator_selector_linha');
         localL.setItensSelecionados(array);
     }
-    
-    function listenerLocalIndicadoresLinha(indicadores){
+
+    function listenerLocalIndicadoresLinha(indicadores) {
 //        console.log('listenerLocalIndicadoresLinha');
         geral.setIndicadores(indicadores);
         linha_indc_selector.refresh();
     }
-    
+
     function linha_listener_lugar(event, obj)
     {
 //        console.log('linha_listener_lugar');
@@ -186,14 +186,14 @@
         linha_indc.refresh();
         dispacth_linha_evt();
     }
-    
-    function seletor_indicadorL(obj){
+
+    function seletor_indicadorL(obj) {
 //        console.log('seletor_indicadorL');
         geral.setIndicadores(obj);
         indicadorLocalL.refresh();
 
     }
-    
+
     function linha_listener_indicador(event, obj)
     {
 //        console.log('linha_listener_indicador');
@@ -203,7 +203,7 @@
         {
             geral.removeIndicadoresDuplicados();
         }
-        
+
         indicadorLocalL.refresh();
         linha_indc_selector.refresh();
 
@@ -211,7 +211,7 @@
         //        // Muda todos os anos dos indicadores
         //        //-----------------------------------
         _indicadores = geral.getIndicadores();
-        for (var i = 0; i < _indicadores.length; i++){
+        for (var i = 0; i < _indicadores.length; i++) {
             geral.updateIndicador(i, linha_a);
         }
 
@@ -258,15 +258,15 @@
 
                 //if (_indicador.c)
                 //{
-                    linha_i = _indicador.id;
+                linha_i = _indicador.id;
 //                    console.log('linha_i: '+linha_i);
-                    linha_a = _indicador.a;
+                linha_a = _indicador.a;
 //                    console.log('linha_a: '+linha_a);
 
-                    //nome completo
-                    linha_i_name = _indicador.desc;
+                //nome completo
+                linha_i_name = _indicador.desc;
 //                    console.log('linha_i_name: '+linha_i_name);
-                    break;
+                break;
                 //}
             }
         }

@@ -11,39 +11,22 @@ function IndicatorSelector()
     var array_dimensoes;
     var array_indicadores_has_temas;
     var this_selector_element = null;
+    //var lazy_select = false;
     var lazy_array;
     var multiYear = false;
     var divSeletor = $('<div class="divSeletor">');
     var listener = null;
-    var eixo = new Array();
-    eixo['y'] = false;
-    eixo['x'] = false;
-    eixo['tam'] = false;
-    eixo['cor'] = false;
     
     var to_hide;
     var skipLimit  = false;
 
-    this.html = function(idElement, eixo_)
+    this.html = function(idElement)
     {
-//       console.log('Indicador Seletor - html');
-       eixo2 = eixo_;
-       if(eixo2 != false){
-//           console.log('tem coisa');
-           var button = '<div id="' + idElement + '" style="float: left; margin-left: -27px; margin-top: -20px;">'
-            + '<div class="divCallOut">'
-            + '<button class="gray_button big_bt selector_popover" data-toggle="dropdown" style="float:right; margin-right: 5px !important; font-size: 14px; padding: 5px 13px 5px 13px" rel="popover" >'+eixo2+'</button>'
-            + '</div>'
-            + '</div>';
-       }
-       else if(eixo2 == false){
-//           console.log('false');
-           var button = '<div id="' + idElement + '" style="float: right;">'
+       var button = '<div id="' + idElement + '" style="float: right;">'
             + '<div class="divCallOut">'
             + '<button class="blue_button big_bt selector_popover" data-toggle="dropdown" style="float:right; margin-right: 29px !important; height: 34px; font-size: 14px;" rel="popover" >Selecionar</button>'
             + '</div>'
-            + '</div>';
-       }
+        + '</div>';
 
         return button;
     };
@@ -51,12 +34,11 @@ function IndicatorSelector()
     /**
     * @param multiselect - Especifica se a lista de indicadores serÃ¡ de mÃºltipla seleÃ§Ã£o ou de seleÃ§Ã£o simples
     */
-    this.startSelector = function(multiselect, id_element_context, _listener, orientation, multiYear_,_to_hide,_skipLimit, eixo_){ 
-//        console.log('Indicador Seletor - startSelector');
+    this.startSelector = function(multiselect, id_element_context, _listener, orientation, multiYear_,_to_hide,_skipLimit)
+    { 
         listener = _listener;
         multiYear = multiYear_;
-        eixo['eixo'] = eixo_;
-        
+
         this_selector_element = '#' + id_element_context;
         
         to_hide = '#' + _to_hide;
@@ -67,18 +49,11 @@ function IndicatorSelector()
               '</ul></div>' +
               '<div class="tema box">'+
               '<h6 class="title_box">Tema</h6><ul class="nav nav-list list_menu_indicador">' +
+              '</ul></div>' +
+              '<div class="indicador box"><h6 class="title_box">Indicador</h6><ul class="nav nav-list list_menu_indicador">' +
               '</ul></div>';
-              if(multiselect == false){
-                html += '<div class="indicador box"><a class="close indicador">&times;</a><h6 class="title_box">Indicador</h6><ul class="nav nav-list list_menu_indicador">' +
-                '</ul></div>';
-              }
-              else{
-                html += '<div class="indicador box"><h6 class="title_box">Indicador</h6><ul class="nav nav-list list_menu_indicador">' +
-                '</ul></div>';
-              }
-              
         if(multiselect == true){
-            html += '<div class="itens_selecionados box"><a class="close indicador">&times;</a><h6 class="title_box">Selecionados</h6><ul class="nav nav-list list_menu_indicador"></ul></div></div>';
+              html += '<div class="itens_selecionados box"><a class="close indicador">&times;</a><h6 class="title_box">Selecionados</h6><ul class="nav nav-list list_menu_indicador"></ul></div></div>';
         }
         html+='</div>';
         html += '<div class="btn_select" style="display:none">';
@@ -89,7 +64,9 @@ function IndicatorSelector()
         html += '</div>';
         
         divSeletor.html(html);
-
+        
+        
+        
         $(this_selector_element).find('.selector_popover').popover(
         {
             html:true,
@@ -110,51 +87,17 @@ function IndicatorSelector()
     
     this.refresh = function()
     {
-//        console.log('Indicador Seletor - this.refresh');
         refresh();
     };
 
     this.setIndicadores = function setIndicadores(array_values)
     {
-//        console.log('Indicador Seletor - setIndicadores');
         setIndicadoresValue(array_values);
     };
-    
-    this.getEixo = function(){
-        return eixo;
-    }
         
     function startPopOver(multiselect)
     {
-//        console.log('Indicador Seletor - startPopOver');
-        if(eixo['eixo'] != false){
-            geral.setEixo(eixo['eixo']);
-            if(eixo['eixo'] == 'y'){
-                eixo['y'] = true;
-                eixo['x'] = false;
-                eixo['tam'] = false;
-                eixo['cor'] = false;
-            }
-            else if(eixo['eixo'] == 'x'){
-                eixo['y'] = false;
-                eixo['x'] = true;
-                eixo['tam'] = false;
-                eixo['cor'] = false;
-            }
-            else if(eixo['eixo'] == 'tam'){
-                eixo['y'] = false;
-                eixo['x'] = false;
-                eixo['tam'] = true;
-                eixo['cor'] = false;
-            }
-            else if(eixo['eixo'] == 'cor'){
-                eixo['y'] = false;
-                eixo['x'] = false;
-                eixo['tam'] = false;
-                eixo['cor'] = true;
-            }
-        }
-        
+
         $(this_selector_element).find('.messages').html("");
         refresh();
         
@@ -195,11 +138,6 @@ function IndicatorSelector()
                 });
             }
             
-            else{
-                $(this_selector_element).find('div.divCallOut .popover-inner,div.divCallOut .popover-content,div.divCallOut .popover').css('height','310px');
-                $(this_selector_element).find('div.divCallOut .popover-inner,div.divCallOut .popover-content,div.divCallOut .popover').css('width','513px');
-            }
-            
             $(this_selector_element).find('.close').click(function(e){
                 $(this_selector_element).find('div.divCallOut .popover').hide();
                 return 0;    
@@ -211,14 +149,13 @@ function IndicatorSelector()
     
     function dispatchListener()
     {
-//       console.log('Indicador Seletor - dispatchListener');
        listener(value_indicador);  
        //fillSelectedItens(); 
     }
 
     function fillSelectedItensOfCurrentListOfIndicador()
     {
-//         console.log('Indicador Seletor - fillSelectedItensOfCurrentListOfIndicador');
+
         $(this_selector_element).find('.indicador ul li').removeClass('selected');
         $(this_selector_element).find('.indicador ul li .indicador_ano span').removeClass('selected');
         
@@ -254,13 +191,12 @@ function IndicatorSelector()
 
     function fillSelectedItens()
     {
-//         console.log('Indicador Seletor - fillSelectedItens');
         var indicadoresDistintos = getIndicadoresDistintos(value_indicador);
-//        console.log('indicadoresDistintos: '+indicadoresDistintos);  //[object object]
+        
         var html = "";
         
-        $.each(indicadoresDistintos,function(i,item){
-//            console.log('i: '+i+'  item.id: '+item.id+' + item.desc: '+item.desc+' + item.nc: '+item.nc+' item.sigla: '+item.sigla);
+        $.each(indicadoresDistintos,function(i,item)
+        {
             var array = getArrayOfIndicadores(item.id);
             var classItem = ((array.length >=1 ) ? 'class="selected"' : '');
             var classYear = getDivAno(array, item.id);
@@ -277,7 +213,6 @@ function IndicatorSelector()
 
     function enableClickYear()
     {
-//        console.log('Indicador Seletor - enableClickYear');
         $(this_selector_element).find(".itens_selecionados ul li .indicador_ano span").click(function()
         {
             var idIndicadorSelecionado = parseInt($(this).attr('data-indicador'));
@@ -312,7 +247,6 @@ function IndicatorSelector()
     */
     function loadData(multiselect)
     {
-//        console.log('Indicador Seletor - loadData');
         load = true;
        
         if(dataSeletorIndicador == null)
@@ -331,7 +265,6 @@ function IndicatorSelector()
 
     function fillData(data,multiselect)
     {
-//        console.log('Indicador Seletor - fillData');
         array_indicadores = data.indicadores;
         array_dimensoes = data.dimensoes;
         array_temas = data.temas;
@@ -351,7 +284,8 @@ function IndicatorSelector()
             html += "<li data-id=" + item.id + "><a>" + item.n + "</a></li>";
         });
 
-        $(this_selector_element).find('.dimensao .nav').html(html);
+        $(this_selector_element).find('.dimensao .nav').html(html); 
+
         $(this_selector_element).find('.dimensao ul li').click(function(e){
             $(this_selector_element).find('.dimensao ul li').removeClass('active');
             $(this).addClass('active');
@@ -368,7 +302,6 @@ function IndicatorSelector()
     */
     function filtro_tema(value,multiselect)
     {
-//        console.log('Indicador Seletor - filtro_tema');
         var temas = getTemasPorDimensao(value);
         
         if(temas.length == 0)
@@ -396,19 +329,18 @@ function IndicatorSelector()
 
     function getTemasPorDimensao(temaSuperior)
     {
-//        console.log('Indicador Seletor - getTemasPorDimensao');
         var lista = new Array();
         
         $.each(array_temas,function(i,item){
             if(item.tema_superior == temaSuperior)
                 lista.push(item);
         });
+        
         return lista;
     }
 
     function getIndicadoresPorTema(value)
     {
-//        console.log('Indicador Seletor - getIndicadoresPorTema');
         var listaIndicadorHasTema = new Array();
         var listaIndicadores = new Array();
 
@@ -435,7 +367,6 @@ function IndicatorSelector()
     */
     function containsInFilter(listaIndicadorHasTema,idIndicador)
     {
-//        console.log('Indicador Seletor - containsInFilter');
         for(var i = 0; i < listaIndicadorHasTema.length; i++)
         {   
             if(listaIndicadorHasTema[i].variavel == idIndicador)
@@ -449,14 +380,12 @@ function IndicatorSelector()
     */
     function filtro_indicador(value,multiselect)
     {
-//        console.log('Indicador Seletor - filtro_indicador');
         var indicadores = getIndicadoresPorTema(value);
         fillIndicadores(indicadores,multiselect);
     }
     
     function adicionaOpcaoTodos(array)
     {
-//        console.log('Indicador Seletor - adicionaOpcaoTodos');
         var value = new IndicadorPorAno();
 
         value.desc = "Selecionar todos";
@@ -477,7 +406,6 @@ function IndicatorSelector()
     */
     function fillIndicadores(indicadores,multiselect)
     {
-//        console.log('Indicador Seletor - fillIndicadores');
         var array;
         if(multiselect == true && (indicadores.length >0))
             array = adicionaOpcaoTodos(indicadores);
@@ -503,7 +431,6 @@ function IndicatorSelector()
     
     function getDivAno(arrayIndicadores, idIndicador)
     {
-//        console.log('Indicador Seletor - getDivAno');
         if(multiYear == false || multiYear == undefined) return "";
         
         var classAno1 = "";
@@ -524,7 +451,7 @@ function IndicatorSelector()
         html += "<span data-id=2 style='text-align:center' data-indicador=" + idIndicador + " class='year2 " + classAno2 + "'>2000</span>";
         html += "<span data-id=3 style='text-align:right' data-indicador=" + idIndicador + " class='year3 " + classAno3 + "'>2010</span>";
         html += "</div>";
-        //console.log('html: '+html);
+
         return html;
     }
 
@@ -534,7 +461,6 @@ function IndicatorSelector()
     */
     function fillTemas(array)
     {
-//        console.log('Indicador Seletor - fillTemas');
         var html = "";
         
 //        if(array.length > 1)
@@ -564,12 +490,10 @@ function IndicatorSelector()
     */
     function listenerClickIndicador(multiselect)
     {
-//        console.log('Indicador Seletor - listenerClickIndicador');
-//        console.log('multiselect: '+multiselect);
         if(multiselect == false)
         {
             $(this_selector_element).find('.indicador ul li').click(function(e){
-                //$(this_selector_element).find('.indicador ul li').removeClass('active');
+                $(this_selector_element).find('.indicador ul li').removeClass('active');
                 $(this).addClass('active');
 
                 $(this_selector_element).find('div.divCallOut .popover').hide();
@@ -577,7 +501,8 @@ function IndicatorSelector()
                 var objeto = getIndicadorById(parseInt($(this).attr('data-id')));
 
                 value_indicador[0] = objeto;
-                //fillLabelButtonIndicador(); Tirado por Elaine
+                
+                fillLabelButtonIndicador();
 
                 dispatchListener();
             });
@@ -635,7 +560,6 @@ function IndicatorSelector()
     
     function fillLabelButtonIndicador()
     {
-//        console.log('Indicador Seletor - fillLabelButtonIndicador');
         var objeto = value_indicador[0];
         textoIndicadorSelecionado = objeto.nc;
                 
@@ -652,7 +576,6 @@ function IndicatorSelector()
     */
     function contains(value)
     {
-//        console.log('Indicador Seletor - contains');
         var retorno = false;
         
         for(var i = 0; i < value_indicador.length; i++)
@@ -669,7 +592,6 @@ function IndicatorSelector()
 
     function getPosition(value)
     {
-//        console.log('Indicador Seletor - getPosition');
         var retorno = -1;
         
         for(var i = 0; i < value_indicador.length; i++)
@@ -686,14 +608,14 @@ function IndicatorSelector()
 
     function getArrayOfIndicadores(idIndicador)
     {
-//        console.log('Indicador Seletor - getArrayOfIndicadores');
         var array = new Array();
+
         for(var i = 0; i < value_indicador.length; i++)
         {
             if(parseInt(value_indicador[i].id) == parseInt(idIndicador))
-                //console.log('value_indicador'+[i]+': '+value_indicador[i]); // [object object]
                 array.push(value_indicador[i]);
         } 
+
         return array;
     }
 
@@ -702,7 +624,9 @@ function IndicatorSelector()
      */
     function adicionaIndicador(value,ele)
     {
-//        console.log('Indicador Seletor - adicionaIndicador');
+       
+        
+        
         $(this_selector_element).find('.messages').html("");   
         
         if(!skipLimit)
@@ -757,7 +681,7 @@ function IndicatorSelector()
     */
     function removeIndicador(value)
     {
-//        console.log('Indicador Seletor - removeIndicador');
+
         for(var i = 0; i < value_indicador.length; i++)
         {
             if(parseInt(value_indicador[i].id) == parseInt(value.id) && value_indicador[i].a == value.a)
@@ -803,7 +727,7 @@ function IndicatorSelector()
     */
     function removeIndicadores(value)
     {
-//        console.log('Indicador Seletor - removeIndicadores');
+
         var tmp_array = new Array();
         for(var i = 0; i < value_indicador.length; i++)
         {
@@ -851,27 +775,18 @@ function IndicatorSelector()
     */
     function getIndicadorById(value)
     {
-//        console.log('Indicador Seletor - getIndicadorById');
         var length = array_indicadores.length;
-//        console.log(length);
         for(var i = 0; i < length; i++)
         {
             var item = array_indicadores[i];
-//            console.log('item: '+item);
-//            console.log('item: '+item.id+'  value: '+value);
             if(parseInt(item.id) == parseInt(value))
             {
                 var objeto = new IndicadorPorAno();
                 objeto.id = item.id;
-//                console.log('objeto.id: '+objeto.id);
                 objeto.c = item.c;
-//                console.log('objeto.c: '+objeto.c);
                 objeto.a = item.a;
-//                console.log('objeto.a: '+objeto.a);
                 objeto.desc = item.desc;
-//                console.log('objeto.desc: '+objeto.desc);
                 objeto.nc = item.nc;
-//                console.log('objeto.nc: '+objeto.nc);
                 
                 return objeto;
             }
@@ -880,7 +795,6 @@ function IndicatorSelector()
 
     function convertToArray(value)
     {
-//        console.log('Indicador Seletor - convertToArray');
         if($.isArray(value))
             return value;
         else
@@ -889,9 +803,7 @@ function IndicatorSelector()
 
     function refresh()
     {
-//        console.log('Indicador Seletor - refresh');
         value_indicador = geral.getIndicadores().slice();
-//        console.log('value_indicador: '.value_indicador);
         fillSelectedItens();
     }
 
@@ -903,23 +815,22 @@ function IndicatorSelector()
     
     function getIndicadoresDistintos(array)
     {
-//        console.log('Indicador Seletor - getIndicadoresDistintos');
         var novosIndicadores = new Array();
+
         for(var i = 0; i < array.length; i++)
         {
             var item = array[i];
+            
             if(containsInArray(novosIndicadores,item) == false)
             {
                 novosIndicadores.push(item);
             }
         }
-        //console.log('novosIndicaores: '+novosIndicadores); //[object object]
         return novosIndicadores;
     }
 
     function containsInArray(array,value)
     {
-//        console.log('Indicador Seletor - containsInArray');
         for(var i = 0; i < array.length; i++)
         {
             if(array[i].id == value.id)
@@ -930,7 +841,6 @@ function IndicatorSelector()
     
     function closePopOver()
     {
-//        console.log('Indicador Seletor - closePopOver');
         $('html').on('click.popover.divCallOut',function(e) 
         {
             if($(e.target).has('.divCallOut').length == 1)
@@ -938,7 +848,6 @@ function IndicatorSelector()
                 $(this_selector_element).find('.divCallOut .popover').hide();
                 
                 value_indicador = value_indicador_old.slice();
-                
             }
         });
     }

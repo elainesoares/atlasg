@@ -445,7 +445,7 @@ function getCSV(){
             if(json[i].vs[k].v == -1){
                 put.push(' ');
             }else
-                put.push(json[i].vs[k].v);
+                put.push(json[i].vs[k].v.replace('.', ','));
         }
         result += put.join('; ')+"\n";
         count++;
@@ -1109,7 +1109,7 @@ function fillTabela(json){
             put += "<tr class='hoverTr' style='background:#F0F0F0'  i-city='"+json[i].id+"' id='tr_"+json[i].id+"_"+json[i].esp+"'><td class='tdNames th_2'><div class='enlarger'>"+rem+"<div class='tdNames textNameTable'>"+json[i].nome+"</div></div></td>";
         for(var k in json[i].vs){
             v = json[i].vs[k].v == -1 ? "-" : json[i].vs[k].v;
-            put += "<td tdId='"+k+"' class='tdValues'>"+v+"</td>";
+            put += "<td tdId='"+k+"' class='tdValues'>"+v.replace('.',',')+"</td>";
         //                            put += "<td tdId='"+k+"' class='tdValues'>"+json[i].vs[k].v+"</td>";
         }
         put+="</tr>";
@@ -1191,7 +1191,7 @@ function fillTabela(json){
                             put += "<tr class='hoverTr' style='background:#F0F0F0'  i-city='"+json[i].id+"' id='tr_"+json[i].id+"_"+json[i].esp+"'><td class='tdNames th_2'><div class='enlarger'>"+rem+"<div class='tdNames textNameTable'>"+json[i].nome+"</div></div></td>";
                         for(var k in json[i].vs){
                             v = json[i].vs[k].v == -1 ? "-" : json[i].vs[k].v;
-                            put += "<td tdId='"+k+"' class='tdValues'>"+v+"</td>";
+                            put += "<td tdId='"+k+"' class='tdValues'>"+v.replace('.',',')+"</td>";
                         //                            put += "<td tdId='"+k+"' class='tdValues'>"+json[i].vs[k].v+"</td>";
                         }
                         put+="</tr>";
@@ -1337,7 +1337,7 @@ function fillTabela(json){
                             put += "<tr class='hoverTr' style='background:#F0F0F0'  i-city='"+json[i].id+"' id='tr_"+json[i].id+"_"+json[i].esp+"'><td class='tdNames th_2'><div class='enlarger'>"+rem+"<div class='tdNames textNameTable'>"+json[i].nome+"</div></div></td>";
                         for(var k in json[i].vs){
                             v = json[i].vs[k].v == -1 ? "-" : json[i].vs[k].v;
-                            put += "<td tdId='"+k+"' class='tdValues'>"+v+"</td>";
+                            put += "<td tdId='"+k+"' class='tdValues'>"+v.replace('.',',')+"</td>";
                         //                            put += "<td tdId='"+k+"' class='tdValues'>"+json[i].vs[k].v+"</td>";
                         }
                         put+="</tr>";
@@ -1488,7 +1488,7 @@ function removerLinhaTabela(k,l){
             put += "<tr class='hoverTr' style='background:#F0F0F0' i-city='"+copyObject[i].id+"' id='tr_"+copyObject[i].id+"_"+copyObject[i].esp+"'><td class='tdNames th_2'><div class='enlarger'>"+rem+"<div class='tdNames textNameTable'>"+copyObject[i].nome+"</div></div></td>";
 
         for(var k in copyObject[i].vs){
-            put += "<td tdId='"+k+"' class='tdValues'>"+copyObject[i].vs[k].v+"</td>";
+            put += "<td tdId='"+k+"' class='tdValues'>"+copyObject[i].vs[k].v.replace('.',',')+"</td>";
         }
         put+="</tr>";
         flag_value_fina++;
@@ -1521,7 +1521,7 @@ function removerLinhaTabela(k,l){
             put += "<tr class='hoverTr' style='background:#F0F0F0' i-city='"+copyObject[i].id+"' id='tr_"+copyObject[i].id+"_"+copyObject[i].esp+"'><td class='tdNames th_2'><div class='enlarger'>"+rem+"<div class='tdNames textNameTable'>"+copyObject[i].nome+"</div></div></td>";
 
         for(var k in copyObject[i].vs){
-            put += "<td tdId='"+k+"' class='tdValues'>"+copyObject[i].vs[k].v+"</td>";
+            put += "<td tdId='"+k+"' class='tdValues'>"+copyObject[i].vs[k].v.replace('.',',')+"</td>";
         }
         put+="</tr>";
         flag_value_init--;
@@ -1767,7 +1767,7 @@ function navegarPara(element){
 
             for(var k in copyObject[start].vs){
                 v = copyObject[start].vs[k].v == -1 ? '-' : copyObject[start].vs[k].v;
-                put += "<td tdId='"+k+"' class='tdValues'>"+v+"</td>";
+                put += "<td tdId='"+k+"' class='tdValues'>"+v.replace('.',',')+"</td>";
             }
             put+="</tr>";
             count++;

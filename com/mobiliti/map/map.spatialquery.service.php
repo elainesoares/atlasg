@@ -66,10 +66,10 @@ switch($spac)
 {
     case  Consulta::$ESP_REGIAODEINTERESSE:
     case  Consulta::$ESP_MUNICIPAL:
-         $query = "SELECT m.id, m.nome as title, m.the_geom, ROUND(v.valor,3) AS valor, e.uf as estado, lower( replace(m.nome,' ','-') || '_' || e.uf ) as perfil FROM municipio m INNER JOIN ESTADO e ON m.fk_estado = e.id INNER JOIN valor_variavel_mun v ON m.id = v.fk_municipio WHERE  v.fk_ano_referencia =" . $year. " and v.fk_variavel = " . $indc ." and ST_Within (ST_PointFromText('POINT($point->x   $point->y)', 4326), m.the_geom)";                   
+         $query = "SELECT m.id, m.nome as title, ROUND(v.valor,3) AS valor, e.uf as estado, lower( replace(m.nome,' ','-') || '_' || e.uf ) as perfil FROM municipio m INNER JOIN ESTADO e ON m.fk_estado = e.id INNER JOIN valor_variavel_mun v ON m.id = v.fk_municipio WHERE  v.fk_ano_referencia =" . $year. " and v.fk_variavel = " . $indc ." and ST_Within (ST_PointFromText('POINT($point->x   $point->y)', 4326), m.the_geom)";                   
          break; 
     case Consulta::$ESP_ESTADUAL:
-        $query = "SELECT e.id, e.nome as title, e.the_geom, ROUND(v.valor,3) AS valor FROM estado e INNER JOIN valor_variavel_estado v ON e.id = v.fk_estado WHERE  v.fk_ano_referencia =" . $year. " and v.fk_variavel = " . $indc ." and ST_Within (ST_PointFromText('POINT($point->x   $point->y)', 4326), the_geom)";   
+        $query = "SELECT e.id, e.nome as title, ROUND(v.valor,3) AS valor FROM estado e INNER JOIN valor_variavel_estado v ON e.id = v.fk_estado WHERE  v.fk_ano_referencia =" . $year. " and v.fk_variavel = " . $indc ." and ST_Within (ST_PointFromText('POINT($point->x   $point->y)', 4326), the_geom)";   
         break;
 }
 
@@ -258,6 +258,8 @@ if($result["id"])
     $result["longevidade"] = $result_array_lon["valor"];
     $result["renda"] = $result_array_ren["valor"];
     $result["educacao"] = $result_array_edc["valor"]; 
+    $result["x"] = $coordinate[0];
+    $result["y"] = $coordinate[1];
 
 }
 

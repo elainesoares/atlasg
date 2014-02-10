@@ -179,7 +179,7 @@
         <div class="tab-content" style="min-height: 500px">
             <div class="tab-pane active" id="tab1">
                 <div class="topContent" id="topContentHolder"></div>
-                <?php include_once('com/mobiliti/grafico/ui.grafico-dispersao2.php'); ?>
+                <?php include_once('com/mobiliti/grafico/bolhas/ui.grafico-dispersao2.php'); ?>
             </div>
 
             <div class="tab-pane" id="tab2">

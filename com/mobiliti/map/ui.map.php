@@ -45,7 +45,6 @@
     {
         $('#local_box').load('com/mobiliti/componentes/local/local.html', function()
         {
-//            console.log('local_box');
             local = new SeletorLocal();
             local.startLocal(listenerLocalMapa, "local_box", false);
             local.setListenerSelectionItem(map_destacar_regiao);
@@ -57,7 +56,6 @@
 
         $('#box_indicador_local').load('com/mobiliti/componentes/local_indicador/indicador.html', function()
         {
-//            console.log('box_indicador_local');
             indicadorLocal = new SeletorIndicador();
             indicadorLocal.startLocal(listenerLocalIndicadores, "box_indicador_local", false);
             try {
@@ -70,38 +68,35 @@
                 //erro
             }
         });
+
+
         map_init();
     });
 
     function listenerLocalIndicadores(indicadores)
     {
-//        console.log('listenerLocalIndicadores');
         geral.setIndicadores(indicadores);
         map_indc_selector.refresh();
     }
 
     function seletor_indicador(obj)
     {
-//        console.log('seletor_indicador');
         geral.setIndicadores(obj);
         indicadorLocal.refresh();
     }
 
     function map_indcator_selector_mapa(array)
     {
-//        console.log('map_indcator_selector_mapa');
         local.setItensSelecionados(array);
     }
 
     function listenerLocalMapa(lugares)
     {
-//        console.log('listenerLocalMapa');
         geral.setLugares(lugares);
     }
 
     function map_init()
     {
-//        console.log('map_init');
 
         $('.nav-tabs').button();
 
@@ -183,6 +178,8 @@
         $("#link_quintil").tooltip({delay: 500});
         $("#link_quintil_voltar").tooltip({delay: 500});
 
+
+
         $("#uimap_legend").css("-webkit-border-radius", "7px");
         $("#uimap_legend").css("-moz-border-radius", "7px");
         $("#uimap_legend").css("border-radius", "7px");
@@ -190,14 +187,15 @@
         $('#uimapcanvas_1').load(canvas_load_handler);
         $('#uimapcanvas_2').load(canvas_load_handler);
         $('#uimapselection').load(uimaptool_selectregion_load_handler);
+
     }
 
 
     var uimap_is_down = false;
     var uimap_pos_x = 0;
     var uimap_pos_y = 0;
-    function uimap_mouse_down_handler(e){
-//        console.log('uimap_mouse_down_handler');
+    function uimap_mouse_down_handler(e)
+    {
         e.preventDefault();
         uimap_is_down = true;
 
@@ -210,7 +208,6 @@
 
     function uimap_mouse_move_handler(e)
     {
-//        console.log('uimap_mouse_move_handler');
         e.preventDefault();
 
         if (uimap_is_down && map_tool === MAP_TOOL_INFO)
@@ -244,7 +241,6 @@
 
     function uimap_mouse_up_handler(e)
     {
-//        console.log('uimap_mouse_up_handler');
         e.preventDefault();
 
         if (!uimap_is_down)
@@ -297,14 +293,13 @@
 
     function uimap_mouse_out_handler(e)
     {
-//        console.log('uimap_mouse_out_handler');
         e.preventDefault();
         uimap_is_down = false;
     }
 
     function map_click_evt(e, map)
     {
-//        console.log('map_click_evt');
+      
         if(skip_click && map_e != 4)return;
         
         e.preventDefault();
@@ -327,7 +322,6 @@
 
     function ui_button_zoomin_click_evt(e)
     {
-//        console.log('ui_button_zoomin_click_evt');
         map_hide_selection();
 
         var coo = map_extent.split(" ");
@@ -373,7 +367,6 @@
 
     function ui_button_zoomout_click_evt(e)
     {
-//        console.log('ui_button_zoomout_click_evt');
         map_hide_selection();
 
         var coo = map_extent.split(" ");
@@ -402,7 +395,6 @@
 
     function uimaptool_zoomout_event(event)
     {
-//        console.log('uimaptool_zoomout_event');
         map_hide_selection();
 
         map_extent = map_max_extent;
@@ -410,16 +402,13 @@
     }
 
     function map_indcator_selector_listener(obj) {
-//        console.log('map_indcator_selector_listener');
     }
     function map_change_list_indicator(arr) {
-//        console.log('map_change_list_indicator');
     }
 
 
     function map_year_slider_listener(event, data)
     {
-//        console.log('map_year_slider_listener');
         if (___first_time_year_)
         {
             ___first_time_year_ = false;
@@ -453,7 +442,6 @@
 
     function map_hide_selection()
     {
-//        console.log('map_hide_selection');
         $("#p_selection").val("");
         $('#uimappixel').popover('hide');
         $('#uimappixel').hide();
@@ -471,7 +459,6 @@
 
     function uimaptool_selectregion_event(event)
     {
-//        console.log('uimaptool_selectregion_event');
         map_hide_selection();
 
         if (map_tool === MAP_TOOL_INFO)
@@ -494,7 +481,7 @@
 
     function map_selection_event(img, selection)
     {
-//        console.log('map_selection_event');
+
         if (!selection.width || !selection.height)
             return;
 
@@ -507,7 +494,7 @@
 
     function get_map_popover_placement(pop, dom_el)
     {
-//        console.log('get_map_popover_placement');
+
         var px_left = $('#uimappixel').position().left;
         var px_top = $('#uimappixel').position().top;
 
@@ -527,7 +514,6 @@
 
     function map_loading(status)
     {
-//        console.log('map_loading');
         if (status)
             $("#uimaploader").show();
         else
@@ -537,7 +523,6 @@
 
     function map_response(data, textStatus, jqXHR)
     {
-//        console.log('map_response');
         map_hide_selection();
         
         //desativa o botão de seleção de região
@@ -593,9 +578,9 @@
     }
 
 
-    function map_load(e, l, i, a)
+    function map_load(e, l, i, a, zoom, istool)
     {
-//        console.log('map_load');
+
 
         map_loading(true);
 
@@ -647,7 +632,6 @@
 
     function map_positionate_pin(px_lat, px_lon)
     {
-//        console.log('map_positionate_pin');
         $("#lat").val(px_lat);
         $("#lon").val(px_lon);
 
@@ -659,7 +643,7 @@
 
     function map_build_popover_content(px_lat, px_lon)
     {
-//        console.log('map_build_popover_content');
+
         var result = $.parseJSON('{"title":"", "arvore":true, "grafico":true, "perfil":false}');
 
         $("#uimap_popover_idh_tree").hide();
@@ -675,7 +659,6 @@
 
     function map_update_popover(popdata)
     {
-//        console.log('map_update_popover');
         if (popdata.id)
         {
 
@@ -811,7 +794,7 @@
     //não usar por enquanto
     function convert_to_pixel(latitude, longitude)
     {
-//        console.log('convert_to_pixel');
+
         // get x value
         var x = (map_width*(180+longitude)/360)%map_width+(map_width/2);
 
@@ -827,7 +810,7 @@
 
     function map_popover_request(_px_lat, _px_lon)
     {
-//        console.log('map_popover_request');
+        
         var request_data = $.parseJSON('{"spac":"", "px_lat":0, "px_lon":0, "extent":"", "height":0, "width":0, "selection":true, "indc":"" , "year":"" }');
 
         request_data.spac = map_e;
@@ -839,8 +822,6 @@
         request_data.indc = map_i;
         request_data.year = map_a;
 
-        var randomnumber = Math.floor(Math.random()*1001);
-//        console.log("disparar: " + randomnumber);
 
         $.ajax({
             type: "POST",
@@ -855,7 +836,7 @@
 
     function map_popover_response(data, textStatus, jqXHR)
     {
-//        console.log('map_popover_response');
+        
         if (textStatus === "success")
         {
             var obj = $.parseJSON(data);
@@ -870,7 +851,6 @@
 
     function map_listener_indicador(event, obj)
     {
-//        console.log('map_listener_indicador');
         quantil_id = "";
 
         if (event === "changetab")
@@ -898,7 +878,7 @@
 
     function map_listener_lugar(event, obj)
     {
-//        console.log('map_listener_lugar');
+
         quantil_id = "";
         local.refresh();
         map_indc.refresh();
@@ -907,7 +887,6 @@
 
     function dispacth_map_evt()
     {
-//        console.log('dispacth_map_evt');
         // limpa todos os argumentos
         map_i_name = "";
         map_i = 0;
@@ -947,7 +926,6 @@
 
                 if (_indicador.c)
                 {
-//                    console.log(_indicador.c);
                     map_i = _indicador.id;
                     map_a = _indicador.a;
 
@@ -963,7 +941,6 @@
 
     function map_destacar_regiao(id, e)
     {
-//        console.log('map_destacar_regiao');
         map_hide_selection();
 
         if (e == 7)
@@ -990,7 +967,6 @@
 
     function pan_handler(drcts)
     {
-//        console.log('pan_handler');
         map_hide_selection();
 
         var coo = map_extent.split(" ");
@@ -1037,28 +1013,24 @@
 
     function close_legend_evt()
     {
-//        console.log('close_legend_evt');
         $("#uimap_legend").hide();
         $("#uimap_show_legend").show();
     }
 
     function show_legend_evt()
     {
-//        console.log('show_legend_evt');
         $("#uimap_legend").show();
         $("#uimap_show_legend").hide();
     }
 
     function show_perfil_evt()
     {
-//        console.log('show_perfil_evt');
         $("#uimap_show_perfil").hide();
         $("#uimpadowninfo").show();
     }
 
     function close_popover_evt()
     {
-//        console.log('close_popover_evt');
         $("#uimpadowninfo").hide();
         $("#uimap_show_perfil").show();
     }
@@ -1066,7 +1038,6 @@
 
     function canvas_load_handler()
     {
-//        console.log('canvas_load_handler');
         var id_image = $(this).attr('id')
         map_loading(false);
 
@@ -1094,7 +1065,6 @@
 
     function uimaptool_selectregion_load_handler()
     {
-//        console.log('uimaptool_selectregion_load_handler');
         map_loading(false);
         $("#uimapselection").show();
         return 0;
@@ -1102,7 +1072,6 @@
 
     function make_quintil()
     {
-//        console.log('make_quintil');
         quantil_id = "make";
 
         $("#link_quintil").css("font-weight", "bold");
@@ -1114,7 +1083,6 @@
 
     function make_normal()
     {
-//        console.log('make_normal');
         quantil_id = "";
 
         $("#link_quintil").css("font-weight", "normal");
@@ -1126,7 +1094,6 @@
     
     function addPontoDeMilhar(nStr)
     {
-//        console.log('addPontoDeMilhar');
 	nStr += '';
 	x = nStr.split(',');
 	x1 = x[0];

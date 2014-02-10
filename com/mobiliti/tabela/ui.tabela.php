@@ -1,18 +1,41 @@
 <script src="com/mobiliti/tabela/builder.tabela.js" type="text/javascript" charset="utf-8"></script>
 <script>
+  
+  
+    
     var local2;
     var map_indc2;
     var tab_indc;
-//    console.log('ui.tabela');
+    
+ 
     $(document).ready(function(){
+        // $('#lugaresTabela').load('com/mobiliti/componentes/local/local_btn.html',function()
+        // {
+        //     local2 = new SeletorLocal();
+        //     local2.startLocal(listenerLocalTabela,"lugaresTabela",false);
+
+        //     map_indc2 = new LocalSelector();
+
+        //     map_indc2.startSelector(true,"uimapindicator_selector_tabela",map_indcator_selector_tabela,"right");
+            
+        // });
+        
         map_indc2 = new LocalSelector();
-        map_indc2.startSelector(true,"uimapindicator_selector_tabela",map_indcator_selector_tabela,"right","uiindicator_selector_tabela_mult");
+
+        map_indc2.startSelector(true,"uimapindicator_selector_tabela",
+        map_indcator_selector_tabela,"right","uiindicator_selector_tabela_mult");
+        
         tab_indc = new IndicatorSelector();
         html = tab_indc.html("uiindicator_selector_tabela_mult");
         $("#calloutIndicadores").append(html);
         $("#calloutIndicadores").append("<h5>INDICADORES</h5>");
-        tab_indc.startSelector(true,"uiindicator_selector_tabela_mult",tab_indcator_selector_tabela,"bottom",true,"uimapindicator_selector_tabela");       
+        tab_indc.startSelector(true,"uiindicator_selector_tabela_mult",tab_indcator_selector_tabela,"bottom",true,"uimapindicator_selector_tabela");
+
+        
     });
+    
+    
+    
     
     function listnerTabelaIndicadores(obj)
     {
@@ -20,14 +43,12 @@
     }
     
     function tab_indcator_selector_tabela(array){
-//        console.log('ui.tabela - tab_indcator_selector_tabela');
         geral.setIndicadores(array);
         tabela_build();
     }
    
     function listnerTabelaLocal(e, obj)
     {
-//        console.log('ui.tabela - listnerTabelaLocal');
         if(e == "changetab" || e == "reloadList"){
             // geral.removeIndicadoresExtras();
             map_indc2.refresh();

@@ -63,6 +63,7 @@ function SelectorIndicator(selectorArea,listArea,inputSearch,selectionListener,c
      
      
     function _construct_selector(){ 
+        
         var list = $("#" + _listArea);
         list.css("overflow-y","scroll");
         list.css("height","250px");
@@ -102,6 +103,7 @@ function SelectorIndicator(selectorArea,listArea,inputSearch,selectionListener,c
     
     //executa a busca no array interno de indicadores
     function _done_type_end_evt(){
+
         var filter = $('#input_search_intern_list').val();
        
         if(_intern_list === null)return;
@@ -127,6 +129,7 @@ function SelectorIndicator(selectorArea,listArea,inputSearch,selectionListener,c
     
     function _choice_ready(arr)
     {
+        
         _checked_itens = new Array();
 
         var ui = $("#" + _listArea);
@@ -167,6 +170,8 @@ function SelectorIndicator(selectorArea,listArea,inputSearch,selectionListener,c
     
     function _fill_with_filtered_list(list)
     {
+       
+        
        var ui = $("#" + _listArea);
               
        var length = list.length;
@@ -220,6 +225,7 @@ function SelectorIndicator(selectorArea,listArea,inputSearch,selectionListener,c
     
     function  _on_click_evt(e)
     {
+        
         _element = $(e.currentTarget);
    
         var attr_id = $(_element).attr('id');
@@ -273,6 +279,7 @@ function SelectorIndicator(selectorArea,listArea,inputSearch,selectionListener,c
     
     function  _create_popover_for(e,opts,id,sigla)
     {
+        
         e.popover({
                     trigger:'manual',
                     html:true,
