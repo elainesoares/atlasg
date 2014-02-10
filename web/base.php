@@ -58,27 +58,28 @@ function rez(){
 //            include("footer_print.php");
 //            die();
 //        }
-        require_once 'block_all.php';
-        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore"){
-            echo "<div class='contentMenu' style=''>";
-            require_once "web/menu.php";
-            echo "</div>
-                <div class='speratorShadow'></div>
-            ";
-        }
-        else if($pag == 'arvore_print' || $pag == 'perfil_print' || $pag == 'imprimir_mapa'){
-            require_once 'web/menu_print.php';
-            echo "<div class='speratorShadow'></div>";
-        }
-        else if($pag == 'home' || $pag == ''){
-            echo "<div class='contentMenu'>";
-            require_once 'web/menu.php';
-            echo "</div>"; 
-            if($pagNext != '')
-                echo "<div class='speratorShadow'></div>";
-        }
+//        require_once 'block_all.php';
+//        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore"){
+//            echo "<div class='contentMenu' style=''>";
+//            require_once "web/menu.php";
+//            echo "</div>
+//                <div class='speratorShadow'></div>
+//            ";
+//        }
+//        else if($pag == 'arvore_print' || $pag == 'perfil_print' || $pag == 'imprimir_mapa'){
+//            require_once 'web/menu_print.php';
+//            echo "<div class='speratorShadow'></div>";
+//        }
+//        else if($pag == 'home' || $pag == ''){
+//            echo "<div class='contentMenu'>";
+//            require_once 'web/menu.php';
+//            echo "</div>"; 
+//            if($pagNext != '')
+//                echo "<div class='speratorShadow'></div>";
+//        }
         
-        else{
+//        else{
+        if($pag == 'graficos'){
             echo "<div class='contentMenu'>";
             require_once 'web/menu.php';
             echo "</div>"; 
@@ -103,7 +104,7 @@ function rez(){
 			$pagNext = $gets[3];
 		}
 	}
-        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore"){
+        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore" || $pag == 'graficos'){
             echo "<div class='speratorShadowFooter'></div>";
             include 'web/footer.php';
         }

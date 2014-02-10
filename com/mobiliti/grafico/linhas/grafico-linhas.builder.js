@@ -78,7 +78,8 @@ function drawChart(){
     	legend: {position: 'none'}, 	//Retira a legenda
     	hAxis: {direction: 1, textPosition: 'out', gridlines: {count: 3}, minorGridlines: {count: 2}, viewWindow: {max: 2010, min: 1991}, format:'####', axAlternation: 4, minValue: 1991, maxValue: 2010},
         chartArea:{left:70,top:10,width:"85%",height:"90%"},
-        axisTitlesPosition: 'none'
+        axisTitlesPosition: 'none',
+        vAxis: {gridlines: {count: 10}}
 //        width: 400,
         //height: 900,
         //selectionMode: 'multiple',          // Allow multiple simultaneous selections.

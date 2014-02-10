@@ -60,15 +60,7 @@ if($pag == 'perfil' || $pag == 'perfil_print'){
             ?>
         </div>
         <ul class="mainMenuTopUl">
-            
-            <li><a href="<?php echo $path_dir; ?>home/" <?php if(($pag == 'home' || $pag == '') && $pagNext == '') {echo 'class="ativo"';} ?> >HOME</a></li>
-            <li><a href="<?php echo $path_dir; ?>o_atlas/o_atlas_" <?php if($pag == "o_atlas") {echo 'class="ativo"';} ?>>O ATLAS</a></li>
-            <li><a href="<?php echo $path_dir; ?>destaques/" <?php if($pag == "destaques") {echo 'class="ativo"';} ?>>DESTAQUES</a></li> 
-            <li><a href="<?php echo $path_dir; ?>perfil/" <?php if($pag == 'perfil' && $pagNext2 == '') {echo 'class="ativo"';} ?>>PERFIL</a></li>
-            <li><a href="<?php echo $path_dir; ?>consulta/" <?php if($pag == 'consulta' && $pagNext2 == '') {echo 'class="ativo"';} ?>>CONSULTA</a></li>
-            <li><a href="<?php echo $path_dir; ?>arvore/" <?php if($pag == 'arvore' && ($pagNext == '' || $pagNext == 'estado' || $pagNext == 'municipio' || $pagNext == 'aleatorio')) {echo 'class="ativo"';} ?>>&Aacute;RVORE</a></li>
-            <li><a href="<?php echo $path_dir; ?>ranking" <?php if($pag == 'ranking' && $pagNext == '') {echo 'class="ativo"';} ?>>RANKING</a></li>
-            <li><a href="<?php echo $path_dir; ?>download/" <?php if($pag == "download" && $pagNext == '') {echo 'class="ativo"';} ?>>DOWNLOAD</a></li>
+         
         </ul>
     </div> 
 </div>
