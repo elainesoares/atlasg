@@ -72,7 +72,7 @@ RewriteCond %{REQUEST_URI} !^(.*/)?hdi/consulta\.php$ [NC]
 RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/histogram/histogram.controller\.php$ [NC]
 
 #Gráficos
-RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/grafico/grafico-dispersao.controller\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/grafico/bolhas/grafico-dispersao.controller\.php$ [NC]
 RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/grafico/linhas/grafico-linhas.controller\.php$ [NC]
 
 #autocompletar

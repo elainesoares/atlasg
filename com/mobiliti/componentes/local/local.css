@@ -31,10 +31,10 @@
 	overflow-y: scroll;
 }
 
-.list_local li:hover
+/*.list_local li:hover
 {
 	background: #74d0f7;
-}
+}*/
 
 .list_local li.selection
 {

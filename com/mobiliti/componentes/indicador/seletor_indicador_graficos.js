@@ -26,7 +26,7 @@ function IndicatorSelectorG()
 
     this.html = function(idElement, eixo_)
     {
-//       console.log('Indicador Seletor - html');
+//       console.log('html');
        eixo2 = eixo_;
        if(eixo2 != false){
 //           console.log('tem coisa');
@@ -52,7 +52,7 @@ function IndicatorSelectorG()
     * @param multiselect - Especifica se a lista de indicadores serÃ¡ de mÃºltipla seleÃ§Ã£o ou de seleÃ§Ã£o simples
     */
     this.startSelector = function(multiselect, id_element_context, _listener, orientation, multiYear_,_to_hide,_skipLimit, eixo_){ 
-//        console.log('Indicador Seletor - startSelector');
+//        console.log('startSelector');
         listener = _listener;
         multiYear = multiYear_;
         eixo['eixo'] = eixo_;
@@ -110,13 +110,13 @@ function IndicatorSelectorG()
     
     this.refresh = function()
     {
-//        console.log('Indicador Seletor - this.refresh');
+//        console.log('this.refresh');
         refresh();
     };
 
     this.setIndicadores = function setIndicadores(array_values)
     {
-//        console.log('Indicador Seletor - setIndicadores');
+//        console.log('setIndicadores');
         setIndicadoresValue(array_values);
     };
     
@@ -126,7 +126,7 @@ function IndicatorSelectorG()
         
     function startPopOver(multiselect)
     {
-//        console.log('Indicador Seletor - startPopOver');
+//        console.log('startPopOver');
         if(eixo['eixo'] != false){
             geral.setEixo(eixo['eixo']);
             if(eixo['eixo'] == 'y'){
@@ -211,14 +211,14 @@ function IndicatorSelectorG()
     
     function dispatchListener()
     {
-//       console.log('Indicador Seletor - dispatchListener');
+//       console.log('dispatchListener');
        listener(value_indicador);  
        //fillSelectedItens(); 
     }
 
     function fillSelectedItensOfCurrentListOfIndicador()
     {
-//         console.log('Indicador Seletor - fillSelectedItensOfCurrentListOfIndicador');
+//         console.log('fillSelectedItensOfCurrentListOfIndicador');
         $(this_selector_element).find('.indicador ul li').removeClass('selected');
         $(this_selector_element).find('.indicador ul li .indicador_ano span').removeClass('selected');
         
@@ -254,7 +254,7 @@ function IndicatorSelectorG()
 
     function fillSelectedItens()
     {
-//         console.log('Indicador Seletor - fillSelectedItens');
+//         console.log('fillSelectedItens');
         var indicadoresDistintos = getIndicadoresDistintos(value_indicador);
 //        console.log('indicadoresDistintos: '+indicadoresDistintos);  //[object object]
         var html = "";
@@ -277,7 +277,7 @@ function IndicatorSelectorG()
 
     function enableClickYear()
     {
-//        console.log('Indicador Seletor - enableClickYear');
+//        console.log('enableClickYear');
         $(this_selector_element).find(".itens_selecionados ul li .indicador_ano span").click(function()
         {
             var idIndicadorSelecionado = parseInt($(this).attr('data-indicador'));
@@ -312,7 +312,7 @@ function IndicatorSelectorG()
     */
     function loadData(multiselect)
     {
-//        console.log('Indicador Seletor - loadData');
+//        console.log('loadData');
         load = true;
        
         if(dataSeletorIndicador == null)
@@ -331,7 +331,7 @@ function IndicatorSelectorG()
 
     function fillData(data,multiselect)
     {
-//        console.log('Indicador Seletor - fillData');
+//        console.log('fillData');
         array_indicadores = data.indicadores;
         array_dimensoes = data.dimensoes;
         array_temas = data.temas;
@@ -368,7 +368,7 @@ function IndicatorSelectorG()
     */
     function filtro_tema(value,multiselect)
     {
-//        console.log('Indicador Seletor - filtro_tema');
+//        console.log('filtro_tema');
         var temas = getTemasPorDimensao(value);
         
         if(temas.length == 0)
@@ -396,7 +396,7 @@ function IndicatorSelectorG()
 
     function getTemasPorDimensao(temaSuperior)
     {
-//        console.log('Indicador Seletor - getTemasPorDimensao');
+//        console.log('getTemasPorDimensao');
         var lista = new Array();
         
         $.each(array_temas,function(i,item){
@@ -408,7 +408,7 @@ function IndicatorSelectorG()
 
     function getIndicadoresPorTema(value)
     {
-//        console.log('Indicador Seletor - getIndicadoresPorTema');
+//        console.log('getIndicadoresPorTema');
         var listaIndicadorHasTema = new Array();
         var listaIndicadores = new Array();
 
@@ -435,7 +435,7 @@ function IndicatorSelectorG()
     */
     function containsInFilter(listaIndicadorHasTema,idIndicador)
     {
-//        console.log('Indicador Seletor - containsInFilter');
+//        console.log('containsInFilter');
         for(var i = 0; i < listaIndicadorHasTema.length; i++)
         {   
             if(listaIndicadorHasTema[i].variavel == idIndicador)
@@ -449,14 +449,14 @@ function IndicatorSelectorG()
     */
     function filtro_indicador(value,multiselect)
     {
-//        console.log('Indicador Seletor - filtro_indicador');
+//        console.log('filtro_indicador');
         var indicadores = getIndicadoresPorTema(value);
         fillIndicadores(indicadores,multiselect);
     }
     
     function adicionaOpcaoTodos(array)
     {
-//        console.log('Indicador Seletor - adicionaOpcaoTodos');
+//        console.log('adicionaOpcaoTodos');
         var value = new IndicadorPorAno();
 
         value.desc = "Selecionar todos";
@@ -477,7 +477,7 @@ function IndicatorSelectorG()
     */
     function fillIndicadores(indicadores,multiselect)
     {
-//        console.log('Indicador Seletor - fillIndicadores');
+//        console.log('fillIndicadores');
         var array;
         if(multiselect == true && (indicadores.length >0))
             array = adicionaOpcaoTodos(indicadores);
@@ -503,7 +503,7 @@ function IndicatorSelectorG()
     
     function getDivAno(arrayIndicadores, idIndicador)
     {
-//        console.log('Indicador Seletor - getDivAno');
+//        console.log('getDivAno');
         if(multiYear == false || multiYear == undefined) return "";
         
         var classAno1 = "";
@@ -534,7 +534,7 @@ function IndicatorSelectorG()
     */
     function fillTemas(array)
     {
-//        console.log('Indicador Seletor - fillTemas');
+//        console.log('fillTemas');
         var html = "";
         
 //        if(array.length > 1)
@@ -564,7 +564,7 @@ function IndicatorSelectorG()
     */
     function listenerClickIndicador(multiselect)
     {
-//        console.log('Indicador Seletor - listenerClickIndicador');
+//        console.log('listenerClickIndicador');
 //        console.log('multiselect: '+multiselect);
         if(multiselect == false)
         {
@@ -635,7 +635,7 @@ function IndicatorSelectorG()
     
     function fillLabelButtonIndicador()
     {
-//        console.log('Indicador Seletor - fillLabelButtonIndicador');
+//        console.log('fillLabelButtonIndicador');
         var objeto = value_indicador[0];
         textoIndicadorSelecionado = objeto.nc;
                 
@@ -652,7 +652,7 @@ function IndicatorSelectorG()
     */
     function contains(value)
     {
-//        console.log('Indicador Seletor - contains');
+//        console.log('contains');
         var retorno = false;
         
         for(var i = 0; i < value_indicador.length; i++)
@@ -669,7 +669,7 @@ function IndicatorSelectorG()
 
     function getPosition(value)
     {
-//        console.log('Indicador Seletor - getPosition');
+//        console.log('getPosition');
         var retorno = -1;
         
         for(var i = 0; i < value_indicador.length; i++)
@@ -686,7 +686,7 @@ function IndicatorSelectorG()
 
     function getArrayOfIndicadores(idIndicador)
     {
-//        console.log('Indicador Seletor - getArrayOfIndicadores');
+//        console.log('getArrayOfIndicadores');
         var array = new Array();
         for(var i = 0; i < value_indicador.length; i++)
         {
@@ -702,7 +702,7 @@ function IndicatorSelectorG()
      */
     function adicionaIndicador(value,ele)
     {
-//        console.log('Indicador Seletor - adicionaIndicador');
+//        console.log('adicionaIndicador');
         $(this_selector_element).find('.messages').html("");   
         
         if(!skipLimit)
@@ -757,7 +757,7 @@ function IndicatorSelectorG()
     */
     function removeIndicador(value)
     {
-//        console.log('Indicador Seletor - removeIndicador');
+//        console.log('removeIndicador');
         for(var i = 0; i < value_indicador.length; i++)
         {
             if(parseInt(value_indicador[i].id) == parseInt(value.id) && value_indicador[i].a == value.a)
@@ -803,7 +803,7 @@ function IndicatorSelectorG()
     */
     function removeIndicadores(value)
     {
-//        console.log('Indicador Seletor - removeIndicadores');
+//        console.log('removeIndicadores');
         var tmp_array = new Array();
         for(var i = 0; i < value_indicador.length; i++)
         {
@@ -851,7 +851,7 @@ function IndicatorSelectorG()
     */
     function getIndicadorById(value)
     {
-//        console.log('Indicador Seletor - getIndicadorById');
+//        console.log('getIndicadorById');
         var length = array_indicadores.length;
 //        console.log(length);
         for(var i = 0; i < length; i++)
@@ -880,7 +880,7 @@ function IndicatorSelectorG()
 
     function convertToArray(value)
     {
-//        console.log('Indicador Seletor - convertToArray');
+//        console.log('convertToArray');
         if($.isArray(value))
             return value;
         else
@@ -889,7 +889,7 @@ function IndicatorSelectorG()
 
     function refresh()
     {
-//        console.log('Indicador Seletor - refresh');
+//        console.log('refresh');
         value_indicador = geral.getIndicadores().slice();
 //        console.log('value_indicador: '.value_indicador);
         fillSelectedItens();
@@ -903,7 +903,7 @@ function IndicatorSelectorG()
     
     function getIndicadoresDistintos(array)
     {
-//        console.log('Indicador Seletor - getIndicadoresDistintos');
+//        console.log('getIndicadoresDistintos');
         var novosIndicadores = new Array();
         for(var i = 0; i < array.length; i++)
         {
@@ -919,7 +919,7 @@ function IndicatorSelectorG()
 
     function containsInArray(array,value)
     {
-//        console.log('Indicador Seletor - containsInArray');
+//        console.log('containsInArray');
         for(var i = 0; i < array.length; i++)
         {
             if(array[i].id == value.id)
@@ -930,7 +930,7 @@ function IndicatorSelectorG()
     
     function closePopOver()
     {
-//        console.log('Indicador Seletor - closePopOver');
+//        console.log('closePopOver');
         $('html').on('click.popover.divCallOut',function(e) 
         {
             if($(e.target).has('.divCallOut').length == 1)

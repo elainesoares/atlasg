@@ -102,8 +102,8 @@ function Geral(listenerReady){
     }
         
     this.getLugares = function(){
-//        console.log('Geral - getLugares');
-//        console.log('lugares: '+lugares);
+        console.log('Geral - getLugares');
+        console.log('lugares: '+lugares);
         return lugares;
     }
         

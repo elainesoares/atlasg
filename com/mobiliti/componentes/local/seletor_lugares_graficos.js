@@ -13,7 +13,7 @@ function LocalSelectorG()
 
     var estados;
     var regioes;
-    var areas_tematicas;
+//    var areas_tematicas;
     var espacialidade_selecionada = -1;
     var cidades = new Array();
     
@@ -24,7 +24,7 @@ function LocalSelectorG()
 
     this.html = function(idElement)
     {
-//        console.log('Seletor Lugares - html');
+        console.log('Seletor Lugares - html');
        var button = '<div id="' + idElement + '" style="float: right;">'
             + '<div class="divCallOutLugares">'
             + '<button class="blue_button big_bt selector_popover" data-toggle="dropdown" style="margin-right: 27px !important; height: 34px; font-size: 14px;" rel="popover" >Selecionar</button>'
@@ -42,7 +42,7 @@ function LocalSelectorG()
     */
     this.startSelector = function(multiselect,id_element_context,listener_param,orientation,_to_hide,skip)
     { 
-//        console.log('Seletor Lugares - startSelector');
+        console.log('startSelector');
         this_selector_element = '#' + id_element_context;
         value_multiselect = multiselect;
         listener = listener_param;
@@ -89,16 +89,15 @@ function LocalSelectorG()
             {
                 $(this_selector_element).find('.divCallOutLugares .popover').hide();
                 value_indicador = value_indicador_old.slice();
+                console.log('value_indicador: '+value_indicador);
             }
         });
-        
-         
     }
     
 
     function startPopOver()
     {
-//        console.log('Seletor Lugares - startPopOver');
+        console.log('startPopOver');
         refresh();
         $(this_selector_element).find('.divCallOutLugares .popover').toggle(); //Exibir ou ocultar os elementos combinados.
         
@@ -109,6 +108,7 @@ function LocalSelectorG()
         
         if(load == false)
         { 
+//            console.log('load == false');
             $(this_selector_element).find('.selector_popover').popover('show');
 
             loadData(listener);
@@ -131,7 +131,9 @@ function LocalSelectorG()
                     
                     
                     value_indicador_old = value_indicador.slice();
+//                    console.log('value_indicador_old2: '+value_indicador_old);
                     total = value_indicador.length;
+//                    console.log('total: '+total);
                     fillSelectedItens();
                 });
                 
@@ -171,25 +173,29 @@ function LocalSelectorG()
 
     this.getData = function()
     {
-//        console.log('Seletor Lugares - getData');
+        console.log('getData');
         return value_indicador;
     }
     
     function dispatchListener(listener)
     {
-//        console.log('Seletor Lugares - dispatchListener');
+        console.log('dispatchListener');
         fillSelectedItens();
 
         var locais_municipal = new Array();
         var locais_estadual = new Array();
-        var locais_area_tematica = new Array();
+//        var locais_area_tematica = new Array();
         
         $.each(value_indicador,function(i,item){
             var local = new Local();
             local.id = item.id;
+            console.log('local.id: '+local.id);
             local.n = item.n
+            console.log('local.n: '+local.n);
             local.c = true;
+            console.log('local.c: '+local.c);
             local.s = false;
+            console.log('local.s: '+local.s);
             
             if(item.e == 2)
                 locais_municipal.push(local);
@@ -197,8 +203,8 @@ function LocalSelectorG()
             if(item.e == 4)
                 locais_estadual.push(local);
             
-            if(item.e == 7)
-                locais_area_tematica.push(local);
+//            if(item.e == 7)
+//                locais_area_tematica.push(local);
         });
         
         var lugar_municipal = new Lugar();
@@ -211,18 +217,18 @@ function LocalSelectorG()
         lugar_estadual.ac = false;
         lugar_estadual.l = locais_estadual;
         
-        var lugar_area_tematica = new Lugar();
-        lugar_area_tematica.e = 7;
-        lugar_area_tematica.ac = false;
-        lugar_area_tematica.l = locais_area_tematica;
+//        var lugar_area_tematica = new Lugar();
+//        lugar_area_tematica.e = 7;
+//        lugar_area_tematica.ac = false;
+//        lugar_area_tematica.l = locais_area_tematica;
 //        console.log('lugar_area_tematica: '+lugar_area_tematica.l);
 //        console.log('listener: '+listener);
-        listener([lugar_municipal,lugar_estadual,lugar_area_tematica]);
+        listener([lugar_municipal,lugar_estadual]);
     }
 
     function fillSelectedItens()
     {
-//        console.log('Seletor Lugares - fillSelectedItens');
+        console.log('fillSelectedItens');
         var html = "";
         
         $.each(value_indicador,function(i,item){
@@ -234,7 +240,7 @@ function LocalSelectorG()
 
     function loadData(listener)
     {
-//        console.log('Seletor Lugares - loadData');
+        console.log('loadData');
         load = true;
        
         $.getJSON('com/mobiliti/componentes/local/local.php', function(data){ 
@@ -244,7 +250,7 @@ function LocalSelectorG()
 
     function injetaEspacialidade(array,espacialidade)
     {
-//        console.log('Seletor Lugares - injetaEspacialidade');
+        console.log('injetaEspacialidade');
         $.each(array,function(i,item)
         {
             item.e = espacialidade;
@@ -255,7 +261,7 @@ function LocalSelectorG()
 
     function fillData(data)
     {
-//        console.log('Seletor Lugares - fillData');
+        console.log('fillData');
         estados = injetaEspacialidade(data.estados,4);
         if(estados.length > 1)
         {
@@ -267,17 +273,17 @@ function LocalSelectorG()
             estados = newArray.concat(estados);
         }
         
-        areas_tematicas = injetaEspacialidade(data.areasTematicas,7);
-        $.each(areas_tematicas, function(index, value) {
-           geral.AddOrUpdateAreaTematica(value.id,value.n,value.tam);
-        });
+//        areas_tematicas = injetaEspacialidade(data.areasTematicas,7);
+//        $.each(areas_tematicas, function(index, value) {
+//           geral.AddOrUpdateAreaTematica(value.id,value.n,value.tam);
+//        });
         
         fillFiltroBox1(getItensBox1());
     }
 
     function getItensBox1()
     {
-//        console.log('Seletor Lugares - getItensBox1');
+        console.log('getItensBox1');
         var array = new Array();
         var objeto;
 
@@ -291,21 +297,21 @@ function LocalSelectorG()
         objeto.n = 'Municipal';
         array.push(objeto);
         
-        objeto = {};
-        objeto.n = '[BROKER]';
-        array.push(objeto);
-        
-        objeto = {};
-        objeto.id = 7;
-        objeto.n = 'Área temática';
-        array.push(objeto);
+//        objeto = {};
+//        objeto.n = '[BROKER]';
+//        array.push(objeto);
+//        
+//        objeto = {};
+//        objeto.id = 7;
+//        objeto.n = 'Área temática';
+//        array.push(objeto);
 
         return array;
     }
 
     function fillFiltroBox1(array)
     {
-//        console.log('Seletor Lugares - fillFiltroBox1');
+        console.log('fillFiltroBox1');
         var html = "";
         $.each(array,function(i,item)
         {
@@ -342,11 +348,11 @@ function LocalSelectorG()
                 $(this_selector_element).find('.box2 .title_box').html('Estado');
                 $(this_selector_element).find('.box3 .title_box').html('');   
             }
-            else if(valorSelecionadoBox1 == 7)
-            {
-               $(this_selector_element).find('.box2 .title_box').html('Áreas');
-               $(this_selector_element).find('.box3 .title_box').html('');
-            }
+//            else if(valorSelecionadoBox1 == 7)
+//            {
+//               $(this_selector_element).find('.box2 .title_box').html('Áreas');
+//               $(this_selector_element).find('.box3 .title_box').html('');
+//            }
             filtroBox2($(this).attr('data-id'));
             
             espacialidade_selecionada = valorSelecionadoBox1;
@@ -355,16 +361,16 @@ function LocalSelectorG()
     
     function filtroBox2(value)
     {
-//        console.log('Seletor Lugares - filtroBox2');
-        if(value == 7)
-            filterByBox2(areas_tematicas,value);
-        else
+        console.log('filtroBox2');
+//        if(value == 7)
+//            filterByBox2(areas_tematicas,value);
+//        else
             filterByBox2(estados,value);
     }
 
     function filterByBox2(array,value)
     {
-//        console.log('Seletor Lugares - filterByBox2');
+        console.log('filterByBox2');
         $(this_selector_element).find('.box2 ul li').removeClass('active');
         $(this_selector_element).find('.box2 ul li').removeClass('selected');
 
@@ -372,16 +378,22 @@ function LocalSelectorG()
         
         $.each(array,function(i,item)
         {
+//            console.log('item.e: '+item.e);
             var htmlespacialidade = ((value==2) ? "":"data-espacialidade=" + item.e);
             if(value == 4 || value == 7)
                 var classItem = ((contains(item) == true) ? 'class="selected"' : '');
+//            console.log('item.id: '+item.id);
+//            console.log('item.n: '+item.n);
+//            console.log('item.tam: '+item.tam);
             html += "<li " + htmlespacialidade + " data-id=" + item.id + " data-texto='" + item.n + "'" + classItem  + " data-tematica=" + item.tam + "><a>" + item.n + "</a></li>";
         });
 
         $(this_selector_element).find('.box2 .nav').html(html); 
-
+        
+        console.log('value: '+value);
         if(value == 4)
         {
+            console.log('entrei value=4');
             $(this_selector_element).find('.box2 ul li').click(function(e)
             {
                 var valorSelecionado = parseInt($(this).attr('data-id'));
@@ -419,30 +431,30 @@ function LocalSelectorG()
                 }                
             });
         }
-        else if(value == 7)
-        {
-            $(this_selector_element).find('.box2 ul li').click(function(e)
-            {
-                    var valorSelecionado = parseInt($(this).attr('data-id'));
-                    var tamanho_tematica = parseInt($(this).attr('data-tematica'));
-                    
-                    var objeto = {};
-                    objeto.id = valorSelecionado;
-                    objeto.n = $(this).text();
-                    objeto.e = value; 
-
-                    if($(this).hasClass('selected') == false)
-                    {
-                        adicionaElemento(objeto,$(this),tamanho_tematica);
-                    }
-                    else
-                    {
-                        removeElemento(objeto,tamanho_tematica);
-                        $(this).removeClass('selected');
-                    }
-                                
-            });
-        }
+//        else if(value == 7)
+//        {
+//            $(this_selector_element).find('.box2 ul li').click(function(e)
+//            {
+//                    var valorSelecionado = parseInt($(this).attr('data-id'));
+//                    var tamanho_tematica = parseInt($(this).attr('data-tematica'));
+//                    
+//                    var objeto = {};
+//                    objeto.id = valorSelecionado;
+//                    objeto.n = $(this).text();
+//                    objeto.e = value; 
+//
+//                    if($(this).hasClass('selected') == false)
+//                    {
+//                        adicionaElemento(objeto,$(this),tamanho_tematica);
+//                    }
+//                    else
+//                    {
+//                        removeElemento(objeto,tamanho_tematica);
+//                        $(this).removeClass('selected');
+//                    }
+//                                
+//            });
+//        }
         else if(value == 2)
         {
             $(this_selector_element).find('.box2 ul li').click(function(e)
@@ -467,7 +479,7 @@ function LocalSelectorG()
     
     function filterByBox3(array)
     {
-//        console.log('Seletor Lugares - filterByBox3');
+        console.log('filterByBox3');
         $("#ui_city_loader").hide();
         
         array = injetaEspacialidade(array,2);
@@ -496,7 +508,7 @@ function LocalSelectorG()
 
     function filtroBox3(value)
     {
-//        console.log('Seletor Lugares - filtroBox3');
+        console.log('filtroBox3');
         $.getJSON('com/mobiliti/componentes/local/cidades_por_estado.php', {estado:value},function(data){ 
             cidades = data.cidades;
             filterByBox3(data.cidades)
@@ -505,7 +517,7 @@ function LocalSelectorG()
 
     function adicionaItemTodos(array)
     {
-//        console.log('Seletor Lugares - adicionaItemTodos');
+        console.log('adicionaItemTodos');
         var html = "";
         
         if(array.length > 1)
@@ -527,7 +539,7 @@ function LocalSelectorG()
     */
     function listenerClickItens()
     {
-//        console.log('Seletor Lugares - listenerClickItens');
+        console.log('listenerClickItens');
         if(value_multiselect == false)
         {
             $(this_selector_element).find('.box3 ul li').click(function(e)
@@ -599,7 +611,7 @@ function LocalSelectorG()
     
     function fillLabelButtonIndicador()
     {
-//        console.log('Seletor Lugares - fillLabelButtonIndicador');
+        console.log('fillLabelButtonIndicador');
         var objeto = value_indicador[0];
         textoIndicadorSelecionado = objeto.nome;
                 
@@ -616,7 +628,7 @@ function LocalSelectorG()
     */
     function contains(value)
     {
-//        console.log('Seletor Lugares - contains');
+        console.log('contains');
         var length = value_indicador.length
         for(var i = 0; i < length; i++)
         {
@@ -632,7 +644,7 @@ function LocalSelectorG()
     */
     function adicionaElemento(value,elemento,size)
     {
-//        console.log('Seletor Lugares - adicionaElemento');
+        console.log('adicionaElemento');
         $(this_selector_element).find('.messages').html("");
         
         if(size == undefined || size == null)size = 0;
@@ -678,7 +690,7 @@ function LocalSelectorG()
 
     function adicionaVariosElementos(value)
     {
-//        console.log('Seletor Lugares - adicionaVariosElementos');
+        console.log('adicionaVariosElementos');
         $(this_selector_element).find('.messages').html("");
 
         if(!skipLimit)
@@ -719,7 +731,7 @@ function LocalSelectorG()
     */
     function removeElemento(value, size)
     {
-//        console.log('Seletor Lugares - removeElemento');
+        console.log('removeElemento');
         var length = value_indicador.length;
         if(size == undefined || size == null)size = 0;
         
@@ -774,7 +786,7 @@ function LocalSelectorG()
     */
     function getIndicadorById(value)
     {
-//        console.log('Seletor Lugares - getCIndicadorById');
+        console.log('getCIndicadorById');
         var length = array_indicadores.length;
         
         for(var i = 0; i < length; i++)
@@ -790,7 +802,7 @@ function LocalSelectorG()
     */
     function getIndicadorBySigla(value)
     {
-//        console.log('Seletor Lugares - getIndicadorBySigla');
+        console.log('getIndicadorBySigla');
         var length = array_indicadores.length;
         for(var i = 0; i < length; i++)
         {
@@ -802,7 +814,7 @@ function LocalSelectorG()
 
     function convertToArray(value)
     {
-//        console.log('Seletor Lugares - convertToArray');
+        console.log('convertToArray');
         if($.isArray(value))
             return value;
         else
@@ -811,24 +823,28 @@ function LocalSelectorG()
 
     this.setLugares = function(lugares)
     {
-//        console.log('Seletor Lugares - setLugares');
+        console.log('setLugares');
         setLugaresValue(lugares);
     }
 
     function setLugaresValue(lugares)
     {
-//        console.log('Seletor Lugares - setLugaresValue');
+        console.log('setLugaresValue');
 //        console.log('lugares: '+lugares);
         var array = new Array();
 
         $.each(lugares,function(i,item)
         {
             var locais = item.l;
+//            console.log('i: '+i);
+//            console.log('item: '+item.l);
+//            console.log('locais: '+locais);
             var espacialidade = item.e;
-            
+//            console.log('espacialidade: '+espacialidade);
             $.each(locais,function(k, local)
             {
                 local.e = espacialidade;
+//                console.log('local.e: '+espacialidade);
                 
                 array.push(local);
             });
@@ -840,13 +856,13 @@ function LocalSelectorG()
 
     this.refresh = function()
     {
-//       console.log('this.refresh');
+       console.log('this.refresh');
        refresh();
     }
 
     function refresh()
     {
-//       console.log('Seletor Lugares - refresh');
+       console.log('refresh');
        setLugaresValue(geral.getLugares().slice());
     }
 }

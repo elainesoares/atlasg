@@ -3,11 +3,11 @@
         header("Location: {$path_dir}404");
     }
 
-    require_once "../../../config/config_path.php";
-    require_once '../../../config/conexao.class.php';
+    require_once "../../../../config/config_path.php";
+    require_once '../../../../config/conexao.class.php';
     require_once MOBILITI_PACKAGE.'util/protect_sql_injection.php';
-    require_once "../consulta/bd.class.php";
-    require_once "../consulta/Consulta.class.php";
+    require_once "../../consulta/bd.class.php";
+    require_once "../../consulta/Consulta.class.php";
     require_once "GraficoDispersao.class.php";
     
 //    $json_lugares = $_POST['json_lugares'];
@@ -20,7 +20,7 @@
     $ocon = new Conexao();
 
     // É necessário colocar o import da função antes de utilizá-la
-    include_once("../util/protect_sql_injection.php");
+    include_once("../../util/protect_sql_injection.php");
 
     /* =================== LER VALORES DA REQUISIÇÃO =============================== */
     $espacialidade = (int)$_POST["e"];

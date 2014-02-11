@@ -5,7 +5,7 @@ function GraficoDispersao(){
         json = JSON.parse('[{"id":'+eixoX+',"eixo":"X","ano":'+ano_eixoX+'},{"id":'+eixoY+',"eixo":"Y","ano":'+ano_eixoY+'},{"id":'+eixoSize+',"eixo":"Size","ano":'+ano_eixoSize+'},{"id":'+eixoColor+',"eixo":"Color","ano":'+ano_eixoColor+'}]');
         $.ajax({
             type: 'post',
-            url:'com/mobiliti/grafico/grafico-dispersao.controller.php',
+            url:'com/mobiliti/grafico/bolhas/grafico-dispersao.controller.php',
             data:{'json_lugares':geral.getLugaresPorEspacialidadeAtiva(),'json_indicadores' : json},
             success: function(retorno){
                 this.data = jQuery.parseJSON(retorno);

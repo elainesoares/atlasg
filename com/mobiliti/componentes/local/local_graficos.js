@@ -15,7 +15,7 @@ function SeletorLocalG()
     //adicionando por reinaldo
     var listenerSelectionItem = null;
     this.setListenerSelectionItem = function(_listener){
-//        console.log('setListenerSelectionItem');
+        console.log('setListenerSelectionItem');
         listenerSelectionItem = _listener;
     }
     
@@ -25,12 +25,12 @@ function SeletorLocalG()
     }
 
     this.getEspacialidade_selecionada = function(){
-//        console.log('getEspacialidade_selecionada');
+        console.log('getEspacialidade_selecionada');
         return espacialidade_selecionada;
     }
 
     this.selectedElement = function(value){
-//        console.log('selectedElement');
+        console.log('selectedElement');
         try
         {
             var string_id = '[data-id=' + value + ']';
@@ -51,7 +51,7 @@ function SeletorLocalG()
     }
 
     function dispatcher(array){
-//        console.log('dispatcher');
+        console.log('dispatcher');
         $.each(itens_selecionados,function(i,item)
         {
             if(item.e == espacialidade_selecionada)
@@ -90,7 +90,7 @@ function SeletorLocalG()
     }
 
     function addEspacialidade(array,espacialidade){
-//        console.log('addEspacialidade');
+        console.log('addEspacialidade');
         $.each(array,function(i,item)
         {
             item.e = espacialidade;
@@ -98,7 +98,7 @@ function SeletorLocalG()
     }
 
     function enableBtnCleanAll(){
-//        console.log('enableBtnCleanAll');
+        console.log('enableBtnCleanAll');
         $(element_context).find('.btn_clean_local').removeAttr("disabled");
         $(element_context).find('.btn_clean_local').click(function()
         {
@@ -116,7 +116,7 @@ function SeletorLocalG()
     }
 
     function enabledBtnAll(){
-//        console.log('enabledBtnAll');
+        console.log('enabledBtnAll');
         $(element_context).find('.btn_all').removeAttr("disabled");
         $(element_context).find('.btn_all').click(function()
         {
@@ -135,12 +135,13 @@ function SeletorLocalG()
     }
 
     function setEspacialidadePorDadosPreenchidos(){
-//        console.log('setEspacialidadePorDadosPreenchidos');
+        console.log('setEspacialidadePorDadosPreenchidos');
         var countMunicipal;
         var countEstadual;
 //        var countAreaTematica;
 
         lista = itens_selecionados;
+//        console.log('lista.length: '+lista.length); //2
 
         for(var i = 0; i < lista.length; i++)
         {
@@ -149,6 +150,8 @@ function SeletorLocalG()
                 countMunicipal = locais.length;
             else if(lista[i].e == 4)
                 countEstadual = locais.length;
+            
+//            console.log('countMunicipal: '+countMunicipal); //2
 //            else if(lista[i].e == 7)
 //                countAreaTematica = locais.length;
         } 
@@ -165,8 +168,14 @@ function SeletorLocalG()
         }
             
         var string = "";
+        
+        //index 0    value 2
+        //index 1    value 4
+        //index 2    value 7
         $.each([2, 4, 7], function(index, value) 
         {    
+//            console.log('index: '+index);
+//            console.log('value: '+value);
             string = '.title_toggle[data-espacialidade='+ value + ']';
             if(espacialidade_selecionada != value)
             {
@@ -179,19 +188,17 @@ function SeletorLocalG()
                 $(element_context).find(string).next().fadeIn();
             }
         });
-            
-           
     }
 
     this.refresh = function(){
-//        console.log('this.refresh - local');
+        console.log('this.refresh - local');
         itens_selecionados = geral.getLugares();
         setEspacialidadePorDadosPreenchidos();
         preencheLista();
     }
 
     function preencheLista(){
-//        console.log('preencheLista');
+        console.log('preencheLista');
         $("#head_list_c").hide();
         var display_cidade = false;
             
@@ -232,7 +239,7 @@ function SeletorLocalG()
     }
 
     function enabledSelected(){
-//        console.log('enabledSelected');
+        console.log('enabledSelected');
         $(element_context).find('.list_local li').click(function()
         {
                      
@@ -294,7 +301,7 @@ function SeletorLocalG()
     }
     
     function classLi(item){
-//        console.log('classLi');
+        console.log('classLi');
         if(item.c == true && item.s == true)
             return "class='selected selection'";
         else if(item.c == true)
@@ -305,13 +312,15 @@ function SeletorLocalG()
     }
 
     function preencheCidades(cidades){
-//        console.log('preencheCidades');
+        console.log('preencheCidades');
         var html = "";
-                                
+        console.log('cidade.length: '+cidades.length);                        
         for (var i=0, il=cidades.length; i<il; i++) 
         {
             var item = cidades[i];
+            console.log('item: '+item);
             var classSelected = classLi(item);
+            console.log('classSelected: '+classSelected);
                  
                     
             html += '<li data-espacialidade=2 data-id=' + item.id + ' ' + classSelected + '><div class="icon_select"></div><div class="icon_remove"></div>'  + item.n + '</li>' 
@@ -336,7 +345,7 @@ function SeletorLocalG()
 //    }
 
     function preencheEstados(estados){
-//        console.log('preencheEstados');
+        console.log('preencheEstados');
         var html = "";
 
         $.each(estados,function(i,item)
@@ -353,7 +362,7 @@ function SeletorLocalG()
 	* @description
 	*/
     function getElement(value){
-//        console.log('getElement');
+        console.log('getElement');
         lista = itens_selecionados;
 
         for(var i = 0; i < lista.length; i++)
@@ -375,7 +384,7 @@ function SeletorLocalG()
 	* @description 
 	*/
     function removeElement(value){
-//        console.log('removeElement');
+        console.log('removeElement');
         lista = itens_selecionados;
 
         for(var i = 0; i < lista.length; i++)
@@ -399,7 +408,7 @@ function SeletorLocalG()
 	* @description Pega o objeto da lista pelo name
 	*/
     function getItemByName(value){
-//        console.log('getItemByName');
+        console.log('getItemByName');
         var cidades = dataLocal.cidades;
         var estados = dataLocal.estados;
 	    
@@ -419,7 +428,7 @@ function SeletorLocalG()
     }
 
     function convertToArray(value){
-//        console.log('convertToArray');
+        console.log('convertToArray');
         if($.isArray(value))
             return value;
         else
@@ -427,17 +436,17 @@ function SeletorLocalG()
     }
 
     this.setItensSelecionados = function(array_values){
-//        console.log('setItensSelecionados');
+        console.log('setItensSelecionados');
         setItens(array_values);
     }
 
     this.getItensSelecionados = function(){
-//        console.log('getItensSelecionados');
+        console.log('getItensSelecionados');
         return itens_selecionados;
     }
 
     function setItens(array_values){
-//        console.log('setItens');
+        console.log('setItens');
         itens_selecionados = array_values;
         setEspacialidadePorDadosPreenchidos();
         preencheLista();

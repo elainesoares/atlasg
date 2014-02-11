@@ -1,5 +1,5 @@
 <?php require_once "./config/config_path.php"; ?>
-<script src="com/mobiliti/grafico/grafico-dispersao.builder2.js"></script>
+<script src="com/mobiliti/grafico/bolhas/grafico-dispersao.builder2.js"></script>
 <script type="text/javascript">
     /*****************************
      script: ui.grafico.dispersao2.php
@@ -36,7 +36,7 @@
             console.log('local_box2');
             local_ = new SeletorLocalG();
             local_.startLocal(listenerLocalGrafBolha, "local_box2", false);
-            bolha_indc = new LocalSelector();
+            bolha_indc = new LocalSelectorG();
             local_.setButton(bolha_indc.html('uibolhalocal_selector'))
             bolha_indc.startSelector(true, "uibolhalocal_selector", bolha_indcator_selector_bolha, "right", "bolhaEditIndicador", true);
         });
@@ -168,7 +168,7 @@
 //        teste = <?=$path_dir; ?>;
         $.ajax({
             type: "POST",
-            url: "<?php echo $path_dir ?>com/mobiliti/grafico/grafico-dispersao.controller.php",
+            url: "<?php echo $path_dir ?>com/mobiliti/grafico/bolhas/grafico-dispersao.controller.php",
             data: bolha_data,
             success: bolha_response
         });

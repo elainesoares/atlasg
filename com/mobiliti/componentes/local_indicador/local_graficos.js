@@ -18,7 +18,7 @@ function SeletorIndicadorG()
     eixo['cor'] = false;
 
     this.setButton = function(html){
-        console.log('setButton');
+//        console.log('setButton');
         $(element_context).find('.button').html(html);
     }
 
@@ -32,7 +32,7 @@ function SeletorIndicadorG()
     }
 
     this.startLocal = function(listener_value,context,_multiSelecao, eixo_){
-        console.log('startLocal');
+//        console.log('startLocal');
         eixo['eixo'] = eixo_;
         multiSelecao = _multiSelecao;
         
