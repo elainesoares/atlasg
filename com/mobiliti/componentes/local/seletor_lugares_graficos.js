@@ -89,7 +89,6 @@ function LocalSelectorG()
             {
                 $(this_selector_element).find('.divCallOutLugares .popover').hide();
                 value_indicador = value_indicador_old.slice();
-                console.log('value_indicador: '+value_indicador);
             }
         });
     }
@@ -102,13 +101,10 @@ function LocalSelectorG()
         $(this_selector_element).find('.divCallOutLugares .popover').toggle(); //Exibir ou ocultar os elementos combinados.
         
        
-        value_indicador_old = value_indicador.slice();
-//        console.log('value_indicador_old: '+value_indicador_old);
-//        console.log('load: '+load);
+        value_indicador_old = value_indicador.slice();  //Salva na variável value_indicador_old, os valores escolhidos, para ficarem guardados
         
         if(load == false)
         { 
-//            console.log('load == false');
             $(this_selector_element).find('.selector_popover').popover('show');
 
             loadData(listener);
@@ -131,9 +127,7 @@ function LocalSelectorG()
                     
                     
                     value_indicador_old = value_indicador.slice();
-//                    console.log('value_indicador_old2: '+value_indicador_old);
                     total = value_indicador.length;
-//                    console.log('total: '+total);
                     fillSelectedItens();
                 });
                 
@@ -155,11 +149,11 @@ function LocalSelectorG()
         fillSelectedItens();
         
         
-        if(espacialidade_selecionada == 7)
-        {
-           filterByBox2(areas_tematicas,espacialidade_selecionada);     
-        }
-        else if(espacialidade_selecionada == 4)
+//        if(espacialidade_selecionada == 7)
+//        {
+//           filterByBox2(areas_tematicas,espacialidade_selecionada);     
+//        }
+        if(espacialidade_selecionada == 4)
         {
            filterByBox2(estados,espacialidade_selecionada);
         }
@@ -177,6 +171,9 @@ function LocalSelectorG()
         return value_indicador;
     }
     
+    var contMun = 0;
+    var contEst = 0;
+    
     function dispatchListener(listener)
     {
         console.log('dispatchListener');
@@ -184,18 +181,97 @@ function LocalSelectorG()
 
         var locais_municipal = new Array();
         var locais_estadual = new Array();
-//        var locais_area_tematica = new Array();
+
+        var LugSelectedMun = new Array();  //Guarda os municípios selecionados
+        var LugSelectedEst = new Array();  //Guarda os estados selecionados
+         
+//        geral.setLugaresTeste(value_indicador);
+        $.each(value_indicador, function(i,item){
+//            console.log('item.e: '+item.e);
+            if(item.e == 2){    //Espacialidade Municipal
+                if(item.c == true){
+                    LugSelectedMun.push(item.c);
+                }
+            }
+            else if(item.e == 4){   //Espacialidade Estadual
+                if(item.c == true){
+                    LugSelectedEst.push(item.c);
+                }
+            }
+            
+        });
         
-        $.each(value_indicador,function(i,item){
+        
+        $.each(value_indicador,function(i,item){    //Percorre os elementos selecionados
+//            console.log('Entrei lalala');
+//            console.log('LugSelected[i]: '+LugSelected[i]);
+//            var local = new Local();
+//            local.id = item.id;
+//            local.n = item.n;
+//            if(cont < 2){
+//                local.c = true;
+//            }
+//            else
+//                local.c = false;
+//            console.log('local.c: '+local.c);
+//            local.s = false;
+//            console.log('local.s: '+local.s);
+            
+            var tamLugSelectedMun = LugSelectedMun.length;  //Total de municipios selecionados
+            var tamLugSelectedEst = LugSelectedEst.length;  //Total de Estados selecionados
+           
             var local = new Local();
             local.id = item.id;
-            console.log('local.id: '+local.id);
-            local.n = item.n
-            console.log('local.n: '+local.n);
-            local.c = true;
-            console.log('local.c: '+local.c);
+            local.n = item.n;
+//            console.log(i+'º item.c: '+item.c);
+//            console.log('tamLugSelected: '+tamLugSelected);
+//            console.log(i+'º cont: '+cont);
+
+            if(item.e == 2){    //Se a espacialidade for igual a municipio
+//                console.log('item = 2');
+                if(item.c == undefined){    //Se não foi setado o valor de item.c. Geralmente isso acontece na primeira vez que é selecionado
+//                    console.log('Entrei UNDEFINED');
+//                    console.log('Contador: '+cont);
+                    if(contMun < 10 && tamLugSelectedMun < 10){
+//                        console.log('Menor que dois');
+                        local.c = true;
+                        contMun++;
+                    }
+                }
+                else if(item.c == true){
+//                    console.log('true e menor que 2');
+                    local.c = true;
+                }
+                else if(tamLugSelectedMun >= 2){
+//                    console.log('false');
+                    local.c = false;
+                }
+            }
+            
+            if(item.e == 4){    //Se a espacialidade for igual a estado
+//                console.log('item = 4');
+                if(item.c == undefined){    //Se não foi setado o valor de item.c. Geralmente isso acontece na primeira vez que é selecionado
+//                    console.log('Entrei UNDEFINED');
+//                    console.log('Contador: '+cont);
+                    if(contEst < 10 && tamLugSelectedEst < 10){
+//                        console.log('Menor que dois');
+                        local.c = true;
+                        contEst++;
+                    }
+                }
+                else if(item.c == true){
+//                    console.log('true e menor que 2');
+                    local.c = true;
+                }
+                else if(tamLugSelectedEst >= 10){
+//                    console.log('false');
+                    local.c = false;
+                }
+            }
+            
+            
             local.s = false;
-            console.log('local.s: '+local.s);
+
             
             if(item.e == 2)
                 locais_municipal.push(local);
@@ -203,19 +279,17 @@ function LocalSelectorG()
             if(item.e == 4)
                 locais_estadual.push(local);
             
-//            if(item.e == 7)
-//                locais_area_tematica.push(local);
         });
         
         var lugar_municipal = new Lugar();
-        lugar_municipal.e = 2;
-        lugar_municipal.ac = true;
-        lugar_municipal.l = locais_municipal;
+        lugar_municipal.e = 2;                  //Espacialidade 
+        lugar_municipal.ac = true;              //Ativo
+        lugar_municipal.l = locais_municipal;   //Array de municípios
 
         var lugar_estadual = new Lugar();
-        lugar_estadual.e = 4;
-        lugar_estadual.ac = false;
-        lugar_estadual.l = locais_estadual;
+        lugar_estadual.e = 4;               //Espacialidade
+        lugar_estadual.ac = false;          //Inativo
+        lugar_estadual.l = locais_estadual; //Array de Estados
         
 //        var lugar_area_tematica = new Lugar();
 //        lugar_area_tematica.e = 7;
@@ -224,14 +298,17 @@ function LocalSelectorG()
 //        console.log('lugar_area_tematica: '+lugar_area_tematica.l);
 //        console.log('listener: '+listener);
         listener([lugar_municipal,lugar_estadual]);
+//        console.log('===============================');
     }
 
+    //Preenche o Box dos selecionados
     function fillSelectedItens()
     {
         console.log('fillSelectedItens');
         var html = "";
         
         $.each(value_indicador,function(i,item){
+//            console.log('item.n: '+item.n);
             html += "<li data-id=" + item.id + " data-texto='" + item.n +"'><a>" + item.n + "</a></li>";
         });
         
@@ -368,6 +445,7 @@ function LocalSelectorG()
             filterByBox2(estados,value);
     }
 
+    //Box de Municípios
     function filterByBox2(array,value)
     {
         console.log('filterByBox2');
@@ -378,7 +456,8 @@ function LocalSelectorG()
         
         $.each(array,function(i,item)
         {
-//            console.log('item.e: '+item.e);
+//            console.log('i: '+i);
+//            console.log('item.n: '+item.n);
             var htmlespacialidade = ((value==2) ? "":"data-espacialidade=" + item.e);
             if(value == 4 || value == 7)
                 var classItem = ((contains(item) == true) ? 'class="selected"' : '');
@@ -390,10 +469,10 @@ function LocalSelectorG()
 
         $(this_selector_element).find('.box2 .nav').html(html); 
         
-        console.log('value: '+value);
+//        console.log('value: '+value);
         if(value == 4)
         {
-            console.log('entrei value=4');
+//            console.log('entrei value=4');
             $(this_selector_element).find('.box2 ul li').click(function(e)
             {
                 var valorSelecionado = parseInt($(this).attr('data-id'));
@@ -551,7 +630,7 @@ function LocalSelectorG()
 
                 var objeto = {};//getIndicadorById(parseInt($(this).attr('data-id')));
                 objeto.id = parseInt($(this).attr('data-id'));
-
+                
                 value_indicador[0] = objeto;
                 
                 fillLabelButtonIndicador();
@@ -561,38 +640,45 @@ function LocalSelectorG()
         }
         else
         {
-            $(this_selector_element).find('.box3 ul li').click(function(e)
+            $(this_selector_element).find('.box3 ul li').click(function(e)  //Percorre o Box3, dos Municípios
             {
-                var valorSelecionado = parseInt($(this).attr('data-id'));
-                
-                if(valorSelecionado == -1)
+                var valorSelecionado = parseInt($(this).attr('data-id'));   //Id do município escolhido
+//                console.log('valorSelecionado: '+valorSelecionado);
+                if(valorSelecionado == -1)  //Se foi escolhido marcar todos
                 {
-                    $(this_selector_element).find('.box3 ul li[data-id=-1]').removeClass('selected');
+                    $(this_selector_element).find('.box3 ul li[data-id=-1]').removeClass('selected');   //Remove a classe do item Marcar Todos
 
                     var itens = new Array();
                  
-                    $.each($(this_selector_element).find('.box3 ul li'),function(pos,itemList)
+                    $.each($(this_selector_element).find('.box3 ul li'),function(pos,itemList)  //Percorre a lista com todos os municipios selecionados
                     {
-                        var id = parseInt($(this).attr('data-id'));
-                        if(id == -1)return;
+//                        console.log('pos: '+pos);
+                        var id = parseInt($(this).attr('data-id'));     //Id do município escolhido
+//                        console.log('id: '+id);
+                        if(id == -1)    //Se o item for Marcar Todos, não faz nada, apenas dá um return
+                            return;
+                        
+//                        console.log('value.length: '+value.length);
                         var objeto = {};
-                        objeto.id = id;
-                        objeto.n = $(this).text();
+                        objeto.id = id; //Id do município escolhido
+                        objeto.n = $(this).text();  //Nome do município escolhido
                         objeto.e = 2; //espacialidade mun
-                        if(contains(objeto) == false)itens.push(objeto);
+                        
+                        if(contains(objeto) == false)
+                            itens.push(objeto);
                         
                     });
-
                     adicionaVariosElementos(itens);
                 }
                 else
                 {
                     var objeto = {};//getIndicadorById(parseInt($(this).attr('data-id')));
-                    objeto.id = parseInt($(this).attr('data-id'));
-                    objeto.n = $(this).text();
+                    objeto.id = parseInt($(this).attr('data-id'));  //Id do município escolhido
+                    objeto.n = $(this).text();  //Nome do município escolhido
                     objeto.e = 2; //espacialidade municipal
 
-                    if($(this).hasClass('selected') == false)
+                    //Se o elemento(município) não estiver selecionado, adiciona ele. Isso pode acontecer quando abrimos o componente uma segunda vez depois de termos escolhido um elemento
+                    if($(this).hasClass('selected') == false)   //hasClass retorna true se a classe existir, quando não existir retorna false
                     {
                         adicionaElemento(objeto,$(this));
                     }
@@ -600,8 +686,8 @@ function LocalSelectorG()
                     {
                         removeElemento(objeto);
                         $(this).removeClass('selected');
-                    }
-                }
+                   
+                } }
 
             });
 
@@ -630,11 +716,19 @@ function LocalSelectorG()
     {
         console.log('contains');
         var length = value_indicador.length
+//        console.log('length: '+length);
         for(var i = 0; i < length; i++)
         {
-            if(value_indicador[i].id == value.id && value_indicador[i].e == value.e)
+//            console.log('value_indicador[i].id: '+value_indicador[i].id);
+//            console.log('value.id: '+value.id);
+//            console.log('value_indicador[i].e: '+value_indicador[i].e);
+//            console.log('value.e: '+value.e);
+            if(value_indicador[i].id == value.id && value_indicador[i].e == value.e){
+//                console.log('RETURN TRUE');
                 return true;
+            }
         } 
+//        console.log('RETURN FALSE');
         return false;
     }
 
@@ -644,10 +738,14 @@ function LocalSelectorG()
     */
     function adicionaElemento(value,elemento,size)
     {
-        console.log('adicionaElemento');
+//        console.log('adicionaElemento');
+//        console.log('value: '+value.id);
+//        console.log('elemento: '+elemento);
+//        console.log('size: '+size);
+        
         $(this_selector_element).find('.messages').html("");
         
-        if(size == undefined || size == null)size = 0;
+        if(size == undefined || size == null) size = 0;
 
         if(contains(value) == false)
         {
@@ -681,7 +779,11 @@ function LocalSelectorG()
              }
             
              total=lug;
-             value_indicador.push(value);
+             value_indicador.push(value);   //Acrescenta na variável value_indicador, que guarda os lugares, o município escolhido no momento
+//             console.log('value_indicador[0]: '+value_indicador[0]);
+//             console.log('value_indicador[1]: '+value_indicador[1]);
+//             console.log('value_indicador[2]: '+value_indicador[2]);
+//             console.log('value_indicador[3]: '+value_indicador[3]);
              elemento.addClass('selected');
              fillSelectedItens();
              
@@ -692,15 +794,27 @@ function LocalSelectorG()
     {
         console.log('adicionaVariosElementos');
         $(this_selector_element).find('.messages').html("");
+        
+//        if(value.length <= 2){
+//            console.log('Passei');
+//        }
+//        else if(value.length > 2){
+//            console.log('Fiquei');
+//        }
 
         if(!skipLimit)
         {
+//            console.log('Entrei skipLimit');
             
                 var idc = geral.getIndicadores().length;
+//                console.log('idc: '+idc);
                 var lug = total + value.length;
+//                console.log('value.length: '+value.length);
+//                console.log('total: '+total);
+//                console.log('lug: '+lug);
                 var produto =  idc * lug;
+//                console.log('produto: '+produto);
                
-
                 if(produto >= JS_LIMITE_TELA && produto < JS_LIMITE_DOWN)
                 {
                     var message = '<div class="alert">';

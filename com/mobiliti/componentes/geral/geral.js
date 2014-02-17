@@ -4,6 +4,7 @@ function Geral(listenerReady){
     
     lugares = new Array();
     indicadores = new Array();
+    _lugaresSelect = new Array();
     var eixo;
 
     listenerLugares = null;
@@ -18,6 +19,14 @@ function Geral(listenerReady){
         ready = value;
     }
 
+    this.setLugaresTeste = function (lugaresSelect){
+        _lugaresSelect = lugaresSelect;
+    }
+    
+    this.getLugaresTeste = function(lugaresSelect){
+        return _lugaresSelect;
+    }
+    
     this.dispatchListeners = function(event){
 //        console.log('Geral - dispatchListeners');
         //console.log('listenerLugares: '+listenerLugares);

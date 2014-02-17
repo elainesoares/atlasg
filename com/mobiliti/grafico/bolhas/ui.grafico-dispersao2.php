@@ -97,7 +97,7 @@
     });
     
     function bolha_init(){
-//        console.log('bolha_init');
+        console.log('bolha_init');
         $('.nav-tabs').button();
         $("#bolha_year_slider").bind("slider:changed", bolha_year_slider_listener);
 
@@ -105,7 +105,7 @@
     }
 //    
     function bolha_year_slider_listener(event, data){
-//        console.log('2 - bolha_year_slider_listener');
+        console.log('2 - bolha_year_slider_listener');
         if (___first_time_year_)
         {
             ___first_time_year_ = false;
@@ -136,7 +136,7 @@
     
     function bolha_loading(status)
     {
-//        console.log('bolha_loading');
+        console.log('bolha_loading');
         if (status)
             $("#uibolhaloader").show();
         else
@@ -145,7 +145,7 @@
     
     function bolha_load(e, l, i, a)
     {
-//        console.log('bolha_load');
+        console.log('bolha_load');
 
         bolha_loading(true);
 
@@ -176,7 +176,7 @@
     
     function bolha_response(data, textStatus, jqXHR)
     {
-//        console.log('bolha_response');
+        console.log('bolha_response');
         if (textStatus === "success"){
             var ano_result_to_fill = '';
             if (bolha_a === 1)
@@ -200,16 +200,17 @@
     }
     
     function listenerLocalGrafBolha(lugares){
-//        console.log('listenerLocalGrafBolha');
+        console.log('listenerLocalGrafBolha');
+        console.log('lugares: '+lugares);
         geral.setLugares(lugares);
     }    
     function bolha_indcator_selector_bolha(array){
-//        console.log('bolha_indcator_selector_bolha');
+        console.log('bolha_indcator_selector_bolha');
         local_.setItensSelecionados(array);
     }
     
     function listenerLocalIndicadoresBolha(indicadores){
-//        console.log('listenerLocalIndicadoresBolha');
+        console.log('listenerLocalIndicadoresBolha');
         geral.setIndicadores(indicadores);
         eixo = geral.getEixo();
         if(eixo == undefined || eixo == ''){
@@ -221,7 +222,7 @@
     
     function bolha_listener_lugar(event, obj)
     {
-//        console.log('bolha_listener_lugar');
+        console.log('bolha_listener_lugar');
 //        quantil_id = "";
         local_.refresh();
         bolha_indc.refresh();
@@ -229,7 +230,7 @@
     }
     
     function seletor_indicador_(obj){
-//        console.log('seletor_indicador_');
+        console.log('seletor_indicador_');
         geral.setIndicadores(obj);
         eixo = geral.getEixo();
         if(eixo == undefined || eixo == ''){
@@ -242,7 +243,7 @@
     
     function bolha_listener_indicador(event, obj)
     {
-//        console.log('bolha_listener_indicador');
+        console.log('bolha_listener_indicador');
         quantil_id = "";
 
         if (event === "changetab")
@@ -276,7 +277,7 @@
 
     function dispacth_bolha_evt()
     {
-//        console.log('dispacth_bolha_evt');
+        console.log('dispacth_bolha_evt');
         // limpa todos os argumentos
         bolha_i_name = new Array();
         bolha_e = 0;
@@ -291,14 +292,19 @@
         if (!(_locais === undefined || _locais === null || _locais === ""))
         {
             bolha_e = _locais.e;
+//            console.log('bolha_e: '+bolha_e);
             //locais a bem exibidos no mapa ou destacadas
             for (var i = 0; i < _locais.l.length; i++)
             {
                 var _lugar = _locais.l[i];
                 if (_lugar)
                 {
-                    if (_lugar.c)
+//                    console.log('_lugar.c: '+_lugar.c);
+                    if (_lugar.c){
+//                        console.log('ENTREI');
                         bolha_l.push(_lugar.id);
+//                        console.log('_lugar.id: '+_lugar.id);
+                    }
                 }
             }
         }
