@@ -284,7 +284,7 @@
                     <tr style="">
                         <td colspan="4">
                             <div id="box_indicador" data-original-title='Selecione o indicador que representará o Eixo Y, no gráfico.' style="margin-left:52px; width: 57px; float: left; height: 507px; "></div>
-                            <div id="chart_divLinha" style='width: 600px; height: 692px; margin-top: -111px; margin-left: 80px;'>
+                            <div id="chart_divLinha" style='width: 600px; height: 500px; margin-top: -111px; margin-left: 80px;'>
                                 <img id="uilinhaloader" src="img/map/ajax-loader.gif" style="background-color: transparent; margin-top: 250px; margin-left: 270px;" />
                             </div>
                         </td>

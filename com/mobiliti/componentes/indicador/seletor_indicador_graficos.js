@@ -28,19 +28,19 @@ function IndicatorSelectorG()
     {
 //       console.log('html');
        eixo2 = eixo_;
-       if(eixo2 != false){
-//           console.log('tem coisa');
-           var button = '<div id="' + idElement + '" style="float: left; margin-left: -27px; margin-top: -20px;">'
+       if(eixo2 == 'X' || eixo2 == 'Y'){
+           console.log('tem coisa');
+           var button = '<div id="' + idElement + '" style="float: left; margin-left: -27px; margin-top: -5px;">'
             + '<div class="divCallOut">'
             + '<button class="gray_button big_bt selector_popover" data-toggle="dropdown" style="float:right; margin-right: 5px !important; font-size: 14px; padding: 5px 13px 5px 13px" rel="popover" >'+eixo2+'</button>'
             + '</div>'
             + '</div>';
        }
-       else if(eixo2 == false){
-//           console.log('false');
-           var button = '<div id="' + idElement + '" style="float: right;">'
+       else{
+           var button = '<div id="' + idElement + '" style="float: right; margin-top: -16px;">'
             + '<div class="divCallOut">'
-            + '<button class="blue_button big_bt selector_popover" data-toggle="dropdown" style="float:right; margin-right: 29px !important; height: 34px; font-size: 14px;" rel="popover" >Selecionar</button>'
+//            + '<a style="cursor: pointer"><img src="'+eixo2+'" class="selector_popover" data-toggle="dropdown" style="float:right;" rel="popover" ></a>'
+            + '<button class="gray_button selector_popover" data-toggle="dropdown" style="float:right; padding: 3px 7px;" rel="popover" >'+eixo2+'</button>'
             + '</div>'
             + '</div>';
        }

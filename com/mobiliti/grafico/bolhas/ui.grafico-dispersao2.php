@@ -73,7 +73,7 @@
             indicadorLocal[3].startLocal(listenerLocalIndicadoresBolha, "box_indicador_Cor", false, 'cor');
             try {
                 bolha_indc_selector[3]= new IndicatorSelectorG();
-                indicadorLocal[3].setButton(bolha_indc_selector[3].html('bolhaEditIndicadorcor', 'Cor'));
+                indicadorLocal[3].setButton(bolha_indc_selector[3].html('bolhaEditIndicadorcor', '<img style="heigth: 14px; width: 66px;" src="img/icons/gradiente.png" />'));
                 bolha_indc_selector[3].startSelector(false, "bolhaEditIndicadorcor", seletor_indicador_, "right", false, "uibolhalocal_selector", true, 'cor');
             } catch (e) {
 ////                //erro
@@ -86,7 +86,7 @@
             indicadorLocal[2].startLocal(listenerLocalIndicadoresBolha, "box_indicador_Tamanho", false, 'tam');
             try {
                 bolha_indc_selector[2] = new IndicatorSelectorG();
-                indicadorLocal[2].setButton(bolha_indc_selector[2].html('bolhaEditIndicadortam', 'Tamanho'));
+                indicadorLocal[2].setButton(bolha_indc_selector[2].html('bolhaEditIndicadortam', '<img src="img/icons/size_.png" />'));
                 bolha_indc_selector[2].startSelector(false, "bolhaEditIndicadortam", seletor_indicador_, "right", false, "uibolhalocal_selector", true, 'tam');
             } catch (e) {
 ////                //erro
@@ -363,13 +363,13 @@
                 <table style='height: 823px;'>
                     <tr>
                          <td >
-                             <div style="margin-top: 20px; margin-left: 30px;">
+                             <div style="margin-left: 30px;">
                                  <!--<img src="img/icons/gradiente.png" style="float: left;">-->
                                 <div id="box_indicador_Cor" data-original-title='Selecione o indicador que representará a cor das Bolinhas no gráfico.' style="width: 281px; float: left; height: 34px; "></div>
                             </div>
                         </td>
                         <td>
-                            <div style="margin-top: 20px;">
+                            <div>
                                  <!--<img src="img/icons/size.png" style="float: left; margin-left: 10px; margin-top: -11px;">-->
                                 <div id="box_indicador_Tamanho" data-original-title='Selecione o indicador que representará o Tamanho da Bolinha, no gráfico.' style="width: 311px; float: left; height: 33px;"> </div>
                             </div>
@@ -381,9 +381,9 @@
                     <tr style="">
                         <td colspan="4">
                             <div style="width:681px; height:507px;">
-                                <div id="box_indicador_eixoY" data-original-title='Selecione o indicador que representará o Eixo Y, no gráfico.' style="margin-left:52px; width: 57px; float: left; height: 507px; "></div>
+                                <div id="box_indicador_eixoY" data-original-title='Selecione o indicador que representará o Eixo Y, no gráfico.' style="margin-left:52px; width: 57px; float: left; height: 362px; "></div>
                                 <!--<div id="myModal" class="modal_video hide" tabindex="-1" role="dialog" data-toggle="modal" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">Selecione Indicadores diferentes para cada Eixo</div>-->
-                                <div id="chart_div" style='margin-left: 77px; width: 603px; height: 559px; margin-top: -40px; padding-top: -40px;'>
+                                <div id="chart_div" style='margin-left: 77px; width: 603px; height: 380px; margin-top: -239px;'>
                                     <img id="uibolhaloader" src="img/map/ajax-loader.gif" style="background-color: transparent; margin-top: 250px; margin-left: 270px;" />
                                 </div>
                                 <div id="box_indicador_eixoX" data-original-title='Selecione o indicador que representará o Eixo X, no gráfico.' style="width: 604; float: left; height: 55px; margin-left: 79px;"> </div>
@@ -395,7 +395,7 @@
         </tr>
         <tstyle="background: wheat">
             <td style="margin:0px; padding: 0px; border: 0px; border-right: 1px solid #ccc;">
-                <span style="font-weight: bold; display:block; margin-left:24px; width:44px; margin-top: 381px;">ANO</span>
+                <span style="font-weight: bold; display:block; margin-left:24px; width:44px; margin-top: 158px;">ANO</span>
                 <div>
                     <div class='labels'>
                         <span class="one">1991</span>

@@ -31,7 +31,7 @@ function drawChartBolha(){
      var options = {
           colorAxis: {/*colors: ['red', 'blue'],*/ legend: {position: 'none'}},
           axisTitlesPosition: 'none',
-          chartArea:{left:70,top:10,width:"85%",height:"90%"},
+          chartArea:{left:70,top:28,width:"80%",height:"85%"},
           enableInteractivity: true,
           hAxis: {gridlines: {count: 5}},
           sortBubblesBySize: true,

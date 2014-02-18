@@ -100,13 +100,12 @@ function SeletorIndicadorG()
         {
             checked = ((item.c == true) ? 'class="selected"':'');
             if(eixo['eixo'] == true){
-//                console.log('2');
                 html += "<li data-id='" + item.id + "' " + checked +"><div class='icon_select'></div><div class='icon_remove'></div>" + item.nc + "</li>";
             }
             else{
 //                console.log('1');
                 checked = 'class=selected';
-                html += "<li data-id='" + item.id + "' " + checked +" style='margin-top: 10px; margin-left: -20px;'></div>" + item.nc + "</li>";
+                html += "<li data-id='" + item.id + "' " + checked +" style='margin-top: 0px; margin-left: -20px;'></div>" + item.nc + "</li>";
             }
             
         });

@@ -324,7 +324,7 @@ function SeletorLocalG()
             objeto.nome = $(this).parent().text();
             if ($(this).parent().hasClass('selected') == false)
             {
-                if (itensSelecionadosAtivos.length < 10) {
+                if (itensSelecionadosAtivos.length < 20) {
                     var obj = getElement(objeto);
                     obj.c = true;
                     $(this).parent().addClass("selected");

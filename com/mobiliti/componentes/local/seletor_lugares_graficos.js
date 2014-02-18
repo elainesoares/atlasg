@@ -231,8 +231,7 @@ function LocalSelectorG()
 //                console.log('item = 2');
                 if(item.c == undefined){    //Se não foi setado o valor de item.c. Geralmente isso acontece na primeira vez que é selecionado
 //                    console.log('Entrei UNDEFINED');
-//                    console.log('Contador: '+cont);
-                    if(contMun < 10 && tamLugSelectedMun < 10){
+                    if(contMun < 20 && tamLugSelectedMun < 20){
 //                        console.log('Menor que dois');
                         local.c = true;
                         contMun++;
@@ -242,7 +241,7 @@ function LocalSelectorG()
 //                    console.log('true e menor que 2');
                     local.c = true;
                 }
-                else if(tamLugSelectedMun >= 2){
+                else if(tamLugSelectedMun >= 20){
 //                    console.log('false');
                     local.c = false;
                 }
@@ -253,7 +252,7 @@ function LocalSelectorG()
                 if(item.c == undefined){    //Se não foi setado o valor de item.c. Geralmente isso acontece na primeira vez que é selecionado
 //                    console.log('Entrei UNDEFINED');
 //                    console.log('Contador: '+cont);
-                    if(contEst < 10 && tamLugSelectedEst < 10){
+                    if(contEst < 20 && tamLugSelectedEst < 20){
 //                        console.log('Menor que dois');
                         local.c = true;
                         contEst++;
@@ -263,7 +262,7 @@ function LocalSelectorG()
 //                    console.log('true e menor que 2');
                     local.c = true;
                 }
-                else if(tamLugSelectedEst >= 10){
+                else if(tamLugSelectedEst >= 20){
 //                    console.log('false');
                     local.c = false;
                 }

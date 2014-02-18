@@ -71,5 +71,7 @@
     define("BORDA_ESTADO","#999999");
     define("BORDA_CIDADE","#cccccc");
     
+    define('LIMITE_ESPACIALIDADE_GRAFICOS', 30);
+    
     
 ?>
