@@ -109,8 +109,9 @@
 //        console.log('Locais: '+l);
 //        console.log('indicador'+i);
 //        console.log('ano: '+a);
-
-//        linha_loading(true);
+        if(i != 0){
+            linha_loading(true);
+        }
 
         var linha_data = new Object();
 

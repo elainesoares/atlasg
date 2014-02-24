@@ -176,7 +176,7 @@
 <div class="linhaDivisoria"></div>
 <div id="content" style="height: 560px;"><!--560-->
     <div class="containerPageComponentes">
-        <div class="tab-content" style="min-height: 500px">
+        <div class="tab-content">
             <div class="tab-pane active" id="tab1">
                 <div class="topContent" id="topContentHolder"></div>
                 <?php include_once('com/mobiliti/grafico/bolhas/ui.grafico-dispersao2.php'); ?>

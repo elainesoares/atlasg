@@ -111,22 +111,22 @@ function SeletorIndicadorG()
         });
         $(element_context).find('.list_local_indicadores').html(html);
 		
-        $(element_context).find('.local li').click(function(){
-            $(element_context).find('.icon_select').removeClass('selected');
-
-            $(this).addClass('selected');
-            var id = parseInt($(this).attr('data-id'));
-
-            $.each(itens,function(i,item)
-            {
-                if(item.id == id)
-                    item.c = true;
-                else
-                    item.c = false;
-            });
-	    	
-            dispatcher(itens);
-        });
+//        $(element_context).find('.local li').click(function(){
+//            $(element_context).find('.icon_select').removeClass('selected');
+//
+//            $(this).addClass('selected');
+//            var id = parseInt($(this).attr('data-id'));
+//
+//            $.each(itens,function(i,item)
+//            {
+//                if(item.id == id)
+//                    item.c = true;
+//                else
+//                    item.c = false;
+//            });
+//	    	
+//            dispatcher(itens);
+//        });
 
 
         $(element_context).find('.icon_select').click(function(){

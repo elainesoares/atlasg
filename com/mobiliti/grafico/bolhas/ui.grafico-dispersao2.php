@@ -7,10 +7,10 @@
      *****************************/
     var bolha_indc_selector = new Array();
     var indicadorLocal = new Array();
-    
+
     var local;
     var bolha_indc;
-    
+
     var bolha_a = 3;
     var ___first_time_year_ = true;
     var bolha_e = null;
@@ -27,7 +27,7 @@
     var _indicadores;
     var _locais;
     var bolha;
-    
+
     $(document).ready(function()
     {
 //        console.log('ready');
@@ -72,14 +72,14 @@
             indicadorLocal[3] = new SeletorIndicadorG();
             indicadorLocal[3].startLocal(listenerLocalIndicadoresBolha, "box_indicador_Cor", false, 'cor');
             try {
-                bolha_indc_selector[3]= new IndicatorSelectorG();
+                bolha_indc_selector[3] = new IndicatorSelectorG();
                 indicadorLocal[3].setButton(bolha_indc_selector[3].html('bolhaEditIndicadorcor', '<img style="heigth: 14px; width: 66px;" src="img/icons/gradiente.png" />'));
                 bolha_indc_selector[3].startSelector(false, "bolhaEditIndicadorcor", seletor_indicador_, "right", false, "uibolhalocal_selector", true, 'cor');
             } catch (e) {
 ////                //erro
             }
         });
-         $('#box_indicador_Tamanho').load('com/mobiliti/componentes/local_indicador/indicador4.html', function()
+        $('#box_indicador_Tamanho').load('com/mobiliti/componentes/local_indicador/indicador4.html', function()
         {
 //            console.log('box_indicador_Tamanho');
             indicadorLocal[2] = new SeletorIndicadorG();
@@ -92,11 +92,11 @@
 ////                //erro
             }
         });
-        
+
         bolha_init();
     });
-    
-    function bolha_init(){
+
+    function bolha_init() {
         console.log('bolha_init');
         $('.nav-tabs').button();
         $("#bolha_year_slider").bind("slider:changed", bolha_year_slider_listener);
@@ -104,36 +104,36 @@
         bolha_loading(false);
     }
 //    
-    function bolha_year_slider_listener(event, data){
+    function bolha_year_slider_listener(event, data) {
         console.log('2 - bolha_year_slider_listener');
         if (___first_time_year_)
         {
             ___first_time_year_ = false;
             return;
         }
-        
+
         if (data.value === 1991)
             bolha_a = 1;
         else if (data.value === 2000)
             bolha_a = 2;
         else if (data.value === 2010)
             bolha_a = 3;
-        
+
 //        console.log('bolha_a: '+bolha_a);
 
         //-----------------------------------
         // Muda todos os anos dos indicadores
         //-----------------------------------
         _indicadores = geral.getIndicadores();
-        for (var i = 0; i < _indicadores.length; i++){
+        for (var i = 0; i < _indicadores.length; i++) {
             geral.updateIndicador(i, bolha_a);
         }
 //        console.log('bolha_i: '+bolha_i);
-        if((bolha_i[0] != undefined && bolha_i[1] != undefined && bolha_i[2] != undefined && bolha_i[3] != undefined) &&(_locais != undefined)){
+        if ((bolha_i[0] != undefined && bolha_i[1] != undefined && bolha_i[2] != undefined && bolha_i[3] != undefined) && (_locais != undefined)) {
             bolha_load(bolha_e, bolha_l, bolha_i, bolha_a);
         }
     }
-    
+
     function bolha_loading(status)
     {
         console.log('bolha_loading');
@@ -142,7 +142,7 @@
         else
             $("#uibolhaloader").hide();
     }
-    
+
     function bolha_load(e, l, i, a)
     {
         console.log('bolha_load');
@@ -165,7 +165,7 @@
         bolha_i = i;
         bolha_a = a;
 //        console.log('bolha_a: '+bolha_a);
-//        teste = <?=$path_dir; ?>;
+//        teste = <?= $path_dir; ?>;
         $.ajax({
             type: "POST",
             url: "<?php echo $path_dir ?>com/mobiliti/grafico/bolhas/grafico-dispersao.controller.php",
@@ -173,11 +173,11 @@
             success: bolha_response
         });
     }
-    
+
     function bolha_response(data, textStatus, jqXHR)
     {
         console.log('bolha_response');
-        if (textStatus === "success"){
+        if (textStatus === "success") {
             var ano_result_to_fill = '';
             if (bolha_a === 1)
                 ano_result_to_fill = "1991";
@@ -198,28 +198,28 @@
 
         }
     }
-    
-    function listenerLocalGrafBolha(lugares){
+
+    function listenerLocalGrafBolha(lugares) {
         console.log('listenerLocalGrafBolha');
-        console.log('lugares: '+lugares);
+        console.log('lugares: ' + lugares);
         geral.setLugares(lugares);
-    }    
-    function bolha_indcator_selector_bolha(array){
+    }
+    function bolha_indcator_selector_bolha(array) {
         console.log('bolha_indcator_selector_bolha');
         local_.setItensSelecionados(array);
     }
-    
-    function listenerLocalIndicadoresBolha(indicadores){
+
+    function listenerLocalIndicadoresBolha(indicadores) {
         console.log('listenerLocalIndicadoresBolha');
         geral.setIndicadores(indicadores);
         eixo = geral.getEixo();
-        if(eixo == undefined || eixo == ''){
+        if (eixo == undefined || eixo == '') {
             eixo = 0;
         }
 //        console.log('eixo 1: '+eixo);
         bolha_indc_selector[eixo].refresh();
     }
-    
+
     function bolha_listener_lugar(event, obj)
     {
         console.log('bolha_listener_lugar');
@@ -228,19 +228,19 @@
         bolha_indc.refresh();
         dispacth_bolha_evt();
     }
-    
-    function seletor_indicador_(obj){
+
+    function seletor_indicador_(obj) {
         console.log('seletor_indicador_');
         geral.setIndicadores(obj);
         eixo = geral.getEixo();
-        if(eixo == undefined || eixo == ''){
+        if (eixo == undefined || eixo == '') {
             eixo = 0;
         }
 //        console.log('eixo 2: '+eixo);
         indicadorLocal[eixo].refresh();
 
     }
-    
+
     function bolha_listener_indicador(event, obj)
     {
         console.log('bolha_listener_indicador');
@@ -250,9 +250,9 @@
         {
             geral.removeIndicadoresDuplicados();
         }
-        
+
         eixo = geral.getEixo();
-        if(eixo == undefined || eixo == ''){
+        if (eixo == undefined || eixo == '') {
             eixo = 0;
         }
 //        console.log('EIXO: '+eixo);
@@ -266,11 +266,11 @@
 //        //-----------------------------------
         _indicadores = geral.getIndicadores();
 //        console.log('Tamanho_indicadores: '+_indicadores.length);
-        for (var i = 0; i < _indicadores.length; i++){
+        for (var i = 0; i < _indicadores.length; i++) {
             geral.updateIndicador(i, bolha_a);
         }
 
-         //Ao Mudar de aba disparar o dispacth_bolha_evt somente uma vez!
+        //Ao Mudar de aba disparar o dispacth_bolha_evt somente uma vez!
         if (event !== "changetab")
             dispacth_bolha_evt(true);
     }
@@ -300,7 +300,7 @@
                 if (_lugar)
                 {
 //                    console.log('_lugar.c: '+_lugar.c);
-                    if (_lugar.c){
+                    if (_lugar.c) {
 //                        console.log('ENTREI');
                         bolha_l.push(_lugar.id);
 //                        console.log('_lugar.id: '+_lugar.id);
@@ -321,9 +321,9 @@
 //        console.log('bolha_i[1]: '+bolha_i[1]);
 //        console.log('bolha_i[2]: '+bolha_i[2]);
 //        console.log('bolha_i[3]: '+bolha_i[3]);
-        
+
         var k = 1;
-        
+
 //        if((bolha_i[0] != undefined && bolha_i[1] != undefined && bolha_i[2] != undefined && bolha_i[3] != undefined) && (_locais != undefined)){
 //            for(var i = 0; i < 4; i++){
 //                for(var j = i+1; j < 4; j++){
@@ -342,35 +342,29 @@
 //                }
 //            }
 //            if(bolha == true){
-                bolha_load(bolha_e, bolha_l, bolha_i, bolha_a);
+        bolha_load(bolha_e, bolha_l, bolha_i, bolha_a);
 //            }
 //        }
-        
+
     }
 
 </script>
 
 <!-- conteúdo do popover -->
-<div id="uimap_popover" style="display: none; margin: 0; padding: 0;" data-container="body"> 
-    <span id="uimap_popover_espc_name" style="font-weight: bold;">NO_NAME</span><br/>
-    <span id="uimap_popover_value">VALUE</span> 
-</div>
 <div>
     <table>
-        <tr style="padding: 0; margin: 0; border: 0;">
-            <td id="local_box2" style="padding: 0; margin: 0; border: 0;"></td>
-            <td rowspan="3" style="padding: 0; margin: 0; border-left: 1px solid #ccc; vertical-align: top;">
-                <table style="height: 561px;">
+        <tr>
+            <td id="local_box2"></td>
+            <td rowspan="3" style="border-left: 1px solid #ccc; vertical-align: top;">
+                <table>
                     <tr>
-                         <td >
-                             <div style="margin-left: 30px;">
-                                 <!--<img src="img/icons/gradiente.png" style="float: left;">-->
+                        <td>
+                            <div style="margin-left: 30px;">
                                 <div id="box_indicador_Cor" data-original-title='Selecione o indicador que representará a cor das Bolinhas no gráfico.' style="width: 281px; float: left; height: 34px; "></div>
                             </div>
                         </td>
                         <td>
                             <div>
-                                 <!--<img src="img/icons/size.png" style="float: left; margin-left: 10px; margin-top: -11px;">-->
                                 <div id="box_indicador_Tamanho" data-original-title='Selecione o indicador que representará o Tamanho da Bolinha, no gráfico.' style="width: 311px; float: left; height: 33px;"> </div>
                             </div>
                         </td>
@@ -384,7 +378,7 @@
                                 <div id="box_indicador_eixoY" data-original-title='Selecione o indicador que representará o Eixo Y, no gráfico.' style="margin-left:52px; width: 57px; float: left; height: 362px; "></div>
                                 <!--<div id="myModal" class="modal_video hide" tabindex="-1" role="dialog" data-toggle="modal" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">Selecione Indicadores diferentes para cada Eixo</div>-->
                                 <div id="chart_div" style='margin-left: 77px; width: 603px; height: 380px; margin-top: 49px;'>
-                                    <img id="uibolhaloader" src="img/map/ajax-loader.gif" style="background-color: transparent; margin-top: 250px; margin-left: 270px;" />
+                                    <img id="uibolhaloader" src="img/map/ajax-loader.gif" style="background-color: transparent; margin-top: 126px; margin-left: 236px;" />
                                 </div>
                                 <div id="box_indicador_eixoX" data-original-title='Selecione o indicador que representará o Eixo X, no gráfico.' style="width: 604; float: left; height: 55px; margin-left: 79px;"> </div>
                             </div>
@@ -393,7 +387,7 @@
                 </table>
             </td>
         </tr>
-        <tr>
+        <tr style="height: 143px;">
             <td style="border-right: 1px solid #ccc;">
                 <span style="font-weight: bold; display:block; margin-left:24px; width:44px;">ANO</span>
                 <div>
