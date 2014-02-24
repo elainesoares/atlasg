@@ -1,5 +1,9 @@
 <?php
+    if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+        header("Location: {$path_dir}404");
+    }
     require_once '../../../config/config_path.php';
+    require_once '../../../config/config_gerais.php';
     require_once '../util/protect_sql_injection.php';
     ini_set( "display_errors", 0);
     ob_start("ob_gzhandler");

@@ -2,6 +2,7 @@
     //! important requires conexao.class.php
     
     require_once BASE_ROOT.'config/config_path.php';
+    require_once BASE_ROOT.'config/config_gerais.php';
     require_once BASE_ROOT."config/conexao.class.php";
     /**
         * Created on 19/02/2013
@@ -76,7 +77,8 @@
         {
             try{
 
-                $Resposta = pg_query($this->ConexaoLink, $SQL) or die ("Nao foi possivel executar a consulta! ".$ident);
+                $Resposta = pg_query($this->ConexaoLink, $SQL) or die (header("location:semconexao"));
+                
                 $Return = array();
                 $count = 0;
                 while ($Linha = pg_fetch_assoc($Resposta)){

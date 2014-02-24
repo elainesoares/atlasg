@@ -1,6 +1,7 @@
 <?php
 $comPath = BASE_ROOT . "/com/mobiliti//";
 require_once BASE_ROOT . 'config/config_path.php';
+require_once BASE_ROOT . 'config/config_gerais.php';
 require_once $comPath . "consulta/bd.class.php";
 require_once $comPath . "util/protect_sql_injection.php";
 require_once $comPath . "display/Block.class.php";
@@ -10,8 +11,7 @@ define("PATH_DIRETORIO", $path_dir);
 /**
  * Description of Perfil
  *
- * @author Lorran, 
- *   Andre Castro (versão 2)
+ * @author Andre Castro (versão 2)
  */
 class PerfilPrint extends bd {
 
@@ -25,30 +25,60 @@ class PerfilPrint extends bd {
     private $nomeCru;
     private $data = array();
     private $locale;
-
+    
     public function __construct($municipio) {
         parent::__construct();
-
         if ($municipio == null || $municipio == "") {
             
         }
 
-        $divisao = explode('_', $municipio);
+        $divisao = explode('_', $this->retira_acentos($municipio));
         $this->nomeCru = $divisao[0];
-        $this->ufCru = $divisao[1] ;
         $stringTratada = cidade_anti_sql_injection(str_replace('-', ' ', $divisao[0]));
-        $stringUfTratada = cidade_anti_sql_injection(str_replace('-', ' ', $divisao[1]));
         $this->UrlNome = $stringTratada;
-        $this->UrlUf = $stringUfTratada;
+
+        if (sizeof($divisao) > 1) {
+            $this->ufCru = $divisao[1];
+            $stringUfTratada = cidade_anti_sql_injection(str_replace('-', ' ', $divisao[1]));
+            $this->UrlUf = $stringUfTratada;
+        }
+
         $this->read();
     }
+    
+    private function retira_acentos($texto) {
+        $array1 = array("á", "à", "â", "ã", "ä", "é", "è", "ê", "ë", "í", "ì", "î", "ï", "ó", "ò", "ô", "õ", "ö", "ú", "ù", "û", "ü", "ç"
+            , "Á", "À", "Â", "Ã", "Ä", "É", "È", "Ê", "Ë", "Í", "Ì", "Î", "Ï", "Ó", "Ò", "Ô", "Õ", "Ö", "Ú", "Ù", "Û", "Ü", "Ç");
+        $array2 = array("a", "a", "a", "a", "a", "e", "e", "e", "e", "i", "i", "i", "i", "o", "o", "o", "o", "o", "u", "u", "u", "u", "c"
+            , "A", "A", "A", "A", "A", "E", "E", "E", "E", "I", "I", "I", "I", "O", "O", "O", "O", "O", "U", "U", "U", "U", "C");
+        return str_replace($array1, $array2, $texto);
+    }
+    
     public function drawNome() {
-        echo "<div class='perfil-title-print'><hr>Perfil do Município de<br><br> 
+        if ($_SESSION["lang"] == "pt"){
+            echo "<div class='perfil-title-print'><hr>Perfil do Município de<br><br> 
             " . $this->nome . ", " . strtoupper($this->uf) . "
             <img id='uiperfilloader' src='img/map/ajax-loader.gif' background-color: transparent;' />
             
             <hr></div>
             <div align='right' style='margin-top:-12%;'>".date("d/m/Y")." - Pág 1 de 14</div>";
+    
+        }else if($_SESSION["lang"] == "en"){
+            echo "<div class='perfil-title-print'><hr>Profile of the Municipality of<br><br> 
+                " . $this->nome . ", " . strtoupper($this->uf) . "
+                <img id='uiperfilloader' src='img/map/ajax-loader.gif' background-color: transparent;' />
+
+                <hr></div>
+                <div align='right' style='margin-top:-12%;'>".date("d/m/Y")." - Page 1 of 14</div>";
+        }
+        else if($_SESSION["lang"] == "es"){
+            echo "<div class='perfil-title-print'><hr>Perfil del municipio de<br><br> 
+                " . $this->nome . ", " . strtoupper($this->uf) . "
+                <img id='uiperfilloader' src='img/map/ajax-loader.gif' background-color: transparent;' />
+
+                <hr></div>
+                <div align='right' style='margin-top:-12%;'>".date("d/m/Y")." - Page 1 of 14</div>";
+        }
     }
 
     public function drawMap() {
@@ -66,25 +96,56 @@ class PerfilPrint extends bd {
         parent::__destruct();
     }
 
-   public function drawBoxes() {
+   public function drawBoxes($lang) {
+
         TextBuilder::$bd = new bd();
+        TextBuilder_EN::$bd = new bd();
+        TextBuilder_ES::$bd = new bd();
 
         $carac_mun = PerfilPrint::getCaracteristicas(TextBuilder::$idMunicipio); //IDHM
         $pop = TextBuilder::getVariaveis_table(TextBuilder::$idMunicipio, "PESOTOT"); //IDHM_R
         $micro_meso = PerfilPrint::getMicroMeso(TextBuilder::$idMunicipio, "PESOTOT"); //IDHM_R
         $idhm = TextBuilder::getVariaveis_table(TextBuilder::$idMunicipio, "IDHM"); //IDHM_R
+        
+        if ($lang == "pt"){
+            $tabela = new BlockTabela("Caracterização do território", 2, 4);
+            //$tabela->setManual("link", $path_dir."atlas/tabela/nulo/mapa/municipal/filtro/municipio/{$this->nomeCru}/indicador/idhm-2010");
+            $tabela->addBox("Área", str_replace(".", ",", $carac_mun[0]["area"]) . " km²");
+            $tabela->addBox("IDHM 2010", str_replace(".", ",", number_format($idhm[2]["valor"], 3)));
+            $tabela->addBox("Faixa do IDHM", Formulas::getSituacaoIDH($idhm, $lang));
+            $tabela->addBox("População (Censo 2010)", $pop[2]["valor"] . " hab.");
 
-        $tabela = new BlockTabela("Caracterização do território", 2, 4);
-        //$tabela->setManual("link", $path_dir."atlas/tabela/nulo/mapa/municipal/filtro/municipio/{$this->nomeCru}/indicador/idhm-2010");
-        $tabela->addBox("Área", str_replace(".",",",$carac_mun[0]["area"]). " km²");
-        $tabela->addBox("IDHM 2010", str_replace(".",",",number_format($idhm[2]["valor"], 3)));
-        $tabela->addBox("Faixa do IDHM", TextBuilder::getSituacaoIDH($idhm[2]["valor"]));
-        $tabela->addBox("População (Censo 2010)", $pop[2]["valor"] . " hab.");
+            $tabela->addBox("Densidade demográfica", str_replace(".", ",", $carac_mun[0]["densidade"]) . " hab/km²");
+            $tabela->addBox("Ano de instalação", $carac_mun[0]["anoinst"]);
+            $tabela->addBox("Microrregião", $micro_meso[0]["micro"]);
+            $tabela->addBox("Mesorregião", $micro_meso[0]["meso"]);
+        }
+        else if ($lang == "en"){
+            $tabela = new BlockTabela("Characterization of the territory", 2, 4);
+            //$tabela->setManual("link", $path_dir."atlas/tabela/nulo/mapa/municipal/filtro/municipio/{$this->nomeCru}/indicador/idhm-2010");
+            $tabela->addBox("Area", str_replace(".", ",", $carac_mun[0]["area"]) . " km²");
+            $tabela->addBox("MHDI 2010", str_replace(".", ",", number_format($idhm[2]["valor"], 3)));
+            $tabela->addBox("MHDI category", Formulas::getSituacaoIDH($idhm, $lang));
+            $tabela->addBox("Population (Census of 2000)", $pop[2]["valor"] . " Inhabitants");
 
-        $tabela->addBox("Densidade demográfica", str_replace(".",",",$carac_mun[0]["densidade"]) . " hab/km²");
-        $tabela->addBox("Ano de instalação", $carac_mun[0]["anoinst"]);
-        $tabela->addBox("Microrregião", $micro_meso[0]["micro"]);
-        $tabela->addBox("Mesorregião", $micro_meso[0]["meso"]);
+            $tabela->addBox("Population density", str_replace(".", ",", $carac_mun[0]["densidade"]) . " inhabitants/km²");
+            $tabela->addBox("Year of Establishment", $carac_mun[0]["anoinst"]);
+            $tabela->addBox("Microregion", $micro_meso[0]["micro"]);
+            $tabela->addBox("Mesoregion", $micro_meso[0]["meso"]);
+        }else if ($lang == "es"){
+            $tabela = new BlockTabela("Caracterización del territorio", 2, 4);
+            //$tabela->setManual("link", $path_dir."atlas/tabela/nulo/mapa/municipal/filtro/municipio/{$this->nomeCru}/indicador/idhm-2010");
+            $tabela->addBox("Area", str_replace(".", ",", $carac_mun[0]["area"]) . " km²");
+            $tabela->addBox("IDHM 2010", str_replace(".", ",", number_format($idhm[2]["valor"], 3)));
+            $tabela->addBox("Nivel de IDHM", Formulas::getSituacaoIDH($idhm, $lang));
+            $tabela->addBox("Población (censo 2010)", $pop[2]["valor"] . " hab.");
+
+            $tabela->addBox("Densidad demográfica", str_replace(".", ",", $carac_mun[0]["densidade"]) . " hab/km²");
+            $tabela->addBox("Año de fundación", $carac_mun[0]["anoinst"]);
+            $tabela->addBox("Microrregión", $micro_meso[0]["micro"]);
+            $tabela->addBox("Mesorregión", $micro_meso[0]["meso"]);
+        }
+        
         $tabela->draw();
     }
 
@@ -110,14 +171,16 @@ class PerfilPrint extends bd {
     private function read() {
         $SQL = "SELECT municipio.nome, uf, municipio.id, estado.nome as nomeestado, (ST_AsGeoJSON(municipio.the_geom)) as locale FROM municipio 
                     INNER JOIN estado ON (municipio.fk_estado = estado.id)
-                     WHERE sem_acento(municipio.nome) ILIKE '{$this->UrlNome}' AND (uf ILIKE '{$this->ufCru}' OR sem_acento(estado.nome) ILIKE '%{$this->UrlUf}%') LIMIT 1";
-
+                    WHERE sem_acento(municipio.nome) ILIKE '{$this->UrlNome}' AND (uf ILIKE '{$this->ufCru}' OR sem_acento(estado.nome) ILIKE '{$this->UrlUf}') LIMIT 1";
         $results = parent::ExecutarSQL($SQL);
-        $this->nome = $results[0]["nome"];
-        $this->uf = $results[0]["uf"];
-        $this->id = $results[0]["id"];
-        $this->estado = $results[0]["nomeestado"];
-        $this->locale = $results[0]["locale"];
+
+        if (sizeof($results) > 0) {
+            $this->nome = $results[0]["nome"];
+            $this->uf = $results[0]["uf"];
+            $this->id = $results[0]["id"];
+            $this->estado = $results[0]["nomeestado"];
+            $this->locale = $results[0]["locale"];
+        }
     }
 
     public function getCityId() {
@@ -312,7 +375,7 @@ class PerfilPrint extends bd {
                 }
                 $.ajax({
                     type: 'post',
-                    data: {page: iPage, city: "<?php echo $this->nomeCru . "_" . $this->ufCru; ?>"},
+                    data: {lang: lang_mng.getString('lang_id'), city: "<?php echo $this->nomeCru . "_" . $this->ufCru; ?>"},
                     url: "com/mobiliti/display/controller/AjaxPaginaPerfilPrint.php",
                     success: function(r) {
                         storedPages[mPage] = r;
@@ -322,31 +385,6 @@ class PerfilPrint extends bd {
                     }
                 });
             }
-//            $(document).ready(function() {
-//                splited = document.URL.split("</?php echo $this->nomeCru; ?>/");
-//                $("[io='" + splited[1] + "']").parent("li").addClass("pmainMenuTopActive");
-//                $(".perfilMenu").click(function() {
-//                    history.pushState("", "Atlas Fase 3 ", bUrl + "/" + $(this).attr("io"));
-//                    _getUrl();
-//                })
-//
-//                $(".pArrowLeft").click(function() {
-//                    if (mPage > 0) {
-//                        mPage--;
-//                        mUrl = bUrl + "/" + $("[io-pos='" + mPage + "']").attr("io");
-//                        history.pushState("", "Atlas Fase 3 ", mUrl);
-//                        _getUrl();
-//                    }
-//                });
-//                $(".pArrowRight").click(function() {
-//                    if (mPage < 7) {
-//                        mPage++;
-//                        mUrl = bUrl + "/" + $("[io-pos='" + mPage + "']").attr("io");
-//                        history.pushState("", "Atlas Fase 3 ", mUrl);
-//                        _getUrl();
-//                    }
-//                });
-//            });
             _getUrl();
 
 

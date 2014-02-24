@@ -100,82 +100,100 @@ class FunctionsChart {
     //GráficoFluxoEscolar IDHM ---------------------------------------------------------------------------------------
     
 	
-	function getFreqEscolar5a6($idMunicipio) {
+    function getFreqEscolar5a6($idMunicipio, $lang) {
 
-        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT estado.uf,replace(municipio.nome,'''','&#39;') as nome,label_ano_referencia, nome_perfil as nomecurto, valor
+        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT estado.uf,replace(municipio.nome,'''','&#39;') as nome,
+            label_ano_referencia, lang_var.nomecurto, valor
             FROM valor_variavel_mun INNER JOIN variavel
             ON fk_variavel = variavel.id
             INNER JOIN ano_referencia
             ON ano_referencia.id = fk_ano_referencia
+            INNER JOIN lang_var
+                ON variavel.id = lang_var.fk_variavel
             INNER JOIN municipio
             ON fk_municipio = municipio.id
 			INNER JOIN estado 
 			ON municipio.fk_estado = estado.id
-            WHERE fk_municipio = $idMunicipio and  sigla ILIKE 'T_FREQ5A6' ORDER BY label_ano_referencia;";
-
+            WHERE fk_municipio = $idMunicipio and sigla ILIKE 'T_FREQ5A6' and lang like '". $lang ."' 
+                ORDER BY label_ano_referencia;";
+        
+        //echo $SQL_FREQ_ESC_CRIAN_E_JOVENS;
         return TextBuilder::$bd->ExecutarSQL($SQL_FREQ_ESC_CRIAN_E_JOVENS, "getFreqEscolar5a6");
     }
 
-    function getFreqEscolar11a13($idMunicipio) {
+    function getFreqEscolar11a13($idMunicipio, $lang) {
 
-        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT estado.uf,replace(municipio.nome,'''','&#39;') as nome,label_ano_referencia, nome_perfil as nomecurto, valor
+        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT estado.uf,replace(municipio.nome,'''','&#39;') as nome,label_ano_referencia, lang_var.nomecurto, valor
             FROM valor_variavel_mun INNER JOIN variavel
             ON fk_variavel = variavel.id
             INNER JOIN ano_referencia
             ON ano_referencia.id = fk_ano_referencia
+            INNER JOIN lang_var
+                ON variavel.id = lang_var.fk_variavel
             INNER JOIN municipio
             ON fk_municipio = municipio.id
 			INNER JOIN estado 
 			ON municipio.fk_estado = estado.id
-            WHERE fk_municipio = $idMunicipio and  sigla ILIKE 'T_FUND11A13' ORDER BY label_ano_referencia;";
+            WHERE fk_municipio = $idMunicipio and  sigla ILIKE 'T_FUND11A13' and lang like '". $lang ."' 
+                ORDER BY label_ano_referencia;";
 
         return TextBuilder::$bd->ExecutarSQL($SQL_FREQ_ESC_CRIAN_E_JOVENS, "getFreqEscolar11a13");
     }
 
-    function getFreqEscolar15a17($idMunicipio) {
+    function getFreqEscolar15a17($idMunicipio, $lang) {
 
-        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT estado.uf,replace(municipio.nome,'''','&#39;') as nome,label_ano_referencia, nome_perfil as nomecurto, valor
+        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT estado.uf,replace(municipio.nome,'''','&#39;') as nome,label_ano_referencia, lang_var.nomecurto, valor
             FROM valor_variavel_mun INNER JOIN variavel
             ON fk_variavel = variavel.id
             INNER JOIN ano_referencia
             ON ano_referencia.id = fk_ano_referencia
+            INNER JOIN lang_var
+                ON variavel.id = lang_var.fk_variavel
             INNER JOIN municipio
             ON fk_municipio = municipio.id
 			INNER JOIN estado 
 			ON municipio.fk_estado = estado.id
-            WHERE fk_municipio = $idMunicipio and  sigla ILIKE 'T_FUND15A17' ORDER BY label_ano_referencia;";
+            WHERE fk_municipio = $idMunicipio and  sigla ILIKE 'T_FUND15A17' and lang like '". $lang ."' 
+                ORDER BY label_ano_referencia;";
 
         return TextBuilder::$bd->ExecutarSQL($SQL_FREQ_ESC_CRIAN_E_JOVENS, "getFreqEscolar15a17");
     }
 
-    function getFreqEscolar18a20($idMunicipio) {
+    function getFreqEscolar18a20($idMunicipio, $lang) {
 
-        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT estado.uf,replace(municipio.nome,'''','&#39;') as nome,label_ano_referencia, nome_perfil as nomecurto, valor
+        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT estado.uf,replace(municipio.nome,'''','&#39;') as nome,label_ano_referencia, lang_var.nomecurto, valor
             FROM valor_variavel_mun INNER JOIN variavel
             ON fk_variavel = variavel.id
             INNER JOIN ano_referencia
             ON ano_referencia.id = fk_ano_referencia
+            INNER JOIN lang_var
+                ON variavel.id = lang_var.fk_variavel
             INNER JOIN municipio
             ON fk_municipio = municipio.id
 			INNER JOIN estado 
 			ON municipio.fk_estado = estado.id
-            WHERE fk_municipio = $idMunicipio and  sigla ILIKE 'T_MED18A20' ORDER BY label_ano_referencia;";
+            WHERE fk_municipio = $idMunicipio and  sigla ILIKE 'T_MED18A20' and lang like '". $lang ."' 
+                ORDER BY label_ano_referencia;";
 
         return TextBuilder::$bd->ExecutarSQL($SQL_FREQ_ESC_CRIAN_E_JOVENS, "getFreqEscolar18a20");
     }
 
     //GráficoFrequenciaEscolar IDHM ---------------------------------------------------------------------------------------
 
-    function getFreqEscolarFaixaEtariaMun($idMunicipio) {
+    function getFreqEscolarFaixaEtariaMun($idMunicipio, $lang) {
 
-        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT  replace(replace(municipio.nome,'''','&#39;'),'''','&#39;') as nome,label_ano_referencia, nomecurto, valor,sigla 
+        $SQL_FREQ_ESC_CRIAN_E_JOVENS = "SELECT  replace(replace(municipio.nome,'''','&#39;'),'''','&#39;') as nome,label_ano_referencia, lang_var.nomecurto, valor,sigla 
 			FROM valor_variavel_mun INNER JOIN variavel
 			ON fk_variavel = variavel.id
 			INNER JOIN ano_referencia
 			ON ano_referencia.id = fk_ano_referencia
+                        INNER JOIN lang_var
+                        ON variavel.id = lang_var.fk_variavel
 			INNER JOIN municipio
 			ON fk_municipio = municipio.id
-			WHERE fk_municipio = $idMunicipio and label_ano_referencia = 2010 and  sigla IN ('T_FREQ5A6','T_FUND11A13','T_FUND15A17','T_MED18A20');";
+			WHERE fk_municipio = $idMunicipio and label_ano_referencia = 2010
+                            and  sigla IN ('T_FREQ5A6','T_FUND11A13','T_FUND15A17','T_MED18A20')
+                            and lang like '". $lang ."';";
 
         return TextBuilder::$bd->ExecutarSQL($SQL_FREQ_ESC_CRIAN_E_JOVENS, "getFreqEscolar4a6");
     }

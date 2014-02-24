@@ -284,8 +284,8 @@ body{
   left: 30px;
   width: 234px;
   height: 80%;
-  background: rgba(0, 0, 0, 0.8);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#000000', endColorstr='#000000'); /* IE */
+  background: rgba(255, 255, 255, 0.9);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FFFFFF', endColorstr='#FFFFFF'); /* IE */
   -webkit-border-radius: 15px;
      -moz-border-radius: 15px;
           border-radius: 15px;

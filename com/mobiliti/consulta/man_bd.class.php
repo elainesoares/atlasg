@@ -2,6 +2,7 @@
     //! important requires conexao.class.php
     
     require_once BASE_ROOT.'config/config_path.php';
+    require_once BASE_ROOT.'config/config_gerais.php';
     require_once BASE_ROOT."config/man_conexao.class.php";
 
     class mbd extends MConexao 

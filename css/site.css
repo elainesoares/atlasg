@@ -10,12 +10,12 @@ body{
 #center{
     margin-left: auto;
     margin-right: auto;
-    height: inherit;
+    height: 100%;
     width: 960px;
     background: transparent;
 }
 
-#h1Home{
+.h1Home{
     color: #FF66CC;
     font-weight: bold;
     font-family: 'Passion One', Arial, sans-serif;
@@ -236,7 +236,7 @@ body{
 }
 
 .mainMenuTopUl{
-    margin-top: 61px;
+    margin-top: 37px;
     float: right;
     color: #B2B2B2;
     margin-right: 30px;
@@ -347,7 +347,6 @@ body{
     margin-top: 44px;
     border-radius: 7px;
     height: 165px;
-    margin-bottom: 44px;
     background: #FFFFFF;
     padding-top: 5px;
     border: 2px solid #C6C6C6;
@@ -389,7 +388,7 @@ body{
 .perfil-search-main_home #buscaHome{
     border: none;
     height: 50px;
-    width: 446px;
+    width: 427px;
     margin-top: 5px;
     font-size: 24pt;
     font-family: 'Passion One', Arial, sans-serif;
@@ -457,6 +456,7 @@ body{
     border-radius: 7px;
     float: left;
     background: #FFFFFF;
+    margin-top: 44px;
     margin-bottom: 44px;
     border: 2px solid #C6C6C6;
     box-shadow: 1px 1px 25px #CCCCCC;
@@ -541,6 +541,7 @@ body{
     margin-left: 30px;
     width: 24.9%;
     margin-bottom: 40px;
+    margin-top: 44px;
 }
 
 .titulo_divs a{
@@ -635,7 +636,7 @@ body{
 }
 
 .footerLeft{
-    width: 166px;
+    width: 244px;
     height: 140px; 
     margin-right: 30px; 
     float: left;
@@ -1054,6 +1055,14 @@ body{
 .clear2{ clear: both; padding-top: 40px; }
 
 .clear{ clear: both; }
+
+.block-01-div-subtitle_atlas{
+    color: 000000;
+    font-size: 28px;
+    padding-top: 20px;
+    padding-bottom: 4px;
+    font-family: Passion One;
+}
 
 .block-01-div-title
 {
@@ -2265,12 +2274,12 @@ div#box_indicador_local>.box_local
 
 .menuAtlasUl a{
     color: #000;
-    padding: 6px;
-    margin-left: -20px;
+    padding: 5px;
+    margin-left: -18px;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-    font-size: 11px;
+    font-size: 10px;
     font-family: helvetica;
     cursor: pointer;
 }
@@ -2289,7 +2298,7 @@ div#box_indicador_local>.box_local
 
 .menuAtlasUl li{
     display: inline-block;
-    margin-right: 17px;
+    margin-right: 14px;
     color: #FFFFFF;
 }
 
@@ -2357,7 +2366,7 @@ div#box_indicador_local>.box_local
     /*width: 675px;*/
     margin-top: 30px;
     margin-bottom: 30px;
-    height: 623px;
+    height: 500px;
 }
 
 #conteudo_atlas{
@@ -2392,7 +2401,7 @@ div#box_indicador_local>.box_local
 }
 
 #realizacao{
-    height: 1300px;
+    height: 1194px;
 }
 
 #columnRight{
@@ -2404,7 +2413,7 @@ div#box_indicador_local>.box_local
 
 #desen_human_idh{
     width: 930px; 
-    height: 2000px;
+    height: 1780px;
 }
 
 #column{
@@ -2430,14 +2439,6 @@ div#box_indicador_local>.box_local
 #dimensoes_idhm span{
     font-size: 10pt;
     /*margin-top: 30px;*/
-}
-
-.block-01-div-subtitle_atlas{
-    color: 000000;
-    font-size: 28px;
-    padding-top: 20px;
-    padding-bottom: 4px;
-    font-family: Passion One;
 }
 
 #texto_realizacao span{
@@ -2505,7 +2506,7 @@ div#box_indicador_local>.box_local
     text-align: left;
 }
 
-#areatitle{
+.areatitle{
     font-family: 'Passion One', cursive;
     font-size: 42pt;
     color: #E26FAB;
@@ -2513,6 +2514,7 @@ div#box_indicador_local>.box_local
     line-height: 41px;
     margin-bottom: 20px;
     text-align: left;
+    width: 930px;
 }
 
 .areaTexto p{
@@ -2597,6 +2599,310 @@ div#box_indicador_local>.box_local
 /*==============================================================================
                                 DESTAQUES
 ==============================================================================*/
+.destaqueMetodologia{
+    width: 930px; 
+    font-family: Helvetica; 
+    height: 3000px;
+}
+
+.titleDestaqueAzul{
+    background: #0065A4; 
+    color: #FFFFFF;  
+    font-weight: bold; 
+    font-size: 24px; 
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.titleDestaqueLaranja{
+    background: #F9D682; 
+    color: #000000;  
+    font-weight: bold; 
+    font-size: 24px; 
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.titleDestaqueMet{
+    color: #0065A4; 
+    font-weight: bold; 
+    font-size: 20px; 
+    padding: 30px 10px; 
+    width: 116px; 
+}
+
+.titleDestaque{
+    color: #0065A4; 
+    font-weight: bold; 
+    font-size: 20px; 
+    padding: 30px 10px; 
+}
+
+.floatLeft{
+    float: left;
+}
+
+.tres_dimensoes{
+    width: 500px; 
+    margin-left: 155px; 
+    margin-top: 30px;
+}
+
+.columnRight{
+    margin-top: -15px; 
+    font-size: 15px;
+    width: 645px;
+}
+
+.alingLeft{
+    text-align: left;
+}
+
+.columnDimensoes{
+    width: 195px;
+    margin-top: 15px;
+}
+
+.floatRight{
+    float: right
+}
+
+.tableDimensoesMetodologia{
+    margin-top: 90px;  
+    font-size: 12px;  
+    height: 401px;
+}
+
+.tableDimensoesMetodologia tr{
+    border: 3px solid #FFFFFF;
+}
+
+.borderRight{
+    border-right: 3px solid #FFFFFF;
+}
+
+.borderLeft{
+    border-left: 3px solid #FFFFFF;
+}
+
+.tdRosa{
+    background: #F8DBE8;
+}
+
+.tdAmarelo1{
+    background: #FADD7B;
+}
+
+.tdAmarelo2{
+    background: #F7EBC3;
+}
+
+.tdVerde{
+    background: #97C657;
+}
+
+.tableIdhmBrasil{
+    font-weight: bold; 
+    font-size: 16px; 
+    line-height: 23px; 
+    width: 76px
+}
+
+.alingCenter{
+    text-align: center;
+}
+
+.importanteMetodologia{
+    width: 236px; 
+    margin-top: 66px;
+}
+
+.marginAuto{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.textoCentralMet{
+    width: 600px; 
+    margin-top: 40px;
+}
+
+.titleDestProc{
+    color: #0065A4; 
+    font-weight: bold; 
+    font-size: 32px;
+    margin-top: 108px; 
+    margin-bottom: 26px;
+}
+
+.imageMet2{
+    width: 578px; 
+    margin-left: 209px; 
+    margin-top: 30px;
+}
+
+.imgComoCalculado{
+    width: 500px; 
+    margin-top: 60px; 
+    border: 3px solid #CCCCCC; 
+    padding: 20px; 
+    margin-right: 30px; 
+}
+
+.imgMet3{
+    margin-top: 60px; 
+    width: 354px;
+}
+
+.imgMet4{
+    margin-top: 60px; 
+    width: 148px; 
+    margin-left: 99px;
+}
+
+.destaqueFaixasIDHM{
+    width: 930px; 
+    font-family: Helvetica; 
+    height: 2390px;
+}
+
+.mapas1Faixas{
+    width: 833px; 
+    margin-left: 129px; 
+    margin-top: 30px;
+}
+
+.direita1Faixas{
+    width: 462px;
+}
+
+.setaList{
+    margin-left: 20px; 
+    margin-right: 5px; 
+    margin-bottom: 2px;
+}
+
+.paragrafoList{
+    margin-left: 20px; 
+    margin-right: 5px; 
+}
+
+.marginLeft20{
+    margin-left: 20px;
+}
+
+.marginLeft30{
+    margin-left: 30px;
+}
+
+.marginTop30{
+    margin-top: 30px;
+}
+
+.mapa2Faixas{
+    width: 515px; 
+    margin-top: 144px;
+}
+
+.textoCentralFaixa{
+    width: 365px;
+}
+
+.marginTop40{
+    margin-top: 40px;
+}
+
+.marginTop20{
+    margin-top: 20px;
+}
+
+.marginTop10{
+    margin-top: 10px;
+}
+
+.marginTop50{
+    margin-top: 50px;
+}
+
+.quadroAzulFaixas{
+    background: #0065A4; 
+    color: #FFFFFF; 
+    padding: 10px 14px 193px 18px;
+}
+
+.destaqueIDHMBRasil{
+    width: 930px; 
+    font-family: Helvetica; 
+    height: 2600px;
+}
+
+.circuloIDHM{
+    width: 300px; 
+    margin-top: 105px;
+}
+
+.mapaEducacaoIDHMBRasil{
+    width: 401px; 
+    margin-top: -84px;
+}
+
+.mapaRendaIDHMBrasil{
+    width: 332px; 
+    margin-top: -43px;
+}
+
+.destaqueEducacao{
+    width: 930px; 
+    font-family: Helvetica; 
+    height: 2224px;
+}
+
+.width100perc{
+    width: 100%;
+}
+
+.educacaoLaranja1{
+    background: #FAD680;
+}
+
+.educacaoLaranja2{
+    background: #FCE69D;
+}
+
+.educacaoLaranja3{
+    background: #FCF5DD;
+}
+
+.borderLeftEduc{
+    border-left: 4px solid #FFFFFF;
+}
+
+.borderRightEduc{
+    border-right: 4px solid #FFFFFF;
+}
+
+.borderBottomEduc{
+    border-bottom: 4px solid #FFFFFF;
+}
+
+.paragrafo50{
+    margin-left: 50px;
+}
+
+.alignRight{
+    text-align: right;
+}
+
+.block-01-div-subtitle_destaques{
+    color: #0065A5;
+    font-size: 28px;
+    padding-top: 15pt;
+    padding-bottom: 4px;
+    font-family: Helvetica;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
 .containerPageDestaques{
     background: #FFFFFF;
     height: 681px;
@@ -2657,6 +2963,9 @@ div#box_indicador_local>.box_local
 #conteudo_destaque{
     
 }
+
+
+/*==============================================================================*/
 
 .tab-content .tableRankingMunicipal{
     border: 1px solid #ccc; 
@@ -3195,6 +3504,21 @@ width: 100px;
     margin-bottom: 30px;
 }
 
+.p_PaginaTestes{
+    float: left;
+}
+
+.p1_ptestes{
+    font-size: 15pt; 
+    color: #E26FAB;
+}
+
+.p2_ptestes{
+    color: #E26FAB; 
+    font-size: 10pt; 
+    margin-bottom: 30px;
+}
+
 .p_erromotivo{
     font-size: 11pt; 
     font-weight: normal;
@@ -3328,3 +3652,4 @@ width: 100px;
     -webkit-transform:scale(1.1); /* Safari and Chrome */
     -o-transform:scale(1.1); /* Opera */
 }
+

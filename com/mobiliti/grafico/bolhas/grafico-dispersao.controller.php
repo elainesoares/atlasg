@@ -4,6 +4,7 @@
     }
 
     require_once "../../../../config/config_path.php";
+    require_once "../../../../config/config_gerais.php";
     require_once '../../../../config/conexao.class.php';
     require_once MOBILITI_PACKAGE.'util/protect_sql_injection.php';
     require_once "../../consulta/bd.class.php";

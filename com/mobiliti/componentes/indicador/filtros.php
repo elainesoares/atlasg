@@ -6,10 +6,12 @@
         die();
     }
 
+    
     /* =================== LER VALORES DA REQUISIÇÃO =============================== */
     
     /* =================== LIMPA REQUISIÇÃO ======================================== */
-
+    
+    $user_lang = $_GET['user_lang'];
     $_GET = null;
     $_POST = null;
     $_REQUEST = null;
@@ -19,18 +21,16 @@
   
     include_once('../../../../config/conexao.class.php');
 
-    function loadDimensoes()  
+    function loadDimensoes($user_lang)  
     {  
         $minhaConexao = new Conexao();
 
-		$con = $minhaConexao->open();
+        $con = $minhaConexao->open();
+        $sql = "SELECT t.id, lg.nome FROM tema t INNER JOIN lang_tema lg ON lg.fk_tema = t.id WHERE t.id_tema_superior IS NULL AND lg.lang='" . $user_lang . "' ";
+        $sql .= " ORDER BY t.cod ASC; ";
+
         
-		$sql = "SELECT id, nome  
-        FROM tema WHERE id_tema_superior IS NULL";
-
-   		$sql .= " ORDER BY cod ASC ";
-
-		$q = pg_query($con, $sql) or die("Nao foi possivel executar a consulta!");
+        $q = pg_query($con, $sql) or die("Nao foi possivel executar a consulta!");
         
         $json = Array();  
 
@@ -44,14 +44,13 @@
         return $json;
     }
 
-    function loadTemas()  
+    function loadTemas($user_lang)  
     {  
         $minhaConexao = new Conexao();
 
         $con = $minhaConexao->open();
         
-        $sql = "SELECT id, nome, nivel, id_tema_superior  
-        FROM tema";
+        $sql = "SELECT t.id, lg.nome, t.nivel, t.id_tema_superior  FROM tema t INNER JOIN lang_tema lg ON lg.fk_tema = t.id WHERE lg.lang ='" . $user_lang . "' ";
 
         $sql .= " ORDER BY id_tema_superior, cod ";
 
@@ -69,15 +68,15 @@
         return $json;
     }
 
-    function loadIndicadores()  
+    function loadIndicadores($user_lang)  
     {  
         $minhaConexao = new Conexao();
 
         $con = $minhaConexao->open();
         
-        $sql = "select var.id,var.sigla,var.nomecurto,var.nomelongo from variavel var where exibir_na_consulta = true";
+        $sql = "select var.id, var.sigla, lg.nomecurto, lg.nomelongo from variavel var inner join lang_var lg on var.id = lg.fk_variavel where lg.lang = '" . $user_lang . "' ";
 
-        $sql .= " ORDER BY ordem ASC";
+        $sql .= " ORDER BY var.ordem ASC";
 
         $q = pg_query($con, $sql) or die("Nao foi possivel executar a consulta!");
         
@@ -130,7 +129,7 @@
     }
     
     $json = new stdClass();
-    $json = (object)Array('indicadores'=>loadIndicadores(),'temas'=>loadTemas(),'dimensoes'=>loadDimensoes(),'var_has_tema'=>loadIndicadoresHasTema());
+    $json = (object)Array('indicadores'=>loadIndicadores($user_lang),'temas'=>loadTemas($user_lang),'dimensoes'=>loadDimensoes($user_lang),'var_has_tema'=>loadIndicadoresHasTema());
    
     echo json_encode($json);
 ?>

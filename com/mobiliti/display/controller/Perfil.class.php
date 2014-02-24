@@ -1,10 +1,13 @@
 <?php
 $comPath = BASE_ROOT . "/com/mobiliti//";
 require_once BASE_ROOT . 'config/config_path.php';
+require_once BASE_ROOT . 'config/config_gerais.php';
 require_once $comPath . "consulta/bd.class.php";
 require_once $comPath . "util/protect_sql_injection.php";
 require_once $comPath . "display/Block.class.php";
 require_once $comPath . "display/BlockTabela.class.php";
+
+require_once $comPath . "display/controller/Formulas.class.php";
 
 //require_once MOBILITI_PACKAGE . "display/controller/PerfilBuilder.class.php";
 
@@ -13,8 +16,7 @@ define("PATH_DIRETORIO", $path_dir);
 /**
  * Description of Perfil
  *
- * @author Lorran, 
- *   Andre Castro (versão 2)
+ * @author Andre Castro (versão 2)
  */
 class Perfil extends bd {
 
@@ -28,9 +30,10 @@ class Perfil extends bd {
     private $nomeCru;
     private $data = array();
     private $locale;
+
     
     public function getNomeCru(){
-	return $this->nome . ", " . strtoupper($this->uf);
+        return $this->nome . ", " . strtoupper($this->uf);
     }
     
     public function __construct($municipio) {
@@ -84,25 +87,56 @@ class Perfil extends bd {
         parent::__destruct();
     }
 
-    public function drawBoxes() {
+    public function drawBoxes($lang) {
+
         TextBuilder::$bd = new bd();
+        TextBuilder_EN::$bd = new bd();
+        TextBuilder_ES::$bd = new bd();
 
         $carac_mun = Perfil::getCaracteristicas(TextBuilder::$idMunicipio); //IDHM
         $pop = TextBuilder::getVariaveis_table(TextBuilder::$idMunicipio, "PESOTOT"); //IDHM_R
         $micro_meso = Perfil::getMicroMeso(TextBuilder::$idMunicipio, "PESOTOT"); //IDHM_R
         $idhm = TextBuilder::getVariaveis_table(TextBuilder::$idMunicipio, "IDHM"); //IDHM_R
+        
+        if ($lang == "pt"){
+            $tabela = new BlockTabela("Caracterização do território", 2, 4);
+            //$tabela->setManual("link", $path_dir."atlas/tabela/nulo/mapa/municipal/filtro/municipio/{$this->nomeCru}/indicador/idhm-2010");
+            $tabela->addBox("Área", str_replace(".", ",", $carac_mun[0]["area"]) . " km²");
+            $tabela->addBox("IDHM 2010", str_replace(".", ",", number_format($idhm[2]["valor"], 3)));
+            $tabela->addBox("Faixa do IDHM", Formulas::getSituacaoIDH($idhm, $lang));
+            $tabela->addBox("População (Censo 2010)", $pop[2]["valor"] . " hab.");
 
-        $tabela = new BlockTabela("Caracterização do território", 2, 4);
-        //$tabela->setManual("link", $path_dir."atlas/tabela/nulo/mapa/municipal/filtro/municipio/{$this->nomeCru}/indicador/idhm-2010");
-        $tabela->addBox("Área", str_replace(".", ",", $carac_mun[0]["area"]) . " km²");
-        $tabela->addBox("IDHM 2010", str_replace(".", ",", number_format($idhm[2]["valor"], 3)));
-        $tabela->addBox("Faixa do IDHM", TextBuilder::getSituacaoIDH($idhm[2]["valor"]));
-        $tabela->addBox("População (Censo 2010)", $pop[2]["valor"] . " hab.");
+            $tabela->addBox("Densidade demográfica", str_replace(".", ",", $carac_mun[0]["densidade"]) . " hab/km²");
+            $tabela->addBox("Ano de instalação", $carac_mun[0]["anoinst"]);
+            $tabela->addBox("Microrregião", $micro_meso[0]["micro"]);
+            $tabela->addBox("Mesorregião", $micro_meso[0]["meso"]);
+        }
+        else if ($lang == "en"){
+            $tabela = new BlockTabela("Characterization of the territory", 2, 4);
+            //$tabela->setManual("link", $path_dir."atlas/tabela/nulo/mapa/municipal/filtro/municipio/{$this->nomeCru}/indicador/idhm-2010");
+            $tabela->addBox("Area", str_replace(".", ",", $carac_mun[0]["area"]) . " km²");
+            $tabela->addBox("MHDI 2010", str_replace(".", ",", number_format($idhm[2]["valor"], 3)));
+            $tabela->addBox("MHDI category", Formulas::getSituacaoIDH($idhm, $lang));
+            $tabela->addBox("Population (Census of 2000)", $pop[2]["valor"] . " Inhabitants");
 
-        $tabela->addBox("Densidade demográfica", str_replace(".", ",", $carac_mun[0]["densidade"]) . " hab/km²");
-        $tabela->addBox("Ano de instalação", $carac_mun[0]["anoinst"]);
-        $tabela->addBox("Microrregião", $micro_meso[0]["micro"]);
-        $tabela->addBox("Mesorregião", $micro_meso[0]["meso"]);
+            $tabela->addBox("Population density", str_replace(".", ",", $carac_mun[0]["densidade"]) . " inhabitants/km²");
+            $tabela->addBox("Year of Establishment", $carac_mun[0]["anoinst"]);
+            $tabela->addBox("Microregion", $micro_meso[0]["micro"]);
+            $tabela->addBox("Mesoregion", $micro_meso[0]["meso"]);
+        }else if ($lang == "es"){
+            $tabela = new BlockTabela("Caracterización del territorio", 2, 4);
+            //$tabela->setManual("link", $path_dir."atlas/tabela/nulo/mapa/municipal/filtro/municipio/{$this->nomeCru}/indicador/idhm-2010");
+            $tabela->addBox("Area", str_replace(".", ",", $carac_mun[0]["area"]) . " km²");
+            $tabela->addBox("IDHM 2010", str_replace(".", ",", number_format($idhm[2]["valor"], 3)));
+            $tabela->addBox("Nivel de IDHM", Formulas::getSituacaoIDH($idhm, $lang));
+            $tabela->addBox("Población (censo 2010)", $pop[2]["valor"] . " hab.");
+
+            $tabela->addBox("Densidad demográfica", str_replace(".", ",", $carac_mun[0]["densidade"]) . " hab/km²");
+            $tabela->addBox("Año de fundación", $carac_mun[0]["anoinst"]);
+            $tabela->addBox("Microrregión", $micro_meso[0]["micro"]);
+            $tabela->addBox("Mesorregión", $micro_meso[0]["meso"]);
+        }
+        
         $tabela->draw();
     }
 
@@ -121,8 +155,10 @@ class Perfil extends bd {
                     INNER JOIN microrregiao ON fk_microregiao = microrregiao.id
                     INNER JOIN mesorregiao ON fk_mesorregiao = mesorregiao.id
                     WHERE municipio.id  = $municipio";
+        
 
         return TextBuilder::$bd->ExecutarSQL($SQL, "getMicroMeso");
+
     }
 
     private function read() {
@@ -159,15 +195,37 @@ class Perfil extends bd {
                 <!--                    <div class="pmainMenuTopCenter">-->
                 <ul class="pmainMenuTopUl">
                     <script type="text/javascript">
-                        document.write("<li><a href='"+document.URL+"#caracterizacao' class='perfilMenu' io-pos='0' io='caracterizacao'>CARACTERIZAÇÃO</a></li>");
-                        document.write("<li><a href='"+document.URL+"#idh' class='perfilMenu' io-pos='1' io='idh'>IDH</a></li>");
-                        document.write("<li><a href='"+document.URL+"#demografia' class='perfilMenu' io-pos='2' io='demografia'>DEMOGRAFIA</a></li>");
-                        document.write("<li><a href='"+document.URL+"#educacao' class='perfilMenu' io-pos='3' io='educacao'>EDUCAÇÃO</a></li>");
-                        document.write("<li><a href='"+document.URL+"#renda' class='perfilMenu' io-pos='4' io='renda'>RENDA</a></li>");
-                        document.write("<li><a href='"+document.URL+"#trabalho' class='perfilMenu' io-pos='5' io='trabalho' >TRABALHO</a></li>");
-                        document.write("<li><a href='"+document.URL+"#habitacao' class='perfilMenu' io-pos='6' io='habitacao' >HABITAÇÃO</a></li>");
-                        document.write("<li><a href='"+document.URL+"#vulnerabilidade' class='perfilMenu' io-pos='7' io='vulnerabilidade' >VULNERABILIDADE</a></li>");                
-                    </script>
+                        if (lang_mng.getString('lang_id') == "pt"){
+                            document.write("<li><a href='"+document.URL+"#caracterizacao' class='perfilMenu' io-pos='0' io='caracterizacao'>CARACTERIZAÇÃO</a></li>");
+                            document.write("<li><a href='"+document.URL+"#idh' class='perfilMenu' io-pos='1' io='idh'>IDH</a></li>");
+                            document.write("<li><a href='"+document.URL+"#demografia' class='perfilMenu' io-pos='2' io='demografia'>DEMOGRAFIA</a></li>");
+                            document.write("<li><a href='"+document.URL+"#educacao' class='perfilMenu' io-pos='3' io='educacao'>EDUCAÇÃO</a></li>");
+                            document.write("<li><a href='"+document.URL+"#renda' class='perfilMenu' io-pos='4' io='renda'>RENDA</a></li>");
+                            document.write("<li><a href='"+document.URL+"#trabalho' class='perfilMenu' io-pos='5' io='trabalho' >TRABALHO</a></li>");
+                            document.write("<li><a href='"+document.URL+"#habitacao' class='perfilMenu' io-pos='6' io='habitacao' >HABITAÇÃO</a></li>");
+                            document.write("<li><a href='"+document.URL+"#vulnerabilidade' class='perfilMenu' io-pos='7' io='vulnerabilidade' >VULNERABILIDADE</a></li>");                
+                        }
+                        else if (lang_mng.getString('lang_id') == "en"){
+                            document.write("<li><a href='"+document.URL+"#caracterizacao' class='perfilMenu' io-pos='0' io='caracterizacao'>CHARACTERIZATION</a></li>");
+                            document.write("<li><a href='"+document.URL+"#idh' class='perfilMenu' io-pos='1' io='idh'>MHDI</a></li>");
+                            document.write("<li><a href='"+document.URL+"#demografia' class='perfilMenu' io-pos='2' io='demografia'>DEMOGRAPHY</a></li>");
+                            document.write("<li><a href='"+document.URL+"#educacao' class='perfilMenu' io-pos='3' io='educacao'>EDUCATION</a></li>");
+                            document.write("<li><a href='"+document.URL+"#renda' class='perfilMenu' io-pos='4' io='renda'>INCOME</a></li>");
+                            document.write("<li><a href='"+document.URL+"#trabalho' class='perfilMenu' io-pos='5' io='trabalho' >LABOUR</a></li>");
+                            document.write("<li><a href='"+document.URL+"#habitacao' class='perfilMenu' io-pos='6' io='habitacao' >HOUSING</a></li>");
+                            document.write("<li><a href='"+document.URL+"#vulnerabilidade' class='perfilMenu' io-pos='7' io='vulnerabilidade' >VULNERABILITY</a></li>");                   
+                        }
+                        else if (lang_mng.getString('lang_id') == "es"){
+                            document.write("<li><a href='"+document.URL+"#caracterizacao' class='perfilMenu' io-pos='0' io='caracterizacao'>CARACTERIZACIÓN</a></li>");
+                            document.write("<li><a href='"+document.URL+"#idh' class='perfilMenu' io-pos='1' io='idh'>IDH</a></li>");
+                            document.write("<li><a href='"+document.URL+"#demografia' class='perfilMenu' io-pos='2' io='demografia'>DEMOGRAFÍA</a></li>");
+                            document.write("<li><a href='"+document.URL+"#educacao' class='perfilMenu' io-pos='3' io='educacao'>EDUCACIÓN</a></li>");
+                            document.write("<li><a href='"+document.URL+"#renda' class='perfilMenu' io-pos='4' io='renda'>INGRESOS</a></li>");
+                            document.write("<li><a href='"+document.URL+"#trabalho' class='perfilMenu' io-pos='5' io='trabalho' >TRABAJO</a></li>");
+                            document.write("<li><a href='"+document.URL+"#habitacao' class='perfilMenu' io-pos='6' io='habitacao' >VIVIENDA</a></li>");
+                            document.write("<li><a href='"+document.URL+"#vulnerabilidade' class='perfilMenu' io-pos='7' io='vulnerabilidade' >VULNERABILIDAD</a></li>");                   
+                        }
+                        </script>
                 </ul>
                 <!--                    </div>-->
             </div>
@@ -283,11 +341,16 @@ class Perfil extends bd {
         ?>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=pt"></script>
         <script type="text/javascript">
-                  
-            var baseUrl = "<?php echo PATH_DIRETORIO . "perfil/" ?>";
+             
+            var lang = '<?=$_SESSION["lang"]?>';
+            //var baseUrl = "</?php //echo PATH_DIRETORIO . "perfil/" ?>";
+            //var baseUrl = "</?php echo PATH_DIRETORIO; ?>" + lang + "/perfil_m/";
+            var baseUrl = "<?php echo PATH_DIRETORIO; ?>" + lang + "/perfil/";
             var storedName = "";
                     
-            splited = document.URL.split("perfil/");
+            
+            splited = document.URL.split(lang_mng.getString("lang_id")+"/perfil/");
+            //splited = document.URL.split(lang_mng.getString("lang_id")+"/perfil_m/");
 
             $(document).ready(function() {
                 inputHandler.add($('#perfil_search'), 'buscaPerfil', 2, "", false, getNomeMunUF);
@@ -372,76 +435,12 @@ class Perfil extends bd {
 
             function _getUrl() {      
                 perfil_loading(true);
-
-                //                if(navigator.appName == 'Microsoft Internet Explorer'){
-                //                    //alert("netexplore");
-                //                    splited = document.URL.split("</?php echo $this->nomeCru . "_" . $this->ufCru; ?>/");
-                //                }else{
-                //                    //alert("noooooooooot netexplore");
-                //                    splited = document.URL.split("</?php echo urlencode($this->nomeCru . "_" . $this->ufCru); ?>/");
-                //                    }
-                //splited = document.URL.split("/");
-
-                //                if (typeof splited[1] === "undefined") {
-                // url = document.URL + "/caracterizacao";
-                //                    history.pushState("", "Atlas Fase 3 ", url);  
-                //                    return _getUrl();                    
-                //                }
-
-                iPage = 0;
-                //                switch (splited[1]) {
-                //                    case "caracterizacao":                        
-                //                        //loadingHolder.show("Carregando dados. Aguarde...");                        
-                //                        iPage = 0;
-                //                        break;
-                //                    case "idh":
-                //                       // loadingHolder.show('Carregando dados. Aguarde...');
-                //                        iPage = 1;
-                //                        break;
-                //                    case "demografia":
-                //                       // loadingHolder.show('Carregando dados. Aguarde...');
-                //                        iPage = 2;
-                //                        break;
-                //                    case "educacao":
-                //                       // loadingHolder.show('Carregando dados. Aguarde...');
-                //                        iPage = 3;
-                //                        break;
-                //                    case "renda":
-                //                      //  loadingHolder.show('Carregando dados. Aguarde...');
-                //                        iPage = 4;
-                //                        break;
-                //                    case "trabalho":
-                //                      //  loadingHolder.show('Carregando dados. Aguarde...');
-                //                        iPage = 5;
-                //                        break;
-                //                    case "habitacao":
-                //                    //   loadingHolder.show('Carregando dados. Aguarde...');
-                //                        iPage = 6;
-                //                        break;
-                //                    case "vulnerabilidade":
-                //                      //  loadingHolder.show('Carregando dados. Aguarde...');
-                //                        iPage = 7;
-                //                        break;
-                //
-                //                    default:
-                //                        location.href = bUrl;
-                //                        break;
-                //                }
-                        
-                        
-                //                mPage = iPage;
-                ////                $(".pmainMenuTopActive").removeClass("pmainMenuTopActive");
-                ////                $("[io='" + splited[1] + "']").parent("li").addClass("pmainMenuTopActive");
-                //
-                //                if (typeof storedPages[mPage] != "undefined") {               
-                //                    $("#MainContentPerfil").html(storedPages[mPage]);
-                //                    return;
-                //                }
-                       
+                //iPage = 0;
                        
                 $.ajax({
                     type: 'post',
-                    data: {page: iPage, city: "<?php echo $this->nomeCru . "_" . $this->ufCru; ?>"},
+                    //data: {page: iPage, lang: lang_mng.getString('lang_id') ,city: "<\\?php echo $this->nomeCru . "_" . $this->ufCru; ?>"},
+                    data: {lang: lang_mng.getString('lang_id'), city: "<?php echo $this->nomeCru . "_" . $this->ufCru; ?>"},
                     url: "com/mobiliti/display/controller/AjaxPaginaPerfil.php",
                     success: function(r) {
                         perfil_loading(false);             
@@ -450,32 +449,7 @@ class Perfil extends bd {
                     }
                 });
             }
-            //                $(document).ready(function() {
-            //                    splited = document.URL.split("</?php echo $this->nomeCru; ?>/");
-            //                    $("[io='" + splited[1] + "']").parent("li").addClass("pmainMenuTopActive");
-            //                    $(".perfilMenu").click(function() {
-            //                        history.pushState("", "Atlas Fase 3 ", bUrl + "/" + $(this).attr("io"));
-            //                        _getUrl();
-            //                    })
-            //
-            //
-            //                    $(".pArrowLeft").click(function() {
-            //                        if (mPage > 0) {
-            //                            mPage--;
-            //                            mUrl = bUrl + "/" + $("[io-pos='" + mPage + "']").attr("io");
-            //                            history.pushState("", "Atlas Fase 3 ", mUrl);
-            //                            _getUrl();
-            //                        }
-            //                    });
-            //                    $(".pArrowRight").click(function() {
-            //                        if (mPage < 7) {
-            //                            mPage++;
-            //                            mUrl = bUrl + "/" + $("[io-pos='" + mPage + "']").attr("io");
-            //                            history.pushState("", "Atlas Fase 3 ", mUrl);
-            //                            _getUrl();
-            //                        }
-            //                    });
-            //                });
+            
             _getUrl();
         </script>
         <?php

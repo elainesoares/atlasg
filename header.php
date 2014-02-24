@@ -1,8 +1,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <!-- saved from url=(0014)about:internet -->
 <?php
+   if(!isset($_SESSION)) 
+   { 
+        session_start(); 
+   } 
+
+    include_once("com/mobiliti/util/language.php");
     include_once("com/mobiliti/util/protect_sql_injection.php");
     include_once("config/config_path.php"); 
+    include_once("config/config_gerais.php"); 
 ?>
 
 <script type="text/javascript">
@@ -14,8 +21,6 @@
    var JS_INDICADOR_RENDA = "<?php echo INDICADOR_RENDA;  ?>";
    var JS_INDICADOR_EDUCACAO = "<?php echo INDICADOR_EDUCACAO;  ?>"; 
 </script>
-<!------------------------------->
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -57,7 +62,7 @@
         <script src="<?php echo $path_dir ?>bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>js/bootstrapx-clickover.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/indicador/seletor_indicador.js" type="text/javascript"></script>
-        <script src="<?php // echo $path_dir ?>com/mobiliti/componentes/indicador/seletor_indicador_graficos.js" type="text/javascript"></script>
+		<script src="<?php // echo $path_dir ?>com/mobiliti/componentes/indicador/seletor_indicador_graficos.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>js/history.min.js" type="text/javascript"></script>
         <script type='text/javascript' charset='utf-8' src="<?php echo $path_dir ?>js/simple-slider.js"></script>
         <script src="<?php echo $path_dir ?>js/search.js" type="text/javascript"></script>
@@ -70,12 +75,12 @@
         <script src="<?php echo $path_dir ?>js/loading.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/selector/SelectorIndicator.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/local.js" type="text/javascript"></script>
-        <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/local_graficos.js" type="text/javascript"></script>
+		<script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/local_graficos.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local_indicador/local.js" type="text/javascript"></script>
-        <script src="<?php // echo $path_dir ?>com/mobiliti/componentes/local_indicador/local_graficos.js" type="text/javascript"></script>
+		<script src="<?php // echo $path_dir ?>com/mobiliti/componentes/local_indicador/local_graficos.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/geral/geral.js" type="text/javascript"></script>
         <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/seletor_lugares.js" type="text/javascript"></script>
-        <script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/seletor_lugares_graficos.js" type="text/javascript"></script>
+		<script src="<?php echo $path_dir ?>com/mobiliti/componentes/local/seletor_lugares_graficos.js" type="text/javascript"></script>
         <script type="text/javascript" src="<?php echo $path_dir ?>js/jquery.mousewheel.js"></script>
         <script type="text/javascript" src="<?php echo $path_dir ?>js/jquery.jscrollpane.min.js"></script>
         <script type="text/javascript" src="<?php echo $path_dir ?>js/scroll-startstop.events.jquery.js"></script>
@@ -86,23 +91,58 @@
         <script type="text/javascript" src="js/colorpicker/utils.js"></script>
         <script type="text/javascript" src="js/colorpicker/layout.js?ver=1.0.2"></script>
         
+        <script type="text/javascript" src="config/langs/LangManager.js"></script>
         
+        <?php
+
+            $ltemp = @$_SESSION["lang"];
+             
+            switch($ltemp)
+            {
+                case "pt":
+                    include_once 'config/langs/lang_pt.php';
+                    break;
+                case "en":
+                    include_once 'config/langs/lang_en.php';
+                    break;
+                case "es":
+                    include_once 'config/langs/lang_es.php';
+                    break;
+                default :
+                    include_once 'config/langs/lang_pt.php';
+                    $_SESSION["lang"] = "pt";
+                    break;
+            } 
+            
+           
+            include_once 'config/langs/LangManager.php';             
+            $lang_mng = new LangManager($lang_var);
+        ?>
+        <script type="text/javascript">
+            var global_pvt_lang_object =  <?php echo json_encode($lang_var);?> ;
+            var lang_mng = new LangManager();
+        </script>
+            
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 
         <!-- tags seo facebook -->
         <meta property='og:title' content='<?php if(isset($meta_title2)) echo $meta_title2; else echo $meta_title; ?>' />
         
+        <?php $geral_title = $lang_mng->getString("geral_title");
+        ?>
+        
+        
         <meta property='og:url' content='<?php echo 'http://'.$_SERVER['SERVER_NAME'].$_SERVER ['REQUEST_URI']; ?>'/>
         <meta property='og:image' content='<?php echo $path_dir;?>img/marca vertical cor.png'/>
         <meta property='og:type' content='website' />
-        <meta property='og:site_name' content='<?php if(isset($title2)) echo $title2; else echo $title; ?> | Atlas do Desenvolvimento Humano no Brasil 2013'/> 
+        <meta property='og:site_name' content='<?php if(isset($title2)) echo $title2.' | '.$geral_title; else echo $title.' | '.$geral_title; ?>'/> 
         <meta name="description" content="<?php if(isset($meta_description2)) echo $meta_description2; else echo $meta_description; ?>" />
         <meta property="og:description" content="<?php if(isset($meta_description2)) echo $meta_description2; else echo $meta_description; ?>" />
-        <title><?php if(isset($title2)) echo $title2; else echo $title; ?> | Atlas do Desenvolvimento Humano no Brasil 2013 </title>
+        <title><?php if(isset($title2)) echo $title2.' | '.$geral_title; else echo $title.' | '.$geral_title; ?></title>
 	
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:url" content="<?php echo 'http://'.$_SERVER['SERVER_NAME'].$_SERVER ['REQUEST_URI']; ?>">
-	<meta name="twitter:title" content="<?php if(isset($title2)) echo $title2; else echo $title; ?> | Atlas do Desenvolvimento Humano no Brasil 2013">
+	<meta name="twitter:title" content="<?php if(isset($title2)) echo $title2; else echo $title.' | '.$geral_title; ?>'">
 	<meta name="twitter:description" content="<?php if(isset($meta_description2)) echo $meta_description2; else echo $meta_description; ?>">
 	<meta name="twitter:image" content="<?php echo $path_dir;?>img/marca vertical cor.png">
     </head>

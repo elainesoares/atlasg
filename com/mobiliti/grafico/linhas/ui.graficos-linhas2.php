@@ -1,4 +1,7 @@
-<?php require_once "./config/config_path.php"; ?>
+<?php 
+    require_once "./config/config_path.php"; 
+    require_once "./config/config_gerais.php";
+?>
 <script src="com/mobiliti/grafico/linhas/grafico-linhas.builder.js"></script>
 <script type="text/javascript">
     /*****************************

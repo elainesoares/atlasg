@@ -2,24 +2,24 @@
     include("./header.php");
     include_once('config/conexao.class.php');
     
-	$base_expl = explode("/",$base);
-        $url = str_replace(strrchr($_SERVER["REQUEST_URI"], "?"), "", $_SERVER["REQUEST_URI"]);
-        $gets = explode("/",$url);
-	if(sizeof($base_expl)== 1){
-		$pag = $gets[2];
-		if(sizeof($gets)>3){
-			$pagNext = $gets[4];
-		}
-	}
-	else if(sizeof($base_expl)== 2){
-		$pag = $gets[3];
-		if(sizeof($gets)>3){
-			$pagNext = $gets[3];
-		}
-	}
+    $base_expl = explode("/",$base);
+    $url = str_replace(strrchr($_SERVER["REQUEST_URI"], "?"), "", $_SERVER["REQUEST_URI"]);
+    $gets = explode("/",$_GET["cod"]);
+    
+    $ltemp = "";
+    
+    if($gets[0] == "pt" || $gets[0] == "en" || $gets[0] == "es")
+    {
+        array_shift ( $gets );
+    }    
+
+        $pag = $gets[0];
+        if(sizeof($gets)>1){
+	$pagNext = $gets[1];
+        }
     
 ?>
-<!--<script>
+<script>
     $(document).ready(function(){
         rez();
     })
@@ -27,7 +27,8 @@ function rez(){
     pag = '<?=$pag?>';
     pagNext = '<?=$pagNext?>';
     pagNext2 = '<?=$pagNext2?>';
-    if(pag == 'destaques' || pag == 'consulta' || pag == 'perfil' || pag == 'download' || pag == 'ranking' || pag == 'arvore' || pag == 'o_atlas'){
+    if(pag == 'destaques' || pag == 'consulta' || pag == 'perfil' || pag == 'download' || pag == 'ranking' || pag == 'arvore' || 
+        (pag == 'o_atlas' && (pagNext == '' || pagNext == 'o_atlas_' || pagNext == 'quem_faz' || pagNext == 'para_que' || pagNext == 'processo' || pagNext == 'desenvolvimento_humano' || pagNext == 'idhm' || pagNext == 'metodologia' && (pagNext2 == 'idhm_longevidade' || pagNext2 == 'idhm_educacao' || pagNext2 == 'idhm_renda') || pagNext == 'glossario' || pagNext == 'perguntas_frequentes' || pagNext == 'tutorial' || pagNext == ''))){
         document.getElementById("setaMenu").style.display = 'block';
         var pos = $(".mainMenuTopUl .ativo").position();
         var largura = $(".mainMenuTopUl .ativo").css("width");
@@ -43,43 +44,29 @@ function rez(){
     }
 }
 
-</script>-->
+</script>
 <body id="body" onresize="rez()">
     <?php
-    
-//        $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
-//        $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
-//        $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
-//        $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
-//        $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
-//        if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-//            $is_mobile = true;
-//            include BASE_ROOT.'web/comp_bloqueio.php';
-//            include("footer_print.php");
-//            die();
-//        }
-//        require_once 'block_all.php';
-//        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore"){
-//            echo "<div class='contentMenu' style=''>";
-//            require_once "web/menu.php";
-//            echo "</div>
-//                <div class='speratorShadow'></div>
-//            ";
-//        }
-//        else if($pag == 'arvore_print' || $pag == 'perfil_print' || $pag == 'imprimir_mapa'){
-//            require_once 'web/menu_print.php';
-//            echo "<div class='speratorShadow'></div>";
-//        }
-//        else if($pag == 'home' || $pag == ''){
-//            echo "<div class='contentMenu'>";
-//            require_once 'web/menu.php';
-//            echo "</div>"; 
-//            if($pagNext != '')
-//                echo "<div class='speratorShadow'></div>";
-//        }
+        require_once 'block_all.php';
+        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore"){
+            echo "<div class='contentMenu' style=''>";
+            require_once "web/menu.php";
+            echo "</div>
+                <div class='speratorShadow'></div>
+            ";
+        }
+        else if($pag == 'arvore_print' || $pag == 'perfil_print' || $pag == 'imprimir_mapa'){
+            require_once 'web/menu_print.php';
+            echo "<div class='speratorShadow'></div>";
+        }
+        else if($pag == 'home' || $pag == ''){
+            echo "<div class='contentMenu'>";
+            require_once 'web/menu.php';
+            echo "</div>"; 
+           
+        }
         
-//        else{
-        if($pag == 'graficos'){
+        else{
             echo "<div class='contentMenu'>";
             require_once 'web/menu.php';
             echo "</div>"; 
@@ -87,24 +74,22 @@ function rez(){
         }
     ?>
     <div id="center" class="defaltWidthContent">
-        
         <?php echo $content; ?>
     </div>
     
     <?php
-	if(sizeof($base_expl)== 1){
-		$pag = $gets[2];
-		if(sizeof($gets)>3){
-			$pagNext = $gets[3];
-		}
+        $url = str_replace(strrchr($_SERVER["REQUEST_URI"], "?"), "", $_SERVER["REQUEST_URI"]);
+        $gets = explode("/",$_GET["cod"]);
+    
+        if($gets[0] == "pt" || $gets[0] == "en" || $gets[0] == "es"){
+            array_shift ( $gets );
+        }
+            $pag = $gets[0];
+	if(sizeof($gets)>1){
+                $pagNext = $gets[1];
 	}
-	else if(sizeof($base_expl)== 2){
-		$pag = $gets[3];
-		if(sizeof($gets)>3){
-			$pagNext = $gets[3];
-		}
-	}
-        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore" || $pag == 'graficos'){
+        
+        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore"){
             echo "<div class='speratorShadowFooter'></div>";
             include 'web/footer.php';
         }
@@ -126,5 +111,8 @@ function rez(){
         }
     ?>
     <div id="maskTransparent"></div>
-    <div id="contentLoading"></div>
+    <div id="contentLoading">
+	<div id='contentLoading-text' style='margin-top:0px !important'></div>
+	<div><img src='img/map/ajax-loader.gif' /></div>
+    </div>
 </body>

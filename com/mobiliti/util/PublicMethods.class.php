@@ -520,25 +520,15 @@
         * converts pixel units into map units
         * @return array  [0]=> X in map units; [1]=> Y in map units
         */
-        public static function click2map ($click_x, $click_y, $current_extent, $width, $height) 
-        {
-    
+        public static function click2map ($click_x, $click_y, $current_extent, $width, $height) {
+
                $x_pct = ($click_x / $width);
                $y_pct = 1 - ($click_y / $height);
-               
 
-               $min_x = (float)$current_extent[0];
-               $min_y = (float)$current_extent[1];
-               $max_x = (float)$current_extent[2];
-               $max_y = (float)$current_extent[3];
-               
-               $delta_x = $max_x - $min_x;
-               $delta_y = $max_y - $min_y;
-               
-               $x_map = $min_x + ($delta_x * $x_pct);
-               $y_map = $min_y + ($delta_y * $y_pct);
-              
-               return array($x_map, $y_map); 
+               $x_map = $current_extent[0] + ( ($current_extent[2] - $current_extent[0]) * $x_pct);
+               $y_map = $current_extent[1] + ( ($current_extent[3] - $current_extent[1]) * $y_pct);
+
+               return array($x_map, $y_map);
         }
         
         

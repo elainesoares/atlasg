@@ -10,7 +10,10 @@
     
     $(document).ready(function()
     {
-//        console.log('ready');
+        $("#graficos_titulo").html(lang_mng.getString("graficos_titulo"));
+        $("#imgTab1").attr("data-original-title",lang_mng.getString("graficos_dispersao"));
+        $("#imgTab2").attr("data-original-title",lang_mng.getString("graficos_linhas"));
+        
         $('#imgTab1').tooltip({html:true, delay: 500});
         $('#imgTab2').tooltip({html:true, delay: 500});
         geral = new Geral(readyGo_);
@@ -18,6 +21,8 @@
             readyGo_();
 //            consulta_();
         },100);
+        
+        
     });
     
     function readyGo_()
@@ -160,13 +165,13 @@
     <div class="containerPage">
         <div class="containerTitlePage">
             <div class="titlePage">
-                <div class="titletopPage">Gráficos</div>
+                <div class="titletopPage" id="graficos_titulo"></div>
             </div>
             <div class="iconAtlas">
-                <button type="button" name="" value="" class="gray_button small_bt" style="margin-right: 5px;" id="imgTab1"  data-original-title='Agregação de 4 indicadores' title data-placement='bottom' onclick="changeAba_(1,this);">
+                <button type="button" name="" value="" class="gray_button small_bt" style="margin-right: 5px;" id="imgTab1"  data-original-title='' title data-placement='bottom' onclick="changeAba_(1,this);">
                     <img src="./img/icons/scatter_plot_gray.png">
                 </button>
-                <button type="button" name="" value="" class="gray_button small_bt" id="imgTab2" onclick="changeAba_(2,this);" data-original-title='Evolução dos indicadores' title data-placement='bottom'>
+                <button type="button" name="" value="" class="gray_button small_bt" id="imgTab2" onclick="changeAba_(2,this);" data-original-title='' title data-placement='bottom'>
                     <img src="./img/icons/lines_gray.png">
                 </button>
             </div>

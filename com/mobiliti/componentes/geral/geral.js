@@ -29,7 +29,6 @@ function Geral(listenerReady){
     
     this.dispatchListeners = function(event){
 //        console.log('Geral - dispatchListeners');
-        //console.log('listenerLugares: '+listenerLugares);
         listenerIndicadores(event, indicadores);
         listenerLugares(event, lugares);
     }

@@ -1,0 +1,10 @@
+[
+    [{"l":[{"id":23,"n":"Acre","c":true,"s":false,"e":4},{"id":13,"n":"Alagoas","c":true,"s":false,"e":4},{"id":26,"n":"Amapá","c":true,"s":false,"e":4},{"id":5,"n":"Amazonas","c":true,"s":false,"e":4},{"id":12,"n":"Bahia","c":true,"s":false,"e":4},{"id":11,"n":"Ceará","c":true,"s":false,"e":4},{"id":25,"n":"Distrito Federal","c":true,"s":false,"e":4},{"id":6,"n":"Espírito Santo","c":true,"s":false,"e":4},{"id":10,"n":"Goiás","c":true,"s":false,"e":4},{"id":8,"n":"Maranhão","c":true,"s":false,"e":4},{"id":18,"n":"Mato Grosso","c":true,"s":false,"e":4},{"id":21,"n":"Mato Grosso do Sul","c":true,"s":false,"e":4},{"id":2,"n":"Minas Gerais","c":true,"s":false,"e":4},{"id":4,"n":"Pará","c":true,"s":false,"e":4},{"id":20,"n":"Paraíba","c":true,"s":false,"e":4},{"id":3,"n":"Paraná","c":true,"s":false,"e":4},{"id":14,"n":"Pernambuco","c":true,"s":false,"e":4},{"id":27,"n":"Piauí","c":true,"s":false,"e":4},{"id":16,"n":"Rio de Janeiro","c":true,"s":false,"e":4},{"id":15,"n":"Rio Grande do Norte","c":true,"s":false,"e":4},{"id":7,"n":"Rio Grande do Sul","c":true,"s":false,"e":4},{"id":1,"n":"Rondônia","c":true,"s":false,"e":4},{"id":19,"n":"Roraima","c":true,"s":false,"e":4},{"id":9,"n":"Santa Catarina","c":true,"s":false,"e":4},{"id":17,"n":"São Paulo","c":true,"s":false,"e":4},{"id":22,"n":"Sergipe","c":true,"s":false,"e":4},{"id":24,"n":"Tocantins","c":true,"s":false,"e":4}],"e":4,"ac":false}],
+    [
+        {"id":196,"a":3,"c":true,"desc":"Média geométrica dos índices das dimensões Renda, Educação e Longevidade, com pesos iguais.","nc":"IDHM"},
+        {"id":"199","nc":"IDHM Educação","a":3,"desc":"Índice de Desenvolvimento Humano Municipal - Dimensão Educação","sigla":"IDHM_E"},
+        {"id":"198","nc":"IDHM Longevidade","a":3,"desc":"Índice de Desenvolvimento Humano Municipal  - Dimensão Longevidade","sigla":"IDHM_L"},
+        {"id":"197","nc":"IDHM Renda","a":3,"desc":"Índice de Desenvolvimento Humano Municipal - Dimensão Renda","sigla":"IDHM_R"}
+    ],
+    {"id":196, "a":3, "o":false}
+]

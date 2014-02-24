@@ -10,6 +10,6 @@
     </div>
 </div>
 <div class='clear'></div>
-<sub style="color:gray;">
-    Fonte: Pnud, Ipea e FJP</sub>
+<!--<sub style="color:gray;">
+    Fonte: Pnud, Ipea e FJP</sub>-->
 <!--</div>-->

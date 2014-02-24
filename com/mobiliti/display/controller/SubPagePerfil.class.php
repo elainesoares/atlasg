@@ -1,6 +1,7 @@
 <?php
     $comPath = BASE_ROOT."\com\mobiliti\\";
     require_once BASE_ROOT.'config\config_path.php';
+    require_once BASE_ROOT.'config\config_gerais.php';
     require_once $comPath."consulta\bd.class.php";
     require_once $comPath."util\protect_sql_injection.php";
 

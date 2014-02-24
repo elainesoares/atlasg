@@ -1,4 +1,7 @@
 <?php
+    if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+        header("Location: {$path_dir}404");
+    }
     var_dump($_POST);
     $file = "log.txt";
     $handle = fopen($file, 'a') or die("erro");

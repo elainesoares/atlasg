@@ -52,7 +52,7 @@ var inputHandler = {
                   '</div>'+
                 "<a id=\"area_"+input_name+"\" data-placement=\"bottom\" class=\"height\" rel=\"popover\">"+
                 "<input type='text' class='open2' id='"+input_name+"' i='0' in='"+tab+"' /></a></div>"+
-                "<div style='display:none' id='Conten_"+input_name+"'><div style='text-align:center'>Digite o nome de algum Município ou Estado</div></div>");
+                "<div style='display:none' id='Conten_"+input_name+"'><div style='text-align:center'>"+ lang_mng.getString("caixa_est_mun") +"</div></div>");
             }
             else{
                 pai.append(
@@ -70,7 +70,7 @@ var inputHandler = {
                   '</div>'+
                 "<a id=\"area_"+input_name+"\" data-placement=\"bottom\" class=\"height\" rel=\"popover\">"+
                 "<input type='text' class='open2' id='"+input_name+"' i='0' in='"+tab+"' /></a></div>"+
-                "<div style='display:none' id='Conten_"+input_name+"'><div style='text-align:center'>Digite o nome de algum Município</div></div>");
+                "<div style='display:none' id='Conten_"+input_name+"'><div style='text-align:center'>" + lang_mng.getString("caixa_digite") + "</div></div>");
             }
         }
         
@@ -80,23 +80,23 @@ var inputHandler = {
                     "<div class='btnInputSearch' id='area_inpt_"+input_name+"'>"+
                         "<a id=\"area_"+input_name+"\" data-placement=\"bottom\" class=\"height\">"+
                         "<input type='text' class='open2' id='"+input_name+"' i='0' in='"+tab+"' value='"+nome_municipio+"' /></a></div>"+
-                    "<div style='display:none' id='Conten_"+input_name+"'><div style='text-align:center'>Digite o nome de algum Município ou Estado</div></div>"
+                    "<div style='display:none' id='Conten_"+input_name+"'><div style='text-align:center'>" + lang_mng.getString("caixa_est_mun") + "</div></div>"
                 );
             }
             else{
                 pai.append("<div class='btnInputSearch' id='area_inpt_"+input_name+"'>"+
                         "<a id=\"area_"+input_name+"\" data-placement=\"bottom\" class=\"height\">"+
-                        "<input type='text' class='open2' value='Ex.: Campinas (SP)' id='"+input_name+"' i='0' in='"+tab+"' /></a></div>"+
-                    "<div style='display:none' id='Conten_"+input_name+"'><div style='text-align:center'>Digite o nome de algum Município</div></div>"
+                        "<input type='text' class='open2' value='' id='"+input_name+"' i='0' in='"+tab+"' /></a></div>"+
+                    "<div style='display:none' id='Conten_"+input_name+"'><div style='text-align:center'>" + lang_mng.getString("caixa_digite") + "</div></div>"
                 );
                 $("#"+input_name).focus(function(){
-                    if($(this).val() == "Ex.: Campinas (SP)"){
+                    if($(this).val() == lang_mng.getString("caixa_perfil")){
                         $(this).val("");
                     }
                 });
                 $("#"+input_name).focusout(function(){
                     if($(this).val() == ""){
-                        $(this).val("Ex.: Campinas (SP)");
+                        $(this).val(lang_mng.getString("caixa_perfil"));
                     }
                 });
             }
@@ -190,7 +190,7 @@ var inputHandler = {
         atual = $("#"+atual);
         if(atual.val() == ""){
             atual.attr('i','0');
-            $("#Conten_"+atual.attr("id")).html('Digite o nome de algum Município ou Estado');
+            $("#Conten_"+atual.attr("id")).html(lang_mng.getString("caixa_est_mun"));
         }
         if(atual.val() == "" && atual.val() != lastSearch[atual.attr("id")])
             return;
@@ -210,7 +210,7 @@ var inputHandler = {
                 if(Obj[0] == '003'){
                     $("#imgLoadingInput").hide();
                     atual.addClass('erroInput');
-                    $("#Conten_"+atual.attr("id")).html("<div style='text-align:center'>Nenhum registro encontrado</div>");
+                    $("#Conten_"+atual.attr("id")).html("<div style='text-align:center'>" + lang_mng.getString("caixa_nenhum") + "</div>");
                     if(searchFocused[atual.attr("id")])
                         $("#area_"+atual.attr("id")).clickover("show");
                     return;

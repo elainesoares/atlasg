@@ -71,10 +71,6 @@ RewriteCond %{REQUEST_URI} !^(.*/)?hdi/consulta\.php$ [NC]
 #histgrama
 RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/histogram/histogram.controller\.php$ [NC]
 
-#Gráficos
-RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/grafico/bolhas/grafico-dispersao.controller\.php$ [NC]
-RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/grafico/linhas/grafico-linhas.controller\.php$ [NC]
-
 #autocompletar
 RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/util/AjaxSearchString\.php$ [NC]
 RewriteCond %{REQUEST_URI} !^(.*/)?com/mobiliti/util/AjaxLogErro\.php$ [NC]

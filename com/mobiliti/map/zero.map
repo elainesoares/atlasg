@@ -1,0 +1,22 @@
+MAP
+
+    OUTPUTFORMAT
+      NAME "gif"
+      DRIVER GD/GIF
+      MIMETYPE "image/gif"
+      IMAGEMODE PC256
+      EXTENSION "gif"
+    END
+    
+    LEGEND
+      STATUS ON
+      KEYSIZE 27 15
+      LABEL
+        TYPE BITMAP
+        SIZE SMALL
+        COLOR 0 0 0
+      END
+    END
+
+    
+END

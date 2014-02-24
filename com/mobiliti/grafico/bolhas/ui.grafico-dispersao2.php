@@ -1,4 +1,7 @@
-<?php require_once "./config/config_path.php"; ?>
+<?php 
+    require_once "./config/config_path.php"; 
+    require_once "./config/config_gerais.php";
+?>
 <script src="com/mobiliti/grafico/bolhas/grafico-dispersao.builder2.js"></script>
 <script type="text/javascript">
     /*****************************
@@ -30,7 +33,8 @@
 
     $(document).ready(function()
     {
-//        console.log('ready');
+        $('#disp_m_ano').html(lang_mng.getString("mapa_ano").toUpperCase());
+        
         $('#local_box2').load('com/mobiliti/componentes/local/local_graf.html', function()
         {
             console.log('local_box2');
@@ -389,7 +393,7 @@
         </tr>
         <tr style="height: 143px;">
             <td style="border-right: 1px solid #ccc;">
-                <span style="font-weight: bold; display:block; margin-left:24px; width:44px;">ANO</span>
+                <span id="disp_m_ano" style="font-weight: bold; display:block; margin-left:24px; width:44px;">ANO</span>
                 <div>
                     <div class='labels'>
                         <span class="one">1991</span>

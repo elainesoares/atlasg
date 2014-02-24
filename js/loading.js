@@ -14,8 +14,7 @@ var loadingHolder = {
         $("#maskTransparent").css("display","block");
         $("#maskTransparent").css("width",$(document).innerWidth()+"px");
         $("#maskTransparent").css("height",$(document).innerHeight()+"px");
-        $("#contentLoading").html(text);
-        $("#contentLoading").append("<div><img src='img/map/ajax-loader.gif' /><div>");
+        $("#contentLoading #contentLoading-text").html(text);
     },
     dispose: function(){
         $("#contentLoading").fadeOut("slow");
