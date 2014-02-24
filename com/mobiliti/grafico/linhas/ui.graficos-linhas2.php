@@ -110,7 +110,7 @@
 //        console.log('indicador'+i);
 //        console.log('ano: '+a);
 
-        linha_loading(true);
+//        linha_loading(true);
 
         var linha_data = new Object();
 
@@ -275,16 +275,16 @@
     }
 
 </script>
-<div style="height: 664px;">
+<div>
     <table>
         <tr style="padding: 0; margin: 0; border: 0;">
             <td id="local_box3" style="padding: 0; margin: 0; border: 0;"></td>
             <td rowspan="3" style="padding: 0; margin: 0; border-left: 1px solid #ccc; vertical-align: top;">
-                <table style='height: 823px;'>
+                <table>
                     <tr style="">
                         <td colspan="4">
                             <div id="box_indicador" data-original-title='Selecione o indicador que representará o Eixo Y, no gráfico.' style="margin-left:52px; width: 57px; float: left; height: 507px; "></div>
-                            <div id="chart_divLinha" style='width: 600px; height: 500px; margin-top: -111px; margin-left: 80px;'>
+                            <div id="chart_divLinha" style='width: 600px; height: 500px; margin-left: 80px;'>
                                 <img id="uilinhaloader" src="img/map/ajax-loader.gif" style="background-color: transparent; margin-top: 250px; margin-left: 270px;" />
                             </div>
                         </td>

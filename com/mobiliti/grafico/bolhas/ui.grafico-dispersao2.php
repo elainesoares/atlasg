@@ -355,12 +355,12 @@
     <span id="uimap_popover_espc_name" style="font-weight: bold;">NO_NAME</span><br/>
     <span id="uimap_popover_value">VALUE</span> 
 </div>
-<div style="height: 664px;">
+<div>
     <table>
         <tr style="padding: 0; margin: 0; border: 0;">
             <td id="local_box2" style="padding: 0; margin: 0; border: 0;"></td>
             <td rowspan="3" style="padding: 0; margin: 0; border-left: 1px solid #ccc; vertical-align: top;">
-                <table style='height: 823px;'>
+                <table style="height: 561px;">
                     <tr>
                          <td >
                              <div style="margin-left: 30px;">
@@ -383,7 +383,7 @@
                             <div style="width:681px; height:507px;">
                                 <div id="box_indicador_eixoY" data-original-title='Selecione o indicador que representará o Eixo Y, no gráfico.' style="margin-left:52px; width: 57px; float: left; height: 362px; "></div>
                                 <!--<div id="myModal" class="modal_video hide" tabindex="-1" role="dialog" data-toggle="modal" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">Selecione Indicadores diferentes para cada Eixo</div>-->
-                                <div id="chart_div" style='margin-left: 77px; width: 603px; height: 380px; margin-top: -239px;'>
+                                <div id="chart_div" style='margin-left: 77px; width: 603px; height: 380px; margin-top: 49px;'>
                                     <img id="uibolhaloader" src="img/map/ajax-loader.gif" style="background-color: transparent; margin-top: 250px; margin-left: 270px;" />
                                 </div>
                                 <div id="box_indicador_eixoX" data-original-title='Selecione o indicador que representará o Eixo X, no gráfico.' style="width: 604; float: left; height: 55px; margin-left: 79px;"> </div>
@@ -393,9 +393,9 @@
                 </table>
             </td>
         </tr>
-        <tstyle="background: wheat">
-            <td style="margin:0px; padding: 0px; border: 0px; border-right: 1px solid #ccc;">
-                <span style="font-weight: bold; display:block; margin-left:24px; width:44px; margin-top: 158px;">ANO</span>
+        <tr>
+            <td style="border-right: 1px solid #ccc;">
+                <span style="font-weight: bold; display:block; margin-left:24px; width:44px;">ANO</span>
                 <div>
                     <div class='labels'>
                         <span class="one">1991</span>

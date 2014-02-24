@@ -37,7 +37,7 @@ function IndicatorSelectorG()
             + '</div>';
        }
        else{
-           var button = '<div id="' + idElement + '" style="float: right; margin-top: -16px;">'
+           var button = '<div id="' + idElement + '" style="float: right; ">'
             + '<div class="divCallOut">'
 //            + '<a style="cursor: pointer"><img src="'+eixo2+'" class="selector_popover" data-toggle="dropdown" style="float:right;" rel="popover" ></a>'
             + '<button class="gray_button selector_popover" data-toggle="dropdown" style="float:right; padding: 3px 7px;" rel="popover" >'+eixo2+'</button>'
