@@ -3,11 +3,13 @@
     include_once('config/conexao.class.php');
     
     $base_expl = explode("/",$base);
+//    echo $base_expl;
     $url = str_replace(strrchr($_SERVER["REQUEST_URI"], "?"), "", $_SERVER["REQUEST_URI"]);
+//    echo $_GET["cod"];
     $gets = explode("/",$_GET["cod"]);
     
     $ltemp = "";
-    
+//    print_r($gets);
     if($gets[0] == "pt" || $gets[0] == "en" || $gets[0] == "es")
     {
         array_shift ( $gets );
@@ -27,7 +29,7 @@ function rez(){
     pag = '<?=$pag?>';
     pagNext = '<?=$pagNext?>';
     pagNext2 = '<?=$pagNext2?>';
-    if(pag == 'destaques' || pag == 'consulta' || pag == 'perfil' || pag == 'download' || pag == 'ranking' || pag == 'arvore' || 
+    if(pag == 'destaques' || pag == 'consulta' || pag == 'perfil' || pag == 'download' || pag == 'ranking' || pag == 'arvore' || pag == 'graficos' ||
         (pag == 'o_atlas' && (pagNext == '' || pagNext == 'o_atlas_' || pagNext == 'quem_faz' || pagNext == 'para_que' || pagNext == 'processo' || pagNext == 'desenvolvimento_humano' || pagNext == 'idhm' || pagNext == 'metodologia' && (pagNext2 == 'idhm_longevidade' || pagNext2 == 'idhm_educacao' || pagNext2 == 'idhm_renda') || pagNext == 'glossario' || pagNext == 'perguntas_frequentes' || pagNext == 'tutorial' || pagNext == ''))){
         document.getElementById("setaMenu").style.display = 'block';
         var pos = $(".mainMenuTopUl .ativo").position();
@@ -48,7 +50,10 @@ function rez(){
 <body id="body" onresize="rez()">
     <?php
         require_once 'block_all.php';
-        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore"){
+        
+//         echo $pag.'<br />';
+//        echo $pagNext.'<br />';
+        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore" || $pag == 'graficos'){
             echo "<div class='contentMenu' style=''>";
             require_once "web/menu.php";
             echo "</div>
@@ -88,8 +93,8 @@ function rez(){
 	if(sizeof($gets)>1){
                 $pagNext = $gets[1];
 	}
-        
-        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore"){
+
+        if($pag == "destaques" || $pag == "consulta" || $pag == "perfil" || $pag == "ranking" || $pag == "o_atlas" || $pag == "download" || $pag == "arvore" || $pag == 'graficos'){
             echo "<div class='speratorShadowFooter'></div>";
             include 'web/footer.php';
         }

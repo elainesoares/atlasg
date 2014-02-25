@@ -1,6 +1,7 @@
 <?php
+//    echo 'Entrei URL';
     session_start();
-
+    
     include_once './config/config_gerais.php';
     include_once './config/config_path.php';
     include_once './com/mobiliti/services/URL.class.php';
@@ -20,6 +21,7 @@
     //verifica a linguagem 
     $lang_var = null;
     $ltemp = "";
+//    echo 'URL '.$gets[0].'<br />';
     
     if($gets[0] == "pt" || $gets[0] == "en" || $gets[0] == "es")
     {
@@ -52,6 +54,8 @@
     else{
         $pagNext2 = "";
     }
+    
+//    echo $pag;
     /*======================= Includes das páginas ===========================*/
     #Home
     if($pag == "home" || $pag == ""){
@@ -120,7 +124,6 @@
         else{
             include 'web/pagina_nao_encontrada.php';
         }
-        
     }
     
     #Impressão Árvore IDHM
@@ -159,10 +162,12 @@
             include "./ranking_base.php";
         }
     }
-	
+    
+    	
     #Graficos
     else if($pag == "graficos"){
-        if($pagNext2 != ""){
+//        echo 'Entrei graficos';
+        if($pagNext != ""){
             include 'web/pagina_nao_encontrada.php';
         }
         else{
