@@ -13,7 +13,7 @@ $lang_var["menu_destaques"] = "HIGHLIGHTS";
 $lang_var["menu_perfil"] = "PROFILE";
 $lang_var["menu_consulta"] = "QUERY";
 $lang_var["menu_arvore"] = "TREE";
-$lang_var["menu_graficos"] = "GRAPHICS";
+$lang_var["menu_graficos"] = "CHARTS";
 $lang_var["menu_ranking"] = "RANKING";
 $lang_var["menu_download"] = "DOWNLOAD";
     
@@ -28,6 +28,8 @@ $lang_var["home_textoConsulta"] = "Create maps and charts of your own.It is fast
 $lang_var["home_buttonPesquisa"] = "Search";
 $lang_var["home_titleidhmArvore"] = "MHDI Tree";
 $lang_var["home_textoidhmArvore"] = "Check out the visual representation of MHDI";
+$lang_var["home_titlegraficos"] = "Graphics";
+$lang_var["home_textograficos"] = "Show the display indicators on charts";
 $lang_var["home_titleDownload"] = "Download";
 $lang_var["home_textoDownload"] = "Download the Atlas Brazil 2013 data";
 $lang_var["home_banner0"] = "Do you know what is Human Development?";
@@ -159,7 +161,7 @@ $lang_var["arvore_tituloprint"] = 'MHDI Tree';
 $lang_var["arvore_titleprint"] = 'Printing Tree MHDI';
 
 //========= GRÁFICOS
-$lang_var["graficos_titulo"] = 'Graphics';
+$lang_var["graficos_titulo"] = 'Charts';
 $lang_var["graficos_dispersao"] = 'Four Aggregation Indicators';
 $lang_var["graficos_linhas"] = 'Indicators Evolution';
 

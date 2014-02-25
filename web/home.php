@@ -211,9 +211,9 @@
             <div class="containerMetodologia">
                 <div class="contentMetodologia">
                     <div class="titulo_divs">
-                        <div class="h1Home" id="home_titleidhmArvore"></div>
+                        <div class="h1Home" id="home_titlegraficos"></div>
                         <!--<h1 id="h1Home">Metodologia</h1>-->
-                        <span id="home_textoidhmArvore"></span>
+                        <span id="home_textograficos"></span>
                     </div>
                 </div>
             </div>
@@ -262,6 +262,8 @@
     $("#home_buttonPesquisa").html(lang_mng.getString("home_buttonPesquisa"));
     $("#home_titleidhmArvore").html(lang_mng.getString("home_titleidhmArvore"));
     $("#home_textoidhmArvore").html(lang_mng.getString("home_textoidhmArvore"));
+    $("#home_titlegraficos").html(lang_mng.getString("home_titlegraficos"));
+    $("#home_textograficos").html(lang_mng.getString("home_textograficos"));
     $("#home_titleDownload").html(lang_mng.getString("home_titleDownload"));
     $("#home_textoDownload").html(lang_mng.getString("home_textoDownload"));
 </script>
