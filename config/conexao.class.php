@@ -5,19 +5,13 @@ Class Conexao {
     /* =============== VARIÁVEIS DE CONEXÃO AO BANCO DE DADOS ================= */
 
 
-    private $host = "localhost";
-    private $user = "postgres";
-    private $port = "5432";
-    private $pswd = "123";
-    private $dbname = "atlas";
+    private $host = "host";
+    private $user = "user";
+    private $port = "port";
+    private $pswd = "password";
+    private $dbname = "database_name";
     protected $con = null;
   
-//    private $host = "66.71.249.90";
-//    private $user = "ipea2012";
-//    private $port = "5433";
-//    private $pswd = "Ipea2012@Mob";
-//    private $dbname = "atlas38";
-//    protected $con = null;
 
 
     #Método construtor
